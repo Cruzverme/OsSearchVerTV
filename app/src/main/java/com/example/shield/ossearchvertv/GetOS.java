@@ -29,7 +29,7 @@ import static android.widget.Toast.makeText;
 
 public class GetOS extends AppCompatActivity {
 
-    private TextView os, endereco, contra, nome, telComercial, telResidencial, telCelular, alternativo, obser1;
+    private TextView os, endereco, contra, nome, telComercial, telResidencial, telCelular, alternativo, obser1, cpf;
     EditText textoServ;
     ProgressDialog progresso;
     Button botaoEmail;
@@ -50,6 +50,7 @@ public class GetOS extends AppCompatActivity {
         telCelular = (TextView) findViewById(R.id.textViewTelCelular);
         botaoEmail = (Button) findViewById(R.id.botaoEmailID);
         textoServ = (EditText) findViewById(R.id.textoServExecID);
+        cpf = (EditText) findViewById(R.id.cpfID);
 
         //pegando valor da activity anterior
         Intent intent = getIntent();
@@ -105,6 +106,7 @@ public class GetOS extends AppCompatActivity {
                             telResidencial.setText(respostaServidor.getOs().get(0).getResidencial());
                             telCelular.setText(respostaServidor.getOs().get(0).getCelular());
 
+                            Call<RespostaServidor> callCPF = service.verificaCPF(cpf.getText().toString(),contra.getText().toString());
      /*############################################ ENVIA EMAIL #########################################################*/
                             botaoEmail.setOnClickListener(new View.OnClickListener() {
                                 @Override

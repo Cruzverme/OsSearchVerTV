@@ -48,4 +48,8 @@ public interface RetrofitService {
                                    @Query("anotacaoTecnico") String anotacao,
                                    @Query("observacao") String observacao,
                                    @Query("imagem") String imagem);
+
+    @GET("verifica_cpf.php")
+    Call<RespostaServidor> verificaCPF(@Query("cpf") String cpf,
+                                       @Query("contrato") String contrato);
 }
