@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/colorVertvBackgroundDark"
+android:orientation="vertical"
+tools:context="com.example.shield.ossearchvertv.BuscaOsUnica">
+
+
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/logoID"
+    android:src="@drawable/logo_nova_vertv"
+    android:layout_above="@+id/OsID"
+    android:layout_marginBottom="16dp"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentEnd="true" />
+
+<EditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/OsID"
+    android:layout_marginTop="@dimen/tamanhoTextTitulo"
+    android:hint="Insira a Ordem de Serviço"
+    android:textColor="@color/colorVertvLetters"
+    android:paddingTop="@dimen/activity_horizontal_margin"
+    android:layout_centerInParent="true"
+    android:textSize="@dimen/tamanhoTextTitulo"
+    android:textColorHint="@color/colorVertvLetters"
+    android:background="@color/colorVertvDetailBlack"
+    android:inputType="number"/>
+
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/botaoEnviar"
+    android:textSize="@dimen/tamanhoTextTitulo"
+    android:layout_below="@id/OsID"
+    android:textColor="@color/colorVertvLetters"
+    android:layout_marginTop="25dp"
+    android:layout_marginRight="@dimen/activity_vertical_margin"
+    android:layout_marginLeft="@dimen/activity_vertical_margin"
+    android:background="@color/colorVertvOrange"
+    android:id="@+id/botaoBuscar"/>
+
+</RelativeLayout>

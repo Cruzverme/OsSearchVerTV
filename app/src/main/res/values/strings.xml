@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">OS Search - VERTV</string>
+    <string name="OS">Insira a OS</string>
+    <string name="botaoEnviar">Buscar</string>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorVertvBackground">#666</color>
+    <color name="colorVertvBackgroundDark">#333</color>
+    <color name="colorVertvOrange">#ff9700</color>
+    <color name="colorVertvLetters">#fffffe</color>
+    <color name="colorVertvDetailBlack">#3b4148</color>
+</resources>

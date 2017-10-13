@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:orientation="vertical"
+android:layout_height="match_parent"
+android:background="@color/colorVertvBackgroundDark"
+tools:context="com.example.shield.ossearchvertv.GetOS">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:text="OS: "
+        android:textSize="24sp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_width="wrap_content"
+        android:textColor="@color/colorVertvLetters"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"
+        android:id="@+id/titOS"/>
+
+    <TextView
+        android:id="@+id/textViewOS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titOS"
+        android:background="@color/colorVertvDetailBlack"
+        android:textColor="@color/colorVertvLetters"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:paddingBottom="8dp"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/titContra"
+        android:text="Contrato: "
+        android:layout_below="@id/textViewOS"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:textSize="24sp"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"
+        android:textColor="@color/colorVertvLetters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textViewContra"
+        android:layout_below="@id/titContra"
+        android:textSize="24sp"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:background="@color/colorVertvDetailBlack"
+        android:textColor="@color/colorVertvLetters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/titNome"
+        android:text="Nome: "
+        android:layout_below="@id/textViewContra"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:textSize="24sp"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"
+        android:textColor="@color/colorVertvLetters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:id="@+id/textViewNome"
+        android:layout_below="@id/titNome"
+        android:textSize="24sp"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:background="@color/colorVertvDetailBlack"
+        android:textColor="@color/colorVertvLetters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/titEndereco"
+        android:text="Endereço: "
+        android:layout_below="@id/textViewNome"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:textSize="24sp"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"
+        android:textColor="@color/colorVertvLetters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textViewEndereco"
+        android:textSize="24sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorVertvDetailBlack"
+        android:textColor="@color/colorVertvLetters"
+        android:layout_below="@id/titEndereco"
+        android:layout_marginBottom="@dimen/activity_vertical_margin" />
+
+    <TextView
+        android:id="@+id/titObser"
+        android:text="Obs.: "
+        android:layout_below="@id/textViewEndereco"
+        android:textColor="@color/colorVertvLetters"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:textSize="24sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textViewObser"
+        android:textSize="24sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorVertvDetailBlack"
+        android:textColor="@color/colorVertvLetters"
+        android:layout_below="@id/titObser"
+        android:layout_marginBottom="@dimen/activity_vertical_margin" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/colorVertvDetailBlack">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CONTATO"
+            android:paddingBottom="8dp"
+            android:id="@+id/contatoID"
+            android:textColor="@color/colorVertvLetters"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_below="@id/textViewObser"/>
+
+        <TextView
+            android:id="@+id/textViewTelComercial"
+            android:textSize="24sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/contatoID"
+            android:background="@color/colorVertvDetailBlack"
+            android:textColor="@color/colorVertvLetters"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"  />
+
+        <TextView
+            android:id="@+id/textViewTelResidencial"
+            android:textSize="24sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewTelComercial"
+            android:background="@color/colorVertvDetailBlack"
+            android:textColor="@color/colorVertvLetters"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"  />
+
+        <TextView
+            android:id="@+id/textViewTelCelular"
+            android:textSize="24sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorVertvDetailBlack"
+            android:layout_below="@id/textViewTelResidencial"
+            android:textColor="@color/colorVertvLetters"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"  />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Serviço Executado"
+        android:textSize="24sp"
+        android:textColor="@color/colorVertvLetters"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:inputType="textMultiLine"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:background="@color/colorVertvDetailBlack"
+        android:textColor="@color/colorVertvLetters"
+        android:paddingBottom="8dp"
+        android:id="@+id/textoServExecID"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorVertvLetters"
+        android:paddingTop="8dp"
+        android:text="CPF de Confirmação"
+        android:textSize="24sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cpfID"
+        android:hint="Confirme os 5 primeiros digitos"
+        android:textSize="24sp"
+        android:textColor="@color/colorVertvLetters"
+        android:textColorHint="@color/colorVertvLetters"
+        android:background="@color/colorVertvDetailBlack"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/botaoEmailID"
+        android:background="@color/colorVertvOrange"
+        android:text="Enviar OS"/>
+
+</LinearLayout>
+
+</ScrollView>
