@@ -45,7 +45,7 @@ public interface RetrofitService {
                                    @Query("contrato") String contrato,
                                    @Query("assinante") String assinante,
                                    @Query("servicoExecutado") String servico,
-                                   @Query("anotacoes") String anotacao,
+                                   @Query("anotacaoTecnico") String anotacao,
                                    @Query("observacao") String observacao,
                                    @Query("imagem") String imagem);
 }

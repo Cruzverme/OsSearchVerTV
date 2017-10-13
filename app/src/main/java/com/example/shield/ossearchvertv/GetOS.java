@@ -29,10 +29,11 @@ import static android.widget.Toast.makeText;
 
 public class GetOS extends AppCompatActivity {
 
-    private TextView os, endereco, contra, nome, telComercial,telResidencial,telCelular, alternativo,obser1;
+    private TextView os, endereco, contra, nome, telComercial, telResidencial, telCelular, alternativo, obser1;
     EditText textoServ;
     ProgressDialog progresso;
     Button botaoEmail;
+    String equipe = "TI";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,6 @@ public class GetOS extends AppCompatActivity {
         telComercial = (TextView) findViewById(R.id.textViewTelComercial);
         telResidencial = (TextView) findViewById(R.id.textViewTelResidencial);
         telCelular = (TextView) findViewById(R.id.textViewTelCelular);
-        //alternativo = (TextView) findViewById(R.id.naoecontradoID);
         botaoEmail = (Button) findViewById(R.id.botaoEmailID);
         textoServ = (EditText) findViewById(R.id.textoServExecID);
 
@@ -81,21 +81,18 @@ public class GetOS extends AppCompatActivity {
 
 
         //Minha URLBASE
-        RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
+        final RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
         Call<RespostaServidor> call = service.mostrarOS(os_var);
 
         call.enqueue(new Callback<RespostaServidor>() {
             @Override
-            public void onResponse(Call<RespostaServidor> call, Response<RespostaServidor> response)
-            {
+            public void onResponse(Call<RespostaServidor> call, Response<RespostaServidor> response) {
                 final RespostaServidor respostaServidor = response.body(); //pega o json
 
-                if(response.isSuccessful())
-                {
+                if (response.isSuccessful()) {
                     if (respostaServidor != null) //se o body nao está vazio
                     {
-                        if (respostaServidor.getSuccess() == 1)
-                        {
+                        if (respostaServidor.getSuccess() == 1) {
                             //Dismissing the loading progressbar
                             progresso.dismiss();
 
@@ -112,35 +109,21 @@ public class GetOS extends AppCompatActivity {
                             botaoEmail.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    String body = "Técnico: "  + tecnicoLocal +
-                                            "\nOS: " + os.getText().toString() +
-                                            "\nContrato: "+ contra.getText().toString() +
-                                            "\nNome: "+ nome.getText().toString() +
-                                            "\nEndereço: "+ endereco.getText().toString() +
-                                            "\nComercial: "+ telComercial.getText().toString() +
-                                            "\nResidencial: " + telResidencial.getText().toString() +
-                                            "\nCelular: "+ telCelular.getText().toString() +
-                                            "\nServiço Executado: \n" + textoServ.getText().toString() +
-                                            "\n" +
-                                            "\nData Execução: " + dateFormat.format(dataAtual);
+
                                     try {
-                                        new SendMailTask(GetOS.this).execute(tecnicoLocal,body);// emailSubject, emailBody);contra.setText("");
-                                        os.setText("");
-                                        contra.setText("");
-                                        nome.setText("");
-                                        endereco.setText("");
-                                        telCelular.setText("");
-                                        telResidencial.setText("");
-                                        telComercial.setText("");
-                                        textoServ.setText("");
-                                        obser1.setText("");
-                                    }catch (android.content.ActivityNotFoundException ex){
-                                        Toast.makeText(getApplicationContext(),"Não foi possível enviar o email, tente novamente.", Toast.LENGTH_SHORT).show();
+                                        retrofitEnviaOS(os.getText().toString(), tecnicoLocal, equipe, contra.getText().toString(),
+                                                nome.getText().toString(), textoServ.getText().toString(), "blablabbal anotacao de tecnico",
+                                                "imageimagem", obser1.getText().toString());
+
+                                        finish();
+                                        Toast.makeText(getApplicationContext(), "Os Enviada", Toast.LENGTH_SHORT).show();
+                                    } catch (android.content.ActivityNotFoundException ex) {
+                                        Toast.makeText(getApplicationContext(), "Não foi possível enviar o email, tente novamente.", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
      /*###############################################FIM ENVIA EMAIL ########################################################*/
-                        }else{
+                        } else {
                             //                alternativo.setVisibility(View.VISIBLE);
                             os.setVisibility(View.INVISIBLE);
                             endereco.setVisibility(View.INVISIBLE);
@@ -161,12 +144,42 @@ public class GetOS extends AppCompatActivity {
             public void onFailure(Call<RespostaServidor> call, Throwable t) {
                 progresso.dismiss();
                 Log.e("ERRO:", "SEFERRAEW" + t);
-                Toast.makeText(getApplicationContext(),"Erro na chamada ao servidor" + t, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Erro na chamada ao servidor" + t, Toast.LENGTH_LONG).show();
 
             }
         });
-
-
     }
 
+    private void retrofitEnviaOS(String os, String tecnico, String equipe, String contrato, String nomeAssinante, String servicoExecutado,
+                                 String anotacaoTecnica, String imagem, String observacao) {
+
+        final RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
+
+        Call<RespostaServidor> caller = service.enviaOS(os, tecnico, equipe, contrato, nomeAssinante,
+                servicoExecutado, anotacaoTecnica, observacao, imagem);
+
+        caller.enqueue(new Callback<RespostaServidor>() {
+            @Override
+            public void onResponse(Call<RespostaServidor> caller, Response<RespostaServidor> response) {
+
+                final RespostaServidor respostaServidor = response.body(); //pega o json
+
+                if (response.isSuccessful()) {
+                    if (respostaServidor != null) //se o body nao está vazio
+                    {
+                        if (respostaServidor.getSuccess() == 1) {
+                            Log.i("OS", "ENVIADA");
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RespostaServidor> caller, Throwable t) {
+                progresso.dismiss();
+                Log.e("ERRO:", "SEFERRAEW" + t);
+                //Toast.makeText(getApplicationContext(), "Erro na chamada ao servidor" + t, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 }
