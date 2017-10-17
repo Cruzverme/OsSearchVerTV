@@ -20,6 +20,7 @@ import com.example.shield.ossearchvertv.Retrofit.ServiceGenerator;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.StringTokenizer;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -120,10 +121,9 @@ public class GetOS extends AppCompatActivity {
                                             if (respostaServidor1.getSuccess() == 1)
                                             {
                                                 try {
-
                                                     retrofitEnviaOS(os.getText().toString(), tecnicoLocal, equipe, contra.getText().toString(),
-                                                            nome.getText().toString(), textoServ.getText().toString(), "blablabbal anotacao de tecnico",
-                                                            "imageimagem", obser1.getText().toString());
+                                                            nome.getText().toString(), textoServ.getText().toString(), "anotacao",
+                                                            null, obser1.getText().toString());
 
                                                     finish();
                                                     Toast.makeText(getApplicationContext(), "Os Enviada", Toast.LENGTH_SHORT).show();
@@ -173,8 +173,8 @@ public class GetOS extends AppCompatActivity {
         });
     }
 
-    private void retrofitEnviaOS(String os, String tecnico, String equipe, String contrato, String nomeAssinante, String servicoExecutado,
-                                 String anotacaoTecnica, String imagem, String observacao) {
+    private void retrofitEnviaOS(final String os, final String tecnico, final String equipe, final String contrato, final String nomeAssinante, final String servicoExecutado,
+                                 final String anotacaoTecnica, final String imagem, final String observacao) {
 
         final RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
 
@@ -183,17 +183,20 @@ public class GetOS extends AppCompatActivity {
 
         caller.enqueue(new Callback<RespostaServidor>() {
             @Override
-            public void onResponse(Call<RespostaServidor> caller, Response<RespostaServidor> response) {
+            public void onResponse(Call<RespostaServidor> call, Response<RespostaServidor> response) {
 
-                final RespostaServidor respostaServidor = response.body(); //pega o json
-
+                final RespostaServidor respostaServidor2 = response.body(); //pega o json
                 if (response.isSuccessful()) {
-                    if (respostaServidor != null) //se o body nao está vazio
+                    if (respostaServidor2 != null) //se o body nao está vazio
                     {
-                        if (respostaServidor.getSuccess() == 1) {
+                        if (respostaServidor2.getSuccess() == 1) {
                             Log.i("OS", "ENVIADA");
+                        }else{
+                            Log.i("OS", "NAO ENVIADA");
                         }
                     }
+                }else {
+                    Log.d("ERRO: ","ALGO NAO ESTA CERTO");
                 }
             }
 
