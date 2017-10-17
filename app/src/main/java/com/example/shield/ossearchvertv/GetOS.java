@@ -105,25 +105,46 @@ public class GetOS extends AppCompatActivity {
                             telComercial.setText(respostaServidor.getOs().get(0).getComercial());
                             telResidencial.setText(respostaServidor.getOs().get(0).getResidencial());
                             telCelular.setText(respostaServidor.getOs().get(0).getCelular());
+/*############################################ ENVIA OS PARA SERVIDOR #########################################################*/
 
-                            Call<RespostaServidor> callCPF = service.verificaCPF(cpf.getText().toString(),contra.getText().toString());
-     /*############################################ ENVIA EMAIL #########################################################*/
                             botaoEmail.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
 
-                                    try {
-                                        retrofitEnviaOS(os.getText().toString(), tecnicoLocal, equipe, contra.getText().toString(),
-                                                nome.getText().toString(), textoServ.getText().toString(), "blablabbal anotacao de tecnico",
-                                                "imageimagem", obser1.getText().toString());
+                                    final Call<RespostaServidor> callCPF = service.verificaCPF(cpf.getText().toString(),contra.getText().toString());
+                                    callCPF.enqueue(new Callback<RespostaServidor>()
+                                    {
+                                        @Override
+                                        public void onResponse(Call<RespostaServidor> call, final Response<RespostaServidor> response) {
+                                            final RespostaServidor respostaServidor1 = response.body();
+                                            if (respostaServidor1.getSuccess() == 1)
+                                            {
+                                                try {
 
-                                        finish();
-                                        Toast.makeText(getApplicationContext(), "Os Enviada", Toast.LENGTH_SHORT).show();
-                                    } catch (android.content.ActivityNotFoundException ex) {
-                                        Toast.makeText(getApplicationContext(), "Não foi possível enviar o email, tente novamente.", Toast.LENGTH_SHORT).show();
-                                    }
+                                                    retrofitEnviaOS(os.getText().toString(), tecnicoLocal, equipe, contra.getText().toString(),
+                                                            nome.getText().toString(), textoServ.getText().toString(), "blablabbal anotacao de tecnico",
+                                                            "imageimagem", obser1.getText().toString());
+
+                                                    finish();
+                                                    Toast.makeText(getApplicationContext(), "Os Enviada", Toast.LENGTH_SHORT).show();
+                                                } catch (android.content.ActivityNotFoundException ex) {
+                                                    Toast.makeText(getApplicationContext(), "Não foi possível enviar o email, tente novamente.", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }else{
+                                                Toast.makeText(getApplicationContext(), respostaServidor1.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<RespostaServidor> call, Throwable t) {
+
+                                        }
+
+                                    });
                                 }
                             });
+
+
      /*###############################################FIM ENVIA EMAIL ########################################################*/
                         } else {
                             //                alternativo.setVisibility(View.VISIBLE);
