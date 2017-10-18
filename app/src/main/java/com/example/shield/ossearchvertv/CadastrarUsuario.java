@@ -70,8 +70,8 @@ public class CadastrarUsuario extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Informação Incompleta",Toast.LENGTH_LONG).show();
                 }else
                 {
-                    retrofitEscravo(usuario.getText().toString(),senha.getText().toString(), nome.getText().toString(),
-                            String.valueOf(selectEquipes.getSelectedItem()) );
+       /*             retrofitEscravo(usuario.getText().toString(),senha.getText().toString(), nome.getText().toString(),
+                            String.valueOf(selectEquipes.getSelectedItem()) );*/
                 }
                 usuario.setText("");
                 senha.setText("");
@@ -80,7 +80,7 @@ public class CadastrarUsuario extends AppCompatActivity {
         });
     }
 
-    private void retrofitEscravo(final String usuario, String password, String nome, String equipe)
+    /*private void retrofitEscravo(final String usuario, String password, String nome, String equipe)
     {
         RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
         Call<RespostaServidor> call =service.criarUsuario(usuario, password, nome, equipe);
@@ -114,5 +114,5 @@ public class CadastrarUsuario extends AppCompatActivity {
                 Toast.makeText(CadastrarUsuario.this, "Falha ao Logar", Toast.LENGTH_SHORT).show();
             }
         });
-    }
+    }*/
 }

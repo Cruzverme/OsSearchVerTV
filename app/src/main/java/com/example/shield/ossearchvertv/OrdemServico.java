@@ -8,6 +8,8 @@ import com.google.gson.annotations.SerializedName;
 
 import org.w3c.dom.Text;
 
+import java.util.List;
+
 public class OrdemServico {
 
     @SerializedName("os")
@@ -37,6 +39,10 @@ public class OrdemServico {
     @SerializedName("celular")
     @Expose
     private String celular;
+    @SerializedName("servicos")
+    @Expose
+    private List<String> servicos = null;
+
 
     public OrdemServico(){
 
@@ -101,4 +107,11 @@ public class OrdemServico {
         this.celular = celular;
     }
 
+    public List<String> getServicos() {
+        return servicos;
+    }
+
+    public void setServicos(List<String> servicos) {
+        this.servicos = servicos;
+    }
 }

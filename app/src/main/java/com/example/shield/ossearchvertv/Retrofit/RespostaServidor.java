@@ -26,6 +26,9 @@ public class RespostaServidor {
     @SerializedName("comissao")
     @Expose
     private String comissao;
+    @SerializedName("servicos")
+    @Expose
+    private List<String> servicos = null;
 
     public Integer getSuccess() {
         return success;
@@ -55,4 +58,11 @@ public class RespostaServidor {
         this.message = message;
     }
 
+    public List<String> getServicos() {
+        return servicos;
+    }
+
+    public void setServicos(List<String> servicos) {
+        this.servicos = servicos;
+    }
 }

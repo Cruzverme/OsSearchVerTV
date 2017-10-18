@@ -6,8 +6,10 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -28,11 +30,11 @@ public interface RetrofitService {
     @GET("get_os_spec.php")
     Call<RespostaServidor> mostrarOS(@Query("os") String os);
 
-    @GET("criar_user.php") //FUNCIONAL
+    /*@GET("criar_user.php") //FUNCIONAL
     Call<RespostaServidor> criarUsuario(@Query("usuario") String usuario,
                                         @Query("password") String password,
                                         @Query("nome") String nome,
-                                        @Query("equipe") String equipe);
+                                        @Query("equipe") String equipe);*/
 
     @GET("confirma_login.php")
     Call<RespostaServidor> logarUsuario(@Query("usuario") String usuario,
@@ -52,4 +54,8 @@ public interface RetrofitService {
     @GET("verifica_cpf.php")
     Call<RespostaServidor> verificaCPF(@Query("cpf") String cpf,
                                        @Query("contrato") String contrato);
+
+    @GET("lista_servico_executado.php")
+    Call<RespostaServidor> listaServicosExecutados();
+
 }

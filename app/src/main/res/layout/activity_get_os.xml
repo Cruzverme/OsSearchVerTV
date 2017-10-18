@@ -115,16 +115,39 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:textSize="24sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
     <TextView
         android:id="@+id/textViewObser"
         android:textSize="24sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="SEM OBSERVAÇÃO"
         android:background="@color/colorVertvDetailBlack"
         android:textColor="@color/colorVertvLetters"
         android:layout_below="@id/titObser"
         android:layout_marginBottom="@dimen/activity_vertical_margin" />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorVertvLetters"
+        android:paddingTop="16dp"
+        android:text="Serviço Executado"
+        android:paddingBottom="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:textSize="24sp"/>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/selecaoServicoID"
+        android:textSize="24sp"
+        android:background="@color/colorVertvDetailBlack"
+        android:textColor="@color/colorVertvLetters"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"></Spinner>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -147,6 +170,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
             android:textSize="24sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Sem Telefone Comercial"
             android:layout_below="@id/contatoID"
             android:background="@color/colorVertvDetailBlack"
             android:textColor="@color/colorVertvLetters"
@@ -157,6 +181,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
             android:textSize="24sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Sem Telefone Residencial"
             android:layout_below="@id/textViewTelComercial"
             android:background="@color/colorVertvDetailBlack"
             android:textColor="@color/colorVertvLetters"
@@ -167,6 +192,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
             android:textSize="24sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Sem Telefone Celular"
             android:background="@color/colorVertvDetailBlack"
             android:layout_below="@id/textViewTelResidencial"
             android:textColor="@color/colorVertvLetters"
@@ -177,7 +203,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Serviço Executado"
+        android:text="Anotações Técnicas"
         android:textSize="24sp"
         android:textColor="@color/colorVertvLetters"
         android:paddingTop="16dp"
@@ -191,7 +217,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:background="@color/colorVertvDetailBlack"
         android:textColor="@color/colorVertvLetters"
         android:paddingBottom="8dp"
-        android:id="@+id/textoServExecID"/>
+        android:id="@+id/textoAnotacoesID"/>
 
     <TextView
         android:layout_width="wrap_content"

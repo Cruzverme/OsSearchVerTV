@@ -7,8 +7,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +20,7 @@ import com.example.shield.ossearchvertv.Retrofit.RetrofitService;
 import com.example.shield.ossearchvertv.Retrofit.ServiceGenerator;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.StringTokenizer;
@@ -31,10 +34,12 @@ import static android.widget.Toast.makeText;
 public class GetOS extends AppCompatActivity {
 
     private TextView os, endereco, contra, nome, telComercial, telResidencial, telCelular, alternativo, obser1, cpf;
-    EditText textoServ;
+    EditText anotacaoTecnica;
+    Spinner servicosExecutados;
     ProgressDialog progresso;
     Button botaoEmail;
     String equipe = "TI";
+    ArrayList<String> listaServicosExecutados = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +55,8 @@ public class GetOS extends AppCompatActivity {
         telResidencial = (TextView) findViewById(R.id.textViewTelResidencial);
         telCelular = (TextView) findViewById(R.id.textViewTelCelular);
         botaoEmail = (Button) findViewById(R.id.botaoEmailID);
-        textoServ = (EditText) findViewById(R.id.textoServExecID);
+        anotacaoTecnica = (EditText) findViewById(R.id.textoAnotacoesID);
+        servicosExecutados = (Spinner) findViewById(R.id.selecaoServicoID);
         cpf = (EditText) findViewById(R.id.cpfID);
 
         //pegando valor da activity anterior
@@ -58,7 +64,7 @@ public class GetOS extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         String parametroOS = bundle.getString("os");
         String usuario = bundle.getString("user");
-
+        retrofitServicosExecutados();
         listenerButton(parametroOS, usuario);
     }
 
@@ -86,6 +92,7 @@ public class GetOS extends AppCompatActivity {
         final RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
         Call<RespostaServidor> call = service.mostrarOS(os_var);
 
+
         call.enqueue(new Callback<RespostaServidor>() {
             @Override
             public void onResponse(Call<RespostaServidor> call, Response<RespostaServidor> response) {
@@ -106,6 +113,12 @@ public class GetOS extends AppCompatActivity {
                             telComercial.setText(respostaServidor.getOs().get(0).getComercial());
                             telResidencial.setText(respostaServidor.getOs().get(0).getResidencial());
                             telCelular.setText(respostaServidor.getOs().get(0).getCelular());
+
+
+                            ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),
+                                    android.R.layout.simple_spinner_item,listaServicosExecutados);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            servicosExecutados.setAdapter(adapter);
 /*############################################ ENVIA OS PARA SERVIDOR #########################################################*/
 
                             botaoEmail.setOnClickListener(new View.OnClickListener() {
@@ -122,13 +135,13 @@ public class GetOS extends AppCompatActivity {
                                             {
                                                 try {
                                                     retrofitEnviaOS(os.getText().toString(), tecnicoLocal, equipe, contra.getText().toString(),
-                                                            nome.getText().toString(), textoServ.getText().toString(), "anotacao",
+                                                            nome.getText().toString(), "Servico Executado", anotacaoTecnica.getText().toString(),
                                                             null, obser1.getText().toString());
 
                                                     finish();
                                                     Toast.makeText(getApplicationContext(), "Os Enviada", Toast.LENGTH_SHORT).show();
                                                 } catch (android.content.ActivityNotFoundException ex) {
-                                                    Toast.makeText(getApplicationContext(), "Não foi possível enviar o email, tente novamente.", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(getApplicationContext(), "Não foi possível enviar ao Servidor, tente novamente.", Toast.LENGTH_SHORT).show();
                                                 }
                                             }else{
                                                 Toast.makeText(getApplicationContext(), respostaServidor1.getMessage(), Toast.LENGTH_SHORT).show();
@@ -173,6 +186,37 @@ public class GetOS extends AppCompatActivity {
         });
     }
 
+    private void retrofitServicosExecutados()
+    {
+        final RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
+
+        Call<RespostaServidor> callList = service.listaServicosExecutados();
+
+        callList.enqueue(new Callback<RespostaServidor>() {
+            @Override
+            public void onResponse(Call<RespostaServidor> call, Response<RespostaServidor> response) {
+                final RespostaServidor respostaServidorServicos = response.body();
+
+                if (response.isSuccessful())
+                {
+                    if (respostaServidorServicos.getSuccess() == 1)
+                    {
+
+                        for (String servidor: respostaServidorServicos.getServicos())
+                        {
+                             listaServicosExecutados.add(servidor);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RespostaServidor> call, Throwable t) {
+
+            }
+        });
+    }
+
     private void retrofitEnviaOS(final String os, final String tecnico, final String equipe, final String contrato, final String nomeAssinante, final String servicoExecutado,
                                  final String anotacaoTecnica, final String imagem, final String observacao) {
 
@@ -203,8 +247,8 @@ public class GetOS extends AppCompatActivity {
             @Override
             public void onFailure(Call<RespostaServidor> caller, Throwable t) {
                 progresso.dismiss();
-                Log.e("ERRO:", "SEFERRAEW" + t);
-                //Toast.makeText(getApplicationContext(), "Erro na chamada ao servidor" + t, Toast.LENGTH_LONG).show();
+                Log.e("ERRO:", "SEFERRAasdaEW" + t);
+                Toast.makeText(getApplicationContext(), "Erro na chamada ao servidor" + t, Toast.LENGTH_LONG).show();
             }
         });
     }
