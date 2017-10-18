@@ -135,8 +135,8 @@ public class GetOS extends AppCompatActivity {
                                             {
                                                 try {
                                                     retrofitEnviaOS(os.getText().toString(), tecnicoLocal, equipe, contra.getText().toString(),
-                                                            nome.getText().toString(), "Servico Executado", anotacaoTecnica.getText().toString(),
-                                                            null, obser1.getText().toString());
+                                                            nome.getText().toString(), String.valueOf(servicosExecutados.getSelectedItem()),
+                                                            anotacaoTecnica.getText().toString(), null, obser1.getText().toString());
 
                                                     finish();
                                                     Toast.makeText(getApplicationContext(), "Os Enviada", Toast.LENGTH_SHORT).show();

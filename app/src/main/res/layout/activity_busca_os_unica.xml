@@ -24,6 +24,7 @@ tools:context="com.example.shield.ossearchvertv.BuscaOsUnica">
     android:layout_height="wrap_content"
     android:id="@+id/OsID"
     android:layout_marginTop="@dimen/tamanhoTextTitulo"
+    android:textAlignment="center"
     android:hint="Insira a Ordem de Serviço"
     android:textColor="@color/colorVertvLetters"
     android:paddingTop="@dimen/activity_horizontal_margin"
