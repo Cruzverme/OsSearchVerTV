@@ -101,7 +101,8 @@ public class GetOS extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     if (respostaServidor != null) //se o body nao está vazio
                     {
-                        if (respostaServidor.getSuccess() == 1) {
+                        if (respostaServidor.getSuccess() == 1)
+                        {
                             //Dismissing the loading progressbar
                             progresso.dismiss();
 
@@ -160,17 +161,10 @@ public class GetOS extends AppCompatActivity {
 
      /*###############################################FIM ENVIA EMAIL ########################################################*/
                         } else {
-                            //                alternativo.setVisibility(View.VISIBLE);
-                            os.setVisibility(View.INVISIBLE);
-                            endereco.setVisibility(View.INVISIBLE);
-                            contra.setVisibility(View.INVISIBLE);
-                            nome.setVisibility(View.INVISIBLE);
-                            telComercial.setVisibility(View.INVISIBLE);
-                            telResidencial.setVisibility(View.INVISIBLE);
-                            telCelular.setVisibility(View.INVISIBLE);
-                            alternativo.setVisibility(View.INVISIBLE);
-                            obser1.setVisibility(View.INVISIBLE);
-                            botaoEmail.setVisibility(View.INVISIBLE);
+                            Intent intent = new Intent(getApplicationContext(),BuscaOsUnica.class);
+                            startActivity(intent);
+
+                            Toast.makeText(GetOS.this, respostaServidor.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
