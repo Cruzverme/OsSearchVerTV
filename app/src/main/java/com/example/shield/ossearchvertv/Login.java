@@ -44,7 +44,7 @@ public class Login extends AppCompatActivity {
         logar = (Button) findViewById(R.id.logarID);
         usuario = (EditText) findViewById(R.id.usuarioID);
         senha = (EditText) findViewById(R.id.senhaID);
-        botao_cadastrar = (TextView) findViewById(R.id.botao_cadastrarID);
+        //botao_cadastrar = (TextView) findViewById(R.id.botao_cadastrarID);
         //sharedPreferences = getSharedPreferences(PREFERENCIAS, Context.MODE_PRIVATE);
 
 //        botao_cadastrar.setOnClickListener(new View.OnClickListener() {
