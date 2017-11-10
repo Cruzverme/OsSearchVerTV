@@ -62,8 +62,11 @@ public class GetOS extends AppCompatActivity {
         //pegando valor da activity anterior
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
+        assert bundle != null;
         String parametroOS = bundle.getString("os");
         String usuario = bundle.getString("user");
+        Log.d("TAGA", "onCreate: " + usuario);
+
         retrofitServicosExecutados();
         listenerButton(parametroOS, usuario);
     }
@@ -93,7 +96,8 @@ public class GetOS extends AppCompatActivity {
         Call<RespostaServidor> call = service.mostrarOS(os_var);
 
 
-        call.enqueue(new Callback<RespostaServidor>() {
+        call.enqueue(new Callback<RespostaServidor>()
+        {
             @Override
             public void onResponse(Call<RespostaServidor> call, Response<RespostaServidor> response) {
                 final RespostaServidor respostaServidor = response.body(); //pega o json
@@ -161,9 +165,10 @@ public class GetOS extends AppCompatActivity {
 
      /*###############################################FIM ENVIA EMAIL ########################################################*/
                         } else {
-                            Intent intent = new Intent(getApplicationContext(),BuscaOsUnica.class);
-                            startActivity(intent);
+                            //Dismissing the loading progressbar
+                            progresso.dismiss();
 
+                            finish();
                             Toast.makeText(GetOS.this, respostaServidor.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }

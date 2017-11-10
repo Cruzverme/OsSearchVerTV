@@ -74,7 +74,7 @@ public class Login extends AppCompatActivity {
                         senha.setText("");
                     } else {
                         progresso = new ProgressDialog(Login.this);
-                        progresso.setTitle("processando...");
+                        progresso.setTitle("aguarde...");
                         progresso.show();
 
                         retrofitEscravo(usuario.getText().toString(), senha.getText().toString());
