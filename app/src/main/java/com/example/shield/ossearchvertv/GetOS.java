@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shield.ossearchvertv.EmailServicos.SendMailTask;
+import com.example.shield.ossearchvertv.Helper.Servicos;
 import com.example.shield.ossearchvertv.Retrofit.RespostaServidor;
 import com.example.shield.ossearchvertv.Retrofit.RetrofitService;
 import com.example.shield.ossearchvertv.Retrofit.ServiceGenerator;
@@ -40,7 +41,6 @@ public class GetOS extends AppCompatActivity {
     ProgressDialog progresso;
     Button botaoEmail;
     String equipe = "TI";
-    ArrayList<String> listaServicosExecutados = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +68,7 @@ public class GetOS extends AppCompatActivity {
         String usuario = bundle.getString("user");
         Log.d("TAGA", "onCreate: " + usuario);
 
-        retrofitServicosExecutados();
+        Servicos.retrofitServicosExecutados();
         listenerButton(parametroOS, usuario);
     }
 
@@ -96,7 +96,6 @@ public class GetOS extends AppCompatActivity {
         final RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
         Call<RespostaServidor> call = service.mostrarOS(os_var);
 
-
         call.enqueue(new Callback<RespostaServidor>()
         {
             @Override
@@ -122,7 +121,7 @@ public class GetOS extends AppCompatActivity {
 
 
                             ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),
-                                    android.R.layout.simple_spinner_item,listaServicosExecutados);
+                                    android.R.layout.simple_spinner_item,Servicos.getListaServicosExecutados());
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             servicosExecutados.setAdapter(adapter);
 /*############################################ ENVIA OS PARA SERVIDOR #########################################################*/
@@ -157,12 +156,14 @@ public class GetOS extends AppCompatActivity {
 
                                                     enviaSMS("+5554",body);
                                                     finish();
-                                                    Toast.makeText(getApplicationContext(), "Os Enviada", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(getApplicationContext(), respostaServidor1.getMessage(), Toast.LENGTH_SHORT).show();
                                                 } catch (android.content.ActivityNotFoundException ex) {
                                                     Toast.makeText(getApplicationContext(), "Não foi possível enviar ao Servidor, tente novamente.", Toast.LENGTH_SHORT).show();
                                                 }
                                             }else{
+                                                finish();
                                                 Toast.makeText(getApplicationContext(), respostaServidor1.getMessage(), Toast.LENGTH_SHORT).show();
+
                                             }
                                         }
 
@@ -215,37 +216,7 @@ public class GetOS extends AppCompatActivity {
     }
 
 
-    private void retrofitServicosExecutados()
-    {
-        final RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
-
-        Call<RespostaServidor> callList = service.listaServicosExecutados();
-
-        callList.enqueue(new Callback<RespostaServidor>() {
-            @Override
-            public void onResponse(Call<RespostaServidor> call, Response<RespostaServidor> response) {
-                final RespostaServidor respostaServidorServicos = response.body();
-
-                if (response.isSuccessful())
-                {
-                    if (respostaServidorServicos.getSuccess() == 1)
-                    {
-
-                        for (String servidor: respostaServidorServicos.getServicos())
-                        {
-                            listaServicosExecutados.add("SELECIONE O SERVIÇO EXECUTADO");
-                             listaServicosExecutados.add(servidor);
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<RespostaServidor> call, Throwable t) {
-
-            }
-        });
-    }
+    //AKI ESTAVA O SELECIONAR OPS
 
     private void retrofitEnviaOS(final String os, final String tecnico, final String equipe, final String contrato, final String nomeAssinante, final String servicoExecutado,
                                  final String anotacaoTecnica, final String imagem, final String observacao) {

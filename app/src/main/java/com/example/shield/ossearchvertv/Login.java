@@ -12,6 +12,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -92,7 +93,6 @@ public class Login extends AppCompatActivity {
         RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
         Call<RespostaServidor> call =service.logarUsuario(usuarioLocal, password);
 
-
         call.enqueue(new Callback<RespostaServidor>() {
             @Override
             public void onResponse(Call<RespostaServidor> call, Response<RespostaServidor> response)
@@ -102,7 +102,7 @@ public class Login extends AppCompatActivity {
                     if (respostaServidor != null) {
                         if (respostaServidor.getSuccess() == 1) {
                             //progresso.dismiss();
-                            Toast.makeText(getApplicationContext(), "Bem Vindo" + usuarioLocal, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Bem Vindo " + usuarioLocal, Toast.LENGTH_SHORT).show();
 
                             //joga pra proxima activity
                             Intent bemVindo = new Intent(getApplicationContext(), BuscaOsUnica.class);
