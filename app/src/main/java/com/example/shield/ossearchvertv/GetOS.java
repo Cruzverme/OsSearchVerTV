@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -143,6 +144,18 @@ public class GetOS extends AppCompatActivity {
                                                             nome.getText().toString(), String.valueOf(servicosExecutados.getSelectedItem()),
                                                             anotacaoTecnica.getText().toString(), null, obser1.getText().toString());
 
+                                                    String body ="##### COMPROVANTE DE OS ####" +
+                                                            "\n\nTécnico: "  + tecnicoLocal +
+                                                            "\nOS: " + os.getText().toString() +
+                                                            "\nContrato: "+ contra.getText().toString() +
+                                                            "\nAssinante: "+ nome.getText().toString() +
+                                                            "\nSERVICO: " + servicosExecutados.getSelectedItem().toString();
+                                                            //"\nAnotação do Técnico: \n" + anotacaoTecnica.getText().toString() ;
+                                                            //"\nServiço Executado" + servicosExecutados.getSelectedItem() ;
+                                                            //"\n" +
+                                                            //"\nData Execução: " + dateFormat.format(dataAtual);
+
+                                                    enviaSMS("+5554",body);
                                                     finish();
                                                     Toast.makeText(getApplicationContext(), "Os Enviada", Toast.LENGTH_SHORT).show();
                                                 } catch (android.content.ActivityNotFoundException ex) {
@@ -185,6 +198,23 @@ public class GetOS extends AppCompatActivity {
         });
     }
 
+    /*Envio do SMS*/
+    private boolean enviaSMS(String telefone, String mensagem){
+        try{
+
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(telefone, null, mensagem, null, null);
+
+            return true;
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+
     private void retrofitServicosExecutados()
     {
         final RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
@@ -203,6 +233,7 @@ public class GetOS extends AppCompatActivity {
 
                         for (String servidor: respostaServidorServicos.getServicos())
                         {
+                            listaServicosExecutados.add("SELECIONE O SERVIÇO EXECUTADO");
                              listaServicosExecutados.add(servidor);
                         }
                     }

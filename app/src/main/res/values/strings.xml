@@ -2,4 +2,18 @@
     <string name="app_name">OS Search - VERTV</string>
     <string name="OS">Insira a OS</string>
     <string name="botaoEnviar">Buscar</string>
+    <string name="servi_o_executado">Serviço Executado</string>
+    <string name="contrato">Contrato:</string>
+    <string name="endere_o">Endereço:</string>
+    <string name="obs">Obs.:</string>
+    <string name="sem_observa_o">SEM OBSERVAÇÃO</string>
+    <string name="contato">CONTATO</string>
+    <string name="sem_telefone_comercial">Sem Telefone Comercial</string>
+    <string name="sem_telefone_residencial">Sem Telefone Residencial</string>
+    <string name="sem_telefone_celular">Sem Telefone Celular</string>
+    <string name="anota_es_t_cnicas">Anotações Técnicas</string>
+    <string name="cpf_de_confirma_o">CPF de Confirmação</string>
+    <string name="hint_confirme_os_5_primeiros_digitos">Confirme os 5 primeiros digitos</string>
+    <string name="enviar_os">Enviar OS</string>
+    <string name="nome">Nome:</string>
 </resources>

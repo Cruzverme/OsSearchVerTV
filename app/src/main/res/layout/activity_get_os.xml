@@ -39,7 +39,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
 
     <TextView
         android:id="@+id/titContra"
-        android:text="Contrato: "
+        android:text="@string/contrato"
         android:layout_below="@id/textViewOS"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:textSize="24sp"
@@ -61,7 +61,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
 
     <TextView
         android:id="@+id/titNome"
-        android:text="Nome: "
+        android:text="@string/nome"
         android:layout_below="@id/textViewContra"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:textSize="24sp"
@@ -84,7 +84,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
 
     <TextView
         android:id="@+id/titEndereco"
-        android:text="Endereço: "
+        android:text="@string/endere_o"
         android:layout_below="@id/textViewNome"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:textSize="24sp"
@@ -106,7 +106,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
 
     <TextView
         android:id="@+id/titObser"
-        android:text="Obs.: "
+        android:text="@string/obs"
         android:layout_below="@id/textViewEndereco"
         android:textColor="@color/colorVertvLetters"
         android:paddingTop="16dp"
@@ -121,46 +121,45 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:textSize="24sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SEM OBSERVAÇÃO"
+        android:text="@string/sem_observa_o"
         android:background="@color/colorVertvDetailBlack"
         android:textColor="@color/colorVertvLetters"
         android:layout_below="@id/titObser"
         android:layout_marginBottom="@dimen/activity_vertical_margin" />
 
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorVertvLetters"
-        android:paddingTop="16dp"
-        android:text="Serviço Executado"
-        android:paddingBottom="8dp"
-        android:layout_marginTop="20dp"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:textSize="24sp"/>
+        android:layout_marginTop="20dp"
+        android:paddingTop="16dp"
+        android:text="@string/servi_o_executado"
+        android:textColor="@color/colorVertvLetters"
+        android:textSize="24sp" />
 
     <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/selecaoServicoID"
-        android:textSize="24sp"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+
         android:background="@color/colorVertvDetailBlack"
         android:textColor="@color/colorVertvLetters"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_weight="0.18" />
+        android:textSize="24sp" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/colorVertvDetailBlack">
+        android:background="@color/colorVertvDetailBlack"
+        android:layout_marginTop="@dimen/activity_horizontal_margin">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="CONTATO"
+            android:text="@string/contato"
             android:paddingBottom="8dp"
             android:id="@+id/contatoID"
             android:textColor="@color/colorVertvLetters"
@@ -172,7 +171,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
             android:textSize="24sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sem Telefone Comercial"
+            android:text="@string/sem_telefone_comercial"
             android:layout_below="@id/contatoID"
             android:background="@color/colorVertvDetailBlack"
             android:textColor="@color/colorVertvLetters"
@@ -183,7 +182,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
             android:textSize="24sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sem Telefone Residencial"
+            android:text="@string/sem_telefone_residencial"
             android:layout_below="@id/textViewTelComercial"
             android:background="@color/colorVertvDetailBlack"
             android:textColor="@color/colorVertvLetters"
@@ -194,7 +193,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
             android:textSize="24sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sem Telefone Celular"
+            android:text="@string/sem_telefone_celular"
             android:background="@color/colorVertvDetailBlack"
             android:layout_below="@id/textViewTelResidencial"
             android:textColor="@color/colorVertvLetters"
@@ -205,7 +204,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Anotações Técnicas"
+        android:text="@string/anota_es_t_cnicas"
         android:textSize="24sp"
         android:textColor="@color/colorVertvLetters"
         android:paddingTop="16dp"
@@ -226,14 +225,14 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:layout_height="wrap_content"
         android:textColor="@color/colorVertvLetters"
         android:paddingTop="8dp"
-        android:text="CPF de Confirmação"
+        android:text="@string/cpf_de_confirma_o"
         android:textSize="24sp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/cpfID"
-        android:hint="Confirme os 5 primeiros digitos"
+        android:hint="@string/hint_confirme_os_5_primeiros_digitos"
         android:textSize="24sp"
         android:textColor="@color/colorVertvLetters"
         android:textColorHint="@color/colorVertvLetters"
@@ -246,7 +245,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:layout_alignParentBottom="true"
         android:id="@+id/botaoEmailID"
         android:background="@color/colorVertvOrange"
-        android:text="Enviar OS"/>
+        android:text="@string/enviar_os"/>
 
 </LinearLayout>
 
