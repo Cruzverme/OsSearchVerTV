@@ -4,9 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,7 +19,6 @@ import retrofit2.Response;
 
 public class BuscaOsUnica extends AppCompatActivity {
 
-    private Button buscar;
     private EditText textOS;
 
     @Override
@@ -31,7 +27,7 @@ public class BuscaOsUnica extends AppCompatActivity {
         setContentView(R.layout.activity_busca_os_unica);
 
         textOS = (EditText) findViewById(R.id.OsID);
-        buscar = (Button) findViewById(R.id.botaoBuscar);
+        Button buscar = (Button) findViewById(R.id.botaoBuscar);
 
         //pegando valor da activity anterior MainActivity
         Intent intent = getIntent();

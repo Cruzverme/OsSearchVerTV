@@ -21,8 +21,8 @@ import retrofit2.Response;
 
 public final class Servicos {
 
-    static ArrayList<String> listaServicosExecutados = new ArrayList<String>();
-    static String mensagem;
+    private static ArrayList<String> listaServicosExecutados = new ArrayList<String>();
+    private static String mensagem;
 
     public static void retrofitServicosExecutados()
     {
@@ -41,10 +41,7 @@ public final class Servicos {
                     {
                         listaServicosExecutados.clear();
                         listaServicosExecutados.add("SELECIONE O SERVIÇO EXECUTADO");
-                        for (String servidor: respostaServidorServicos.getServicos())
-                        {
-                            listaServicosExecutados.add(servidor);
-                        }
+                        listaServicosExecutados.addAll(respostaServidorServicos.getServicos());
                     }
                 }
             }
@@ -79,7 +76,7 @@ public final class Servicos {
                     {
                         if (respostaServidor2.getSuccess() == 1) {
                             Log.i("OS", "ENVIADA");
-                            String body ="##### COMPROVANTE DE OS ####" +
+                            String body ="## COMPROVANTE DE OS ##" +
                                     "\n\nTécnico: "  + tecnico +
                                     "\nOS: " + os +
                                     "\nContrato: "+ contrato +

@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -16,27 +15,22 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.shield.ossearchvertv.EmailServicos.SendMailTask;
 import com.example.shield.ossearchvertv.Helper.Servicos;
 import com.example.shield.ossearchvertv.Retrofit.RespostaServidor;
 import com.example.shield.ossearchvertv.Retrofit.RetrofitService;
 import com.example.shield.ossearchvertv.Retrofit.ServiceGenerator;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.StringTokenizer;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.widget.Toast.makeText;
-
 public class GetOS extends AppCompatActivity {
 
-    private TextView os, endereco, contra, nome, telComercial, telResidencial, telCelular, alternativo, obser1, cpf;
+    private TextView os, endereco, contra, nome, telComercial, telResidencial, telCelular, obser1, cpf;
     EditText anotacaoTecnica, celularParaEnviar;
     Spinner servicosExecutados;
     ProgressDialog progresso;
@@ -88,7 +82,7 @@ public class GetOS extends AppCompatActivity {
     private void retrofitEscravo(String os_var, final String tecnicoLocal) {
 
         //pegando data e hora do celular
-        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy-HH:mm:ss");
+        @SuppressLint("SimpleDateFormat") final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy-HH:mm:ss");
         Date data = new Date();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(data);
@@ -123,7 +117,7 @@ public class GetOS extends AppCompatActivity {
                             telCelular.setText(respostaServidor.getOs().get(0).getCelular());
 
 
-                            ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),
+                            ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(),
                                     android.R.layout.simple_spinner_item,Servicos.getListaServicosExecutados());
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             servicosExecutados.setAdapter(adapter);
