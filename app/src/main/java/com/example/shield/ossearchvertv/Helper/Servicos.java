@@ -1,5 +1,9 @@
 package com.example.shield.ossearchvertv.Helper;
 
+import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
+
 import com.example.shield.ossearchvertv.Retrofit.RespostaServidor;
 import com.example.shield.ossearchvertv.Retrofit.RetrofitService;
 import com.example.shield.ossearchvertv.Retrofit.ServiceGenerator;
@@ -33,10 +37,10 @@ public final class Servicos {
                 {
                     if (respostaServidorServicos.getSuccess() == 1)
                     {
-
+                        listaServicosExecutados.clear();
+                        listaServicosExecutados.add("SELECIONE O SERVIÇO EXECUTADO");
                         for (String servidor: respostaServidorServicos.getServicos())
                         {
-                            listaServicosExecutados.add("SELECIONE O SERVIÇO EXECUTADO");
                             listaServicosExecutados.add(servidor);
                         }
                     }
@@ -52,5 +56,40 @@ public final class Servicos {
 
     public static ArrayList<String> getListaServicosExecutados() {
         return listaServicosExecutados;
+    }
+
+    public static void retrofitEnviaOS(final String os, final String tecnico, final String equipe, final String contrato, final String nomeAssinante, final String servicoExecutado,
+                                 final String anotacaoTecnica, final String imagem, final String observacao) {
+
+        final RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
+
+        Call<RespostaServidor> caller = service.enviaOS(os, tecnico, equipe, contrato, nomeAssinante,
+                servicoExecutado, anotacaoTecnica, observacao, imagem);
+
+        caller.enqueue(new Callback<RespostaServidor>()
+        {
+            @Override
+            public void onResponse(Call<RespostaServidor> call, Response<RespostaServidor> response) {
+
+                final RespostaServidor respostaServidor2 = response.body(); //pega o json
+                if (response.isSuccessful()) {
+                    if (respostaServidor2 != null) //se o body nao está vazio
+                    {
+                        if (respostaServidor2.getSuccess() == 1) {
+                            Log.i("OS", "ENVIADA");
+                        }else{
+                            Log.i("OS", "NAO ENVIADA");
+                        }
+                    }
+                }else {
+                    Log.d("ERRO: ","ALGO NAO ESTA CERTO");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RespostaServidor> caller, Throwable t) {
+
+            }
+        });
     }
 }

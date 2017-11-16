@@ -116,7 +116,7 @@ public class Login extends AppCompatActivity {
                             senha.setText("");
                             usuario.setText("");
                         } else {
-                            Toast.makeText(Login.this, "Usuário inexistente ou Informação incorreta", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, respostaServidor.getMessage() , Toast.LENGTH_SHORT).show();
                             senha.setText("");
                         }
                     }

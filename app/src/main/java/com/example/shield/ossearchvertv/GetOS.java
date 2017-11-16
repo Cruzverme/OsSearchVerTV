@@ -139,7 +139,7 @@ public class GetOS extends AppCompatActivity {
                                             if (respostaServidor1.getSuccess() == 1)
                                             {
                                                 try {
-                                                    retrofitEnviaOS(os.getText().toString(), tecnicoLocal, equipe, contra.getText().toString(),
+                                                    Servicos.retrofitEnviaOS(os.getText().toString(), tecnicoLocal, equipe, contra.getText().toString(),
                                                             nome.getText().toString(), String.valueOf(servicosExecutados.getSelectedItem()),
                                                             anotacaoTecnica.getText().toString(), null, obser1.getText().toString());
 
@@ -161,7 +161,6 @@ public class GetOS extends AppCompatActivity {
                                                     Toast.makeText(getApplicationContext(), "Não foi possível enviar ao Servidor, tente novamente.", Toast.LENGTH_SHORT).show();
                                                 }
                                             }else{
-                                                finish();
                                                 Toast.makeText(getApplicationContext(), respostaServidor1.getMessage(), Toast.LENGTH_SHORT).show();
 
                                             }
@@ -169,6 +168,8 @@ public class GetOS extends AppCompatActivity {
 
                                         @Override
                                         public void onFailure(Call<RespostaServidor> call, Throwable t) {
+                                            finish();
+                                            Toast.makeText(getApplicationContext(), "Não foi possível acessar servidor!", Toast.LENGTH_SHORT).show();
 
                                         }
 
@@ -215,42 +216,7 @@ public class GetOS extends AppCompatActivity {
 
     }
 
-
     //AKI ESTAVA O SELECIONAR OPS
 
-    private void retrofitEnviaOS(final String os, final String tecnico, final String equipe, final String contrato, final String nomeAssinante, final String servicoExecutado,
-                                 final String anotacaoTecnica, final String imagem, final String observacao) {
-
-        final RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
-
-        Call<RespostaServidor> caller = service.enviaOS(os, tecnico, equipe, contrato, nomeAssinante,
-                servicoExecutado, anotacaoTecnica, observacao, imagem);
-
-        caller.enqueue(new Callback<RespostaServidor>() {
-            @Override
-            public void onResponse(Call<RespostaServidor> call, Response<RespostaServidor> response) {
-
-                final RespostaServidor respostaServidor2 = response.body(); //pega o json
-                if (response.isSuccessful()) {
-                    if (respostaServidor2 != null) //se o body nao está vazio
-                    {
-                        if (respostaServidor2.getSuccess() == 1) {
-                            Log.i("OS", "ENVIADA");
-                        }else{
-                            Log.i("OS", "NAO ENVIADA");
-                        }
-                    }
-                }else {
-                    Log.d("ERRO: ","ALGO NAO ESTA CERTO");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<RespostaServidor> caller, Throwable t) {
-                progresso.dismiss();
-                Log.e("ERRO:", "SEFERRAasdaEW" + t);
-                Toast.makeText(getApplicationContext(), "Erro na chamada ao servidor" + t, Toast.LENGTH_LONG).show();
-            }
-        });
-    }
+    //AKI ESTAVA O ENVIA OS
 }
