@@ -136,32 +136,25 @@ public class GetOS extends AppCompatActivity {
                                         @Override
                                         public void onResponse(Call<RespostaServidor> call, final Response<RespostaServidor> response) {
                                             final RespostaServidor respostaServidor1 = response.body();
-                                            if (respostaServidor1.getSuccess() == 1)
+                                            if (cpf.getText().length() == 5)
                                             {
-                                                try {
-                                                    Servicos.retrofitEnviaOS(os.getText().toString(), tecnicoLocal, equipe, contra.getText().toString(),
-                                                            nome.getText().toString(), String.valueOf(servicosExecutados.getSelectedItem()),
-                                                            anotacaoTecnica.getText().toString(), null, obser1.getText().toString());
+                                                if (respostaServidor1.getSuccess() == 1) {
+                                                    try {
+                                                        Servicos.retrofitEnviaOS(os.getText().toString(), tecnicoLocal, equipe, contra.getText().toString(),
+                                                                nome.getText().toString(), String.valueOf(servicosExecutados.getSelectedItem()),
+                                                                anotacaoTecnica.getText().toString(), null, obser1.getText().toString());
 
-                                                    String body ="##### COMPROVANTE DE OS ####" +
-                                                            "\n\nTécnico: "  + tecnicoLocal +
-                                                            "\nOS: " + os.getText().toString() +
-                                                            "\nContrato: "+ contra.getText().toString() +
-                                                            "\nAssinante: "+ nome.getText().toString() +
-                                                            "\nSERVICO: " + servicosExecutados.getSelectedItem().toString();
-                                                            //"\nAnotação do Técnico: \n" + anotacaoTecnica.getText().toString() ;
-                                                            //"\nServiço Executado" + servicosExecutados.getSelectedItem() ;
-                                                            //"\n" +
-                                                            //"\nData Execução: " + dateFormat.format(dataAtual);
-
-                                                    enviaSMS("+5554",body);
-                                                    finish();
+                                                        Toast.makeText(GetOS.this, "OS Enviada", Toast.LENGTH_SHORT).show();
+                                                        finish();
+                                                    } catch (android.content.ActivityNotFoundException ex) {
+                                                        Toast.makeText(getApplicationContext(), "Não foi possível enviar ao Servidor, tente novamente.", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                } else {
                                                     Toast.makeText(getApplicationContext(), respostaServidor1.getMessage(), Toast.LENGTH_SHORT).show();
-                                                } catch (android.content.ActivityNotFoundException ex) {
-                                                    Toast.makeText(getApplicationContext(), "Não foi possível enviar ao Servidor, tente novamente.", Toast.LENGTH_SHORT).show();
+
                                                 }
-                                            }else{
-                                                Toast.makeText(getApplicationContext(), respostaServidor1.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }else {
+                                                Toast.makeText(getApplicationContext(), "CPF precisa dos 5 Digitos", Toast.LENGTH_SHORT).show();
 
                                             }
                                         }
@@ -200,21 +193,6 @@ public class GetOS extends AppCompatActivity {
         });
     }
 
-    /*Envio do SMS*/
-    private boolean enviaSMS(String telefone, String mensagem){
-        try{
-
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(telefone, null, mensagem, null, null);
-
-            return true;
-
-        }catch (Exception e){
-            e.printStackTrace();
-            return false;
-        }
-
-    }
 
     //AKI ESTAVA O SELECIONAR OPS
 

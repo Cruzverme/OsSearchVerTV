@@ -1,6 +1,7 @@
 package com.example.shield.ossearchvertv.Helper;
 
 import android.content.Context;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import retrofit2.Response;
 public final class Servicos {
 
     static ArrayList<String> listaServicosExecutados = new ArrayList<String>();
+    static String mensagem;
 
     public static void retrofitServicosExecutados()
     {
@@ -69,14 +71,27 @@ public final class Servicos {
         caller.enqueue(new Callback<RespostaServidor>()
         {
             @Override
-            public void onResponse(Call<RespostaServidor> call, Response<RespostaServidor> response) {
-
+            public void onResponse(Call<RespostaServidor> call, Response<RespostaServidor> response)
+            {
                 final RespostaServidor respostaServidor2 = response.body(); //pega o json
                 if (response.isSuccessful()) {
                     if (respostaServidor2 != null) //se o body nao está vazio
                     {
                         if (respostaServidor2.getSuccess() == 1) {
                             Log.i("OS", "ENVIADA");
+                            String body ="##### COMPROVANTE DE OS ####" +
+                                    "\n\nTécnico: "  + tecnico +
+                                    "\nOS: " + os +
+                                    "\nContrato: "+ contrato +
+                                    "\nAssinante: "+ nomeAssinante +
+                                    "\nSERVICO: " + servicoExecutado;
+                            //"\nAnotação do Técnico: \n" + anotacaoTecnica.getText().toString() ;
+                            //"\nServiço Executado" + servicosExecutados.getSelectedItem() ;
+                            //"\n" +
+                            //"\nData Execução: " + dateFormat.format(dataAtual);
+
+                            enviaSMS("+5554",body);
+
                         }else{
                             Log.i("OS", "NAO ENVIADA");
                         }
@@ -92,4 +107,25 @@ public final class Servicos {
             }
         });
     }
+
+    public static String getMensagem() {
+        return mensagem;
+    }
+
+    /*Envio do SMS*/
+    private static boolean enviaSMS(String telefone, String mensagem){
+        try{
+
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(telefone, null, mensagem, null, null);
+
+            return true;
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
 }
