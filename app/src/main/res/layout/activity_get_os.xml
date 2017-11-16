@@ -240,6 +240,26 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:textColorHint="@color/colorVertvLetters"
         android:background="@color/colorVertvDetailBlack"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorVertvLetters"
+        android:paddingTop="8dp"
+        android:text="@string/celular_para_envio_de_comprovante"
+        android:textSize="24sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:id="@+id/textoCelular"
+        android:inputType="phone"
+        android:textColor="@color/colorVertvLetters"
+        android:textColorHint="@color/colorVertvLetters"
+        android:background="@color/colorVertvDetailBlack"
+        />
+
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

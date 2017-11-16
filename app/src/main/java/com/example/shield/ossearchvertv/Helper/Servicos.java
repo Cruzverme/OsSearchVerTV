@@ -61,7 +61,7 @@ public final class Servicos {
     }
 
     public static void retrofitEnviaOS(final String os, final String tecnico, final String equipe, final String contrato, final String nomeAssinante, final String servicoExecutado,
-                                 final String anotacaoTecnica, final String imagem, final String observacao) {
+                                 final String anotacaoTecnica, final String imagem, final String observacao, final String celularParaEnvio) {
 
         final RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
 
@@ -90,7 +90,7 @@ public final class Servicos {
                             //"\n" +
                             //"\nData Execução: " + dateFormat.format(dataAtual);
 
-                            enviaSMS("+5554",body);
+                            enviaSMS(celularParaEnvio,body);
 
                         }else{
                             Log.i("OS", "NAO ENVIADA");

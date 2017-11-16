@@ -16,4 +16,5 @@
     <string name="hint_confirme_os_5_primeiros_digitos">Confirme os 5 primeiros digitos</string>
     <string name="enviar_os">Enviar OS</string>
     <string name="nome">Nome:</string>
+    <string name="celular_para_envio_de_comprovante">Celular para Envio de Comprovante</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.shield.ossearchvertv;
 
+import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -36,12 +37,13 @@ import static android.widget.Toast.makeText;
 public class GetOS extends AppCompatActivity {
 
     private TextView os, endereco, contra, nome, telComercial, telResidencial, telCelular, alternativo, obser1, cpf;
-    EditText anotacaoTecnica;
+    EditText anotacaoTecnica, celularParaEnviar;
     Spinner servicosExecutados;
     ProgressDialog progresso;
     Button botaoEmail;
     String equipe = "TI";
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +61,7 @@ public class GetOS extends AppCompatActivity {
         anotacaoTecnica = (EditText) findViewById(R.id.textoAnotacoesID);
         servicosExecutados = (Spinner) findViewById(R.id.selecaoServicoID);
         cpf = (EditText) findViewById(R.id.cpfID);
+        celularParaEnviar = (EditText) findViewById(R.id.textoCelular);
 
         //pegando valor da activity anterior
         Intent intent = getIntent();
@@ -131,6 +134,8 @@ public class GetOS extends AppCompatActivity {
                                 public void onClick(View v) {
 
                                     final Call<RespostaServidor> callCPF = service.verificaCPF(cpf.getText().toString(),contra.getText().toString());
+                                    final String celularParaEnvio = "+" + celularParaEnviar.getText().toString();
+
                                     callCPF.enqueue(new Callback<RespostaServidor>()
                                     {
                                         @Override
@@ -142,7 +147,7 @@ public class GetOS extends AppCompatActivity {
                                                     try {
                                                         Servicos.retrofitEnviaOS(os.getText().toString(), tecnicoLocal, equipe, contra.getText().toString(),
                                                                 nome.getText().toString(), String.valueOf(servicosExecutados.getSelectedItem()),
-                                                                anotacaoTecnica.getText().toString(), null, obser1.getText().toString());
+                                                                anotacaoTecnica.getText().toString(), null, obser1.getText().toString(), celularParaEnvio);
 
                                                         Toast.makeText(GetOS.this, "OS Enviada", Toast.LENGTH_SHORT).show();
                                                         finish();
@@ -169,7 +174,6 @@ public class GetOS extends AppCompatActivity {
                                     });
                                 }
                             });
-
 
      /*###############################################FIM ENVIA EMAIL ########################################################*/
                         } else {
