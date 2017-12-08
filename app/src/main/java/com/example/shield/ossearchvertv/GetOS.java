@@ -33,7 +33,7 @@ public class GetOS extends AppCompatActivity {
     private TextView os, endereco, contra, nome, telComercial, telResidencial, telCelular, obser1, cpf;
     EditText anotacaoTecnica, celularParaEnviar;
     Spinner servicosExecutados;
-    ProgressDialog progresso;
+    ProgressDialog progresso, progressoInterno;
     Button botaoEmail;
     String equipe = "TI";
 
@@ -127,6 +127,10 @@ public class GetOS extends AppCompatActivity {
                                 @Override
                                 public void onClick(View v) {
 
+                                    progressoInterno = new ProgressDialog(GetOS.this);
+                                    progressoInterno.setTitle("Carregando...");
+                                    progressoInterno.show();
+
                                     final Call<RespostaServidor> callCPF = service.verificaCPF(cpf.getText().toString(),contra.getText().toString());
                                     final String celularParaEnvio = "+" + celularParaEnviar.getText().toString();
 
@@ -139,6 +143,8 @@ public class GetOS extends AppCompatActivity {
                                             {
                                                 if (respostaServidor1.getSuccess() == 1) {
                                                     try {
+                                                        progresso.dismiss();
+
                                                         Servicos.retrofitEnviaOS(os.getText().toString(), tecnicoLocal, equipe, contra.getText().toString(),
                                                                 nome.getText().toString(), String.valueOf(servicosExecutados.getSelectedItem()),
                                                                 anotacaoTecnica.getText().toString(), null, obser1.getText().toString(), celularParaEnvio);
@@ -149,10 +155,12 @@ public class GetOS extends AppCompatActivity {
                                                         Toast.makeText(getApplicationContext(), "Não foi possível enviar ao Servidor, tente novamente.", Toast.LENGTH_SHORT).show();
                                                     }
                                                 } else {
+                                                    progresso.dismiss();
                                                     Toast.makeText(getApplicationContext(), respostaServidor1.getMessage(), Toast.LENGTH_SHORT).show();
 
                                                 }
                                             }else {
+                                                progresso.dismiss();
                                                 Toast.makeText(getApplicationContext(), "CPF precisa dos 5 Digitos", Toast.LENGTH_SHORT).show();
 
                                             }

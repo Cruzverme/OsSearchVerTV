@@ -81,7 +81,8 @@ public final class Servicos {
                                     "\nOS: " + os +
                                     "\nContrato: "+ contrato +
                                     "\nAssinante: "+ nomeAssinante +
-                                    "\nSERVICO: " + servicoExecutado;
+                                    "\nSERVICO: " + servicoExecutado +
+                                    "\n VerTV Agradece";
                             //"\nAnotação do Técnico: \n" + anotacaoTecnica.getText().toString() ;
                             //"\nServiço Executado" + servicosExecutados.getSelectedItem() ;
                             //"\n" +

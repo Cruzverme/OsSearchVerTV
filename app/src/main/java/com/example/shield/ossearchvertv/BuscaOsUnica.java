@@ -1,5 +1,6 @@
 package com.example.shield.ossearchvertv;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -20,6 +21,7 @@ import retrofit2.Response;
 public class BuscaOsUnica extends AppCompatActivity {
 
     private EditText textOS;
+    ProgressDialog progresso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class BuscaOsUnica extends AppCompatActivity {
 
         textOS = (EditText) findViewById(R.id.OsID);
         Button buscar = (Button) findViewById(R.id.botaoBuscar);
+
 
         //pegando valor da activity anterior MainActivity
         Intent intent = getIntent();
@@ -40,6 +43,11 @@ public class BuscaOsUnica extends AppCompatActivity {
         buscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+            //POPUP de LOADING
+            progresso = new ProgressDialog(BuscaOsUnica.this);
+            progresso.setTitle("Carregando...");
+            progresso.show();
+
             retrofitVerificadorOS(textOS.getText().toString(),usuarioLocal);
 
             }
@@ -61,7 +69,9 @@ public class BuscaOsUnica extends AppCompatActivity {
                              if (response.isSuccessful()) {
                                  if (respostaServidor != null) //se o body nao está vazio
                                  {
+                                     //progresso.dismiss();
                                      if (respostaServidor.getSuccess() == 1) {
+
                                          Intent intent = new Intent(getApplicationContext(), GetOS.class);
 
                                          Bundle bundle = new Bundle();
@@ -70,8 +80,9 @@ public class BuscaOsUnica extends AppCompatActivity {
                                          intent.putExtras(bundle);
                                          startActivity(intent);
                                          textOS.setText("");
-
+                                         progresso.dismiss();
                                      }else{
+                                         progresso.dismiss();
                                          Toast.makeText(getApplicationContext(), respostaServidor.getMessage(), Toast.LENGTH_SHORT).show();
                                      }
                                  }
@@ -80,7 +91,7 @@ public class BuscaOsUnica extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<RespostaServidor> call, Throwable t) {
-
+                progresso.dismiss();
             }
         });
     }

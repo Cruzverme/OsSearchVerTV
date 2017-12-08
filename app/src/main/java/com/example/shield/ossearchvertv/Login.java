@@ -67,6 +67,10 @@ public class Login extends AppCompatActivity {
         logar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progresso = new ProgressDialog(Login.this);
+                progresso.setTitle("aguarde...");
+                progresso.show();
+
                 if(isOnline())//checa se o celular esta com rede
                 {
                     if (usuario.getText().length() == 0 || senha.getText().length() == 0) {
@@ -74,14 +78,11 @@ public class Login extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Informação Incompleta", Toast.LENGTH_LONG).show();
                         senha.setText("");
                     } else {
-                        progresso = new ProgressDialog(Login.this);
-                        progresso.setTitle("aguarde...");
-                        progresso.show();
-
                         retrofitEscravo(usuario.getText().toString(), senha.getText().toString());
                     }
                 }else{
-                    Toast.makeText(getApplicationContext(), "Não estava online para enviar e-mail!", Toast.LENGTH_SHORT).show();
+                    progresso.dismiss();
+                    Toast.makeText(getApplicationContext(), "Não estava online logar!", Toast.LENGTH_SHORT).show();
                     System.exit(0);
                 }
             }
@@ -101,7 +102,7 @@ public class Login extends AppCompatActivity {
                     RespostaServidor respostaServidor = response.body();
                     if (respostaServidor != null) {
                         if (respostaServidor.getSuccess() == 1) {
-                            //progresso.dismiss();
+
                             Toast.makeText(getApplicationContext(), "Bem Vindo " + usuarioLocal, Toast.LENGTH_SHORT).show();
 
                             //joga pra proxima activity
@@ -115,26 +116,27 @@ public class Login extends AppCompatActivity {
                             //zera a entrada do usuario
                             senha.setText("");
                             usuario.setText("");
+                            progresso.dismiss();
                         } else {
+                            progresso.dismiss();
                             Toast.makeText(Login.this, respostaServidor.getMessage() , Toast.LENGTH_SHORT).show();
                             senha.setText("");
                         }
                     }
                 } else {
+                    progresso.dismiss();
                     Toast.makeText(getApplicationContext(), "Resposta nula do servidor", Toast.LENGTH_LONG).show();
                     senha.setText("");
                 }
-
             }
             @Override
             public void onFailure(Call<RespostaServidor> call, Throwable t)
             {
+                progresso.dismiss();
                 Toast.makeText(Login.this, "Falha ao Logar", Toast.LENGTH_SHORT).show();
                 senha.setText("");
             }
-
         });
-        progresso.dismiss();
     }
 
     private boolean isOnline() {
