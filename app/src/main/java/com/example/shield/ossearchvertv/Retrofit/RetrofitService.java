@@ -43,14 +43,14 @@ public interface RetrofitService {
     @GET("envia_os.php")
     Call<RespostaServidor> enviaOS(@Query("os") String os,
                                    @Query("tecnico") String tecnico,
-                                   @Query("equipe") String equipe,
                                    @Query("contrato") String contrato,
                                    @Query("assinante") String assinante,
                                    @Query("servicoExecutado") String servico,
                                    @Query("anotacaoTecnico") String anotacao,
                                    @Query("observacao") String observacao,
-                                   @Query("imagem") String imagem);
-
+                                   @Query("imagem") String imagem,
+                                   @Query("celularComprovante") String celularParaEnvio);
+//@Query("equipe") String equipe, estava no envia
     @GET("verifica_cpf.php")
     Call<RespostaServidor> verificaCPF(@Query("cpf") String cpf,
                                        @Query("contrato") String contrato);

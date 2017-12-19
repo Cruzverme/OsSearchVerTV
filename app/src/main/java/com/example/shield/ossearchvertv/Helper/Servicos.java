@@ -57,13 +57,13 @@ public final class Servicos {
         return listaServicosExecutados;
     }
 
-    public static void retrofitEnviaOS(final String os, final String tecnico, final String equipe, final String contrato, final String nomeAssinante, final String servicoExecutado,
+    public static void retrofitEnviaOS(final String os, final String tecnico, final String contrato, final String nomeAssinante, final String servicoExecutado,
                                  final String anotacaoTecnica, final String imagem, final String observacao, final String celularParaEnvio) {
 
         final RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
 
-        Call<RespostaServidor> caller = service.enviaOS(os, tecnico, equipe, contrato, nomeAssinante,
-                servicoExecutado, anotacaoTecnica, observacao, imagem);
+        Call<RespostaServidor> caller = service.enviaOS(os, tecnico, contrato, nomeAssinante,
+                servicoExecutado, anotacaoTecnica, observacao, imagem, celularParaEnvio);
 
         caller.enqueue(new Callback<RespostaServidor>()
         {
@@ -75,27 +75,22 @@ public final class Servicos {
                     if (respostaServidor2 != null) //se o body nao está vazio
                     {
                         if (respostaServidor2.getSuccess() == 1) {
-                            Log.i("OS", "ENVIADA");
-                            String body ="## COMPROVANTE DE OS ##" +
-                                    "\n\nTécnico: "  + tecnico +
+                            String body = "## COMPROVANTE DE OS ##" +
+                                    "\n\nTÉCNICO: " + tecnico +
                                     "\nOS: " + os +
-                                    "\nContrato: "+ contrato +
-                                    "\nAssinante: "+ nomeAssinante +
+                                    "\nCONTRATO: " + contrato +
+                                    "\nASSINANTE: " + nomeAssinante +
                                     "\nSERVICO: " + servicoExecutado +
-                                    "\n VerTV Agradece";
+                                    "\n\n VerTV Agradece";
+
                             //"\nAnotação do Técnico: \n" + anotacaoTecnica.getText().toString() ;
                             //"\nServiço Executado" + servicosExecutados.getSelectedItem() ;
                             //"\n" +
                             //"\nData Execução: " + dateFormat.format(dataAtual);
 
-                            enviaSMS(celularParaEnvio,body);
-
-                        }else{
-                            Log.i("OS", "NAO ENVIADA");
+                            enviaSMS(celularParaEnvio, body);
                         }
                     }
-                }else {
-                    Log.d("ERRO: ","ALGO NAO ESTA CERTO");
                 }
             }
 
