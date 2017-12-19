@@ -15,7 +15,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
     android:weightSum="1">
 
     <TextView
-        android:text="OS: "
+        android:text="@string/os"
         android:textSize="24sp"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
@@ -143,7 +143,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-
+        style="?android:spinnerDropDownItemStyle"
         android:background="@color/colorVertvDetailBlack"
         android:textColor="@color/colorVertvLetters"
         android:textSize="24sp" />
@@ -254,6 +254,8 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:textSize="24sp"
         android:id="@+id/textoCelular"
         android:inputType="phone"
+        android:layout_marginBottom="8dp"
+        android:hint="@string/exemploCelular"
         android:textColor="@color/colorVertvLetters"
         android:textColorHint="@color/colorVertvLetters"
         android:background="@color/colorVertvDetailBlack"
@@ -264,7 +266,6 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_horizontal_margin"
-        android:layout_alignParentBottom="true"
         android:id="@+id/botaoEmailID"
         android:background="@color/colorVertvOrange"
         android:text="@string/enviar_os"/>

@@ -12,7 +12,7 @@ tools:context="com.example.shield.ossearchvertv.Login">
 <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Usuario"
+    android:text="@string/label_usuario"
 
     android:id="@+id/userLabelID"
     android:textColor="@color/colorVertvLetters"
@@ -27,10 +27,11 @@ tools:context="com.example.shield.ossearchvertv.Login">
 <EditText
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:hint="Digite Seu Usuario"
+    android:hint="@string/hint_digite_seu_usuario"
     android:textColorHint="@color/colorVertvLetters"
     android:textColor="@color/colorVertvLetters"
     android:id="@+id/usuarioID"
+    android:inputType="text"
     android:layout_below="@+id/userLabelID"
     android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true"
@@ -39,7 +40,7 @@ tools:context="com.example.shield.ossearchvertv.Login">
 <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Senha"
+    android:text="@string/textoSenha"
     android:id="@+id/passwordLabelID"
     android:textColor="@color/colorVertvLetters"
     android:textSize="@dimen/tamanhoTextTitulo"
@@ -52,7 +53,7 @@ tools:context="com.example.shield.ossearchvertv.Login">
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/senhaID"
-    android:hint="Digite sua Senha"
+    android:hint="@string/hint_digite_sua_senha"
     android:textColorHint="@color/colorVertvLetters"
     android:textColor="@color/colorVertvLetters"
     android:inputType="textPassword"
@@ -64,7 +65,7 @@ tools:context="com.example.shield.ossearchvertv.Login">
 <Button
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:text="Login"
+    android:text="@string/textoLogin"
     android:textSize="20sp"
     android:id="@+id/logarID"
     android:background="@color/colorVertvOrange"

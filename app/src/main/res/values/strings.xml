@@ -17,4 +17,11 @@
     <string name="enviar_os">Enviar OS</string>
     <string name="nome">Nome:</string>
     <string name="celular_para_envio_de_comprovante">Celular para Envio de Comprovante</string>
+    <string name="exemploCelular">Ex.: 2299992121</string>
+    <string name="textoSenha">Senha</string>
+    <string name="hint_digite_sua_senha">Digite sua Senha</string>
+    <string name="textoLogin">Login</string>
+    <string name="label_usuario">Usuario</string>
+    <string name="hint_digite_seu_usuario">Digite Seu Usuario</string>
+    <string name="os">OS:</string>
 </resources>
