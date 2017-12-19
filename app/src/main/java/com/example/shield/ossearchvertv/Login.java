@@ -105,6 +105,10 @@ public class Login extends AppCompatActivity {
 
                             Toast.makeText(getApplicationContext(), "Bem Vindo " + usuarioLocal, Toast.LENGTH_SHORT).show();
 
+                            //zera a entrada do usuario
+                            senha.setText("");
+                            usuario.setText("");
+
                             //joga pra proxima activity
                             Intent bemVindo = new Intent(getApplicationContext(), BuscaOsUnica.class);
 
@@ -113,9 +117,6 @@ public class Login extends AppCompatActivity {
                             bemVindo.putExtras(bundle);
                             startActivity(bemVindo);
 
-                            //zera a entrada do usuario
-                            senha.setText("");
-                            usuario.setText("");
                             progresso.dismiss();
                         } else {
                             progresso.dismiss();

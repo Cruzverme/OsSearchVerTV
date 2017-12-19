@@ -35,7 +35,7 @@ public class GetOS extends AppCompatActivity {
     Spinner servicosExecutados;
     ProgressDialog progresso, progressoInterno;
     Button botaoEmail;
-    String equipe = "TI";
+    //String equipe = "TI";
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -63,7 +63,6 @@ public class GetOS extends AppCompatActivity {
         assert bundle != null;
         String parametroOS = bundle.getString("os");
         String usuario = bundle.getString("user");
-        Log.d("TAGA", "onCreate: " + usuario);
 
         Servicos.retrofitServicosExecutados();
         listenerButton(parametroOS, usuario);
@@ -116,11 +115,11 @@ public class GetOS extends AppCompatActivity {
                             telResidencial.setText(respostaServidor.getOs().get(0).getResidencial());
                             telCelular.setText(respostaServidor.getOs().get(0).getCelular());
 
-
                             ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(),
                                     android.R.layout.simple_spinner_item,Servicos.getListaServicosExecutados());
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             servicosExecutados.setAdapter(adapter);
+
 /*############################################ ENVIA OS PARA SERVIDOR #########################################################*/
 
                             botaoEmail.setOnClickListener(new View.OnClickListener() {
@@ -145,29 +144,29 @@ public class GetOS extends AppCompatActivity {
                                                     try {
                                                         progresso.dismiss();
 
-                                                        Servicos.retrofitEnviaOS(os.getText().toString(), tecnicoLocal, equipe, contra.getText().toString(),
+                                                        Servicos.retrofitEnviaOS(os.getText().toString(), tecnicoLocal, contra.getText().toString(),
                                                                 nome.getText().toString(), String.valueOf(servicosExecutados.getSelectedItem()),
                                                                 anotacaoTecnica.getText().toString(), null, obser1.getText().toString(), celularParaEnvio);
 
                                                         Toast.makeText(GetOS.this, "OS Enviada", Toast.LENGTH_SHORT).show();
                                                         finish();
                                                     } catch (android.content.ActivityNotFoundException ex) {
+                                                        progresso.dismiss();
                                                         Toast.makeText(getApplicationContext(), "Não foi possível enviar ao Servidor, tente novamente.", Toast.LENGTH_SHORT).show();
                                                     }
                                                 } else {
                                                     progresso.dismiss();
                                                     Toast.makeText(getApplicationContext(), respostaServidor1.getMessage(), Toast.LENGTH_SHORT).show();
-
                                                 }
                                             }else {
-                                                progresso.dismiss();
                                                 Toast.makeText(getApplicationContext(), "CPF precisa dos 5 Digitos", Toast.LENGTH_SHORT).show();
-
+                                                progresso.dismiss();
                                             }
                                         }
 
                                         @Override
                                         public void onFailure(Call<RespostaServidor> call, Throwable t) {
+                                            progresso.dismiss();
                                             finish();
                                             Toast.makeText(getApplicationContext(), "Não foi possível acessar servidor!", Toast.LENGTH_SHORT).show();
 
@@ -192,7 +191,6 @@ public class GetOS extends AppCompatActivity {
             @Override
             public void onFailure(Call<RespostaServidor> call, Throwable t) {
                 progresso.dismiss();
-                Log.e("ERRO:", "SEFERRAEW" + t);
                 Toast.makeText(getApplicationContext(), "Erro na chamada ao servidor" + t, Toast.LENGTH_LONG).show();
 
             }

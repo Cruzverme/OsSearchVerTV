@@ -58,7 +58,7 @@ public class GMail {
         emailProperties.put("mail.smtp.port", emailPort);
         emailProperties.put("mail.smtp.auth", smtpAuth);
         emailProperties.put("mail.smtp.starttls.enable", starttls);
-        Log.i("GMail", "Mail server properties set.");
+       // Log.i("GMail", "Mail server properties set.");
     }
 
     public MimeMessage createEmailMessage() throws AddressException,
@@ -69,7 +69,7 @@ public class GMail {
 
         emailMessage.setFrom(new InternetAddress(TO_EMAIL, "OS de " + fromTecnico));
         //for (String toEmail : toEmailList) {
-        Log.i("GMail", "toEmail: " + TO_EMAIL);
+        //Log.i("GMail", "toEmail: " + TO_EMAIL);
         emailMessage.addRecipient(Message.RecipientType.TO,
                 new InternetAddress(TO_EMAIL));
         //}
@@ -77,19 +77,19 @@ public class GMail {
         emailMessage.setSubject(emailSubject);
         //emailMessage.setContent(emailBody,"text/html");// for a html email
         emailMessage.setText(emailBody, "utf-8", "html");// for a text email
-        Log.i("GMail", "Email Message created.");
+        //Log.i("GMail", "Email Message created.");
         return emailMessage;
     }
 
     public void sendEmail() throws AddressException, MessagingException {
 
         Transport transport = mailSession.getTransport("smtp");
-        Log.i("INFO", emailHost);
+        //Log.i("INFO", emailHost);
         transport.connect(emailHost, fromUser, fromUserEmailPassword);
-        Log.i("GMail", "allrecipients: " + emailMessage.getAllRecipients());
+       // Log.i("GMail", "allrecipients: " + emailMessage.getAllRecipients());
         transport.sendMessage(emailMessage, emailMessage.getAllRecipients());
         transport.close();
-        Log.i("GMail", "Email sent successfully.");
+       // Log.i("GMail", "Email sent successfully.");
     }
 
 }

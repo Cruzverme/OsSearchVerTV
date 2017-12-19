@@ -49,7 +49,7 @@ public class SendMailTask extends AsyncTask {
     @Override
     protected Object doInBackground(Object... args) {
         try {
-            Log.i("SendMailTask", "About to instantiate GMail...");
+//            Log.i("SendMailTask", "About to instantiate GMail...");
             publishProgress("Processing input....");
             GMail androidEmail = new GMail( args[0].toString(), args[1].toString());
             // GMail androidEmail = new GMail(args[0].toString(),
@@ -60,10 +60,10 @@ public class SendMailTask extends AsyncTask {
             publishProgress("Sending email....");
             androidEmail.sendEmail();
             publishProgress("Email Sent.");
-            Log.i("SendMailTask", "Mail Sent.");
+  //          Log.i("SendMailTask", "Mail Sent.");
         } catch (Exception e) {
             publishProgress(e.getMessage());
-            Log.e("SendMailTask", e.getMessage(), e);
+    //        Log.e("SendMailTask", e.getMessage(), e);
         }
         return null;
     }
