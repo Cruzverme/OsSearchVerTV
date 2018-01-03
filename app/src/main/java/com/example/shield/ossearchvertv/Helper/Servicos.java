@@ -1,6 +1,6 @@
 package com.example.shield.ossearchvertv.Helper;
 
-import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -8,6 +8,8 @@ import android.widget.Toast;
 import com.example.shield.ossearchvertv.Retrofit.RespostaServidor;
 import com.example.shield.ossearchvertv.Retrofit.RetrofitService;
 import com.example.shield.ossearchvertv.Retrofit.ServiceGenerator;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -19,13 +21,12 @@ import retrofit2.Response;
  * Created by Shield on 14/11/2017.
  */
 
-public final class Servicos {
+public final class Servicos extends AppCompatActivity {
 
     private static ArrayList<String> listaServicosExecutados = new ArrayList<String>();
     private static String mensagem;
 
-    public static void retrofitServicosExecutados()
-    {
+    public static void retrofitServicosExecutados() {
         final RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
 
         Call<RespostaServidor> callList = service.listaServicosExecutados();
@@ -35,10 +36,8 @@ public final class Servicos {
             public void onResponse(Call<RespostaServidor> call, Response<RespostaServidor> response) {
                 final RespostaServidor respostaServidorServicos = response.body();
 
-                if (response.isSuccessful())
-                {
-                    if (respostaServidorServicos.getSuccess() == 1)
-                    {
+                if (response.isSuccessful()) {
+                    if (respostaServidorServicos.getSuccess() == 1) {
                         listaServicosExecutados.clear();
                         listaServicosExecutados.add("SELECIONE O SERVIÇO EXECUTADO");
                         listaServicosExecutados.addAll(respostaServidorServicos.getServicos());
@@ -58,23 +57,23 @@ public final class Servicos {
     }
 
     public static void retrofitEnviaOS(final String os, final String tecnico, final String contrato, final String nomeAssinante, final String servicoExecutado,
-                                 final String anotacaoTecnica, final String imagem, final String observacao, final String celularParaEnvio) {
+                                       final String anotacaoTecnica, final String imagem, final String observacao, final String celularParaEnvio) {
 
         final RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
 
         Call<RespostaServidor> caller = service.enviaOS(os, tecnico, contrato, nomeAssinante,
                 servicoExecutado, anotacaoTecnica, observacao, imagem, celularParaEnvio);
-
-        caller.enqueue(new Callback<RespostaServidor>()
-        {
+        caller.enqueue(new Callback<RespostaServidor>() {
             @Override
-            public void onResponse(Call<RespostaServidor> call, Response<RespostaServidor> response)
-            {
+            public void onResponse(Call<RespostaServidor> call, Response<RespostaServidor> response) {
                 final RespostaServidor respostaServidor2 = response.body(); //pega o json
-                if (response.isSuccessful()) {
+
+                if (response.isSuccessful())
+                {
                     if (respostaServidor2 != null) //se o body nao está vazio
                     {
-                        if (respostaServidor2.getSuccess() == 1) {
+                        if (respostaServidor2.getSuccess() == 1)
+                        {
                             String body = "## COMPROVANTE DE OS ##" +
                                     "\n\nTÉCNICO: " + tecnico +
                                     "\nOS: " + os +
@@ -83,12 +82,7 @@ public final class Servicos {
                                     "\nSERVICO: " + servicoExecutado +
                                     "\n\n VerTV Agradece";
 
-                            //"\nAnotação do Técnico: \n" + anotacaoTecnica.getText().toString() ;
-                            //"\nServiço Executado" + servicosExecutados.getSelectedItem() ;
-                            //"\n" +
-                            //"\nData Execução: " + dateFormat.format(dataAtual);
-
-                            enviaSMS(celularParaEnvio, body);
+                            enviaSMS(celularParaEnvio,body);
                         }
                     }
                 }
@@ -101,16 +95,45 @@ public final class Servicos {
         });
     }
 
-    public static String getMensagem() {
-        return mensagem;
+
+    public static void retrofitTokenGenerator( final String os, final String celular)
+    {
+        final RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
+        Call<RespostaServidor> caller = service.salvaToken(os,celular);
+
+        caller.enqueue(new Callback<RespostaServidor>() {
+            @Override
+            public void onResponse(Call<RespostaServidor> call, Response<RespostaServidor> response)
+            {
+                final RespostaServidor resposta = response.body();
+                if (response.isSuccessful())
+                {
+                    if (resposta != null)
+                    {
+                        if (resposta.getSuccess() == 1)
+                        {
+                            String msg_token = "Codigo de Conclusão de Serviço:" + resposta.getToken();
+
+                            enviaSMS(celular,msg_token);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RespostaServidor> call, Throwable t) {
+                System.exit(0);
+            }
+        });
     }
 
     /*Envio do SMS*/
-    private static boolean enviaSMS(String telefone, String mensagem){
+    public static boolean enviaSMS(String telefone, String mensagem){
         try{
 
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(telefone, null, mensagem, null, null);
+
 
             return true;
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorVertvBackgroundDark"
+    tools:context="com.example.shield.ossearchvertv.TokenVerify"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:src="@mipmap/logo_nova_vertv"
+        android:layout_marginTop="@dimen/activity_horizontal_margin" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/confirma_token"
+        android:textColorHint="@color/colorVertvLetters"
+        android:textSize="@dimen/tamanhoTextTitulo"
+        android:layout_marginBottom="@dimen/resolucao_25"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/tamanhoTextTitulo"
+        android:textColor="@color/colorVertvLetters"
+        android:background="@color/colorVertvOrange"
+        android:layout_marginTop="50dp"
+        android:text="@string/confirmar"/>
+
+
+</LinearLayout>

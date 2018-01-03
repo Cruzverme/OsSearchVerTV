@@ -110,7 +110,7 @@ public class Login extends AppCompatActivity {
                             usuario.setText("");
 
                             //joga pra proxima activity
-                            Intent bemVindo = new Intent(getApplicationContext(), BuscaOsUnica.class);
+                            Intent bemVindo = new Intent(getApplicationContext(), TokenSender.class);
 
                             Bundle bundle = new Bundle();
                             bundle.putString("user",usuarioLocal);

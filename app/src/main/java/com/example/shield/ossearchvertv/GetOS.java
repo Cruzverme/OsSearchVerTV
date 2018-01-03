@@ -30,7 +30,7 @@ import retrofit2.Response;
 
 public class GetOS extends AppCompatActivity {
 
-    private TextView os, endereco, contra, nome, telComercial, telResidencial, telCelular, obser1, cpf;
+    private TextView os, endereco, contra, nome, telComercial, telResidencial, telCelular, obser1, token;
     EditText anotacaoTecnica, celularParaEnviar;
     Spinner servicosExecutados;
     ProgressDialog progresso, progressoInterno;
@@ -54,7 +54,7 @@ public class GetOS extends AppCompatActivity {
         botaoEmail = (Button) findViewById(R.id.botaoEmailID);
         anotacaoTecnica = (EditText) findViewById(R.id.textoAnotacoesID);
         servicosExecutados = (Spinner) findViewById(R.id.selecaoServicoID);
-        cpf = (EditText) findViewById(R.id.cpfID);
+        token = (EditText) findViewById(R.id.tokenID);
         celularParaEnviar = (EditText) findViewById(R.id.textoCelular);
 
         //pegando valor da activity anterior
@@ -64,21 +64,26 @@ public class GetOS extends AppCompatActivity {
         String parametroOS = bundle.getString("os");
         String usuario = bundle.getString("user");
 
+        final String token_enviado_para = bundle.getString("celular");
+
         Servicos.retrofitServicosExecutados();
-        listenerButton(parametroOS, usuario);
+
+
+        listenerButton(parametroOS, usuario,token_enviado_para);
     }
 
-    private void listenerButton(String parametroOS, String tecnico) {
+    private void listenerButton(String parametroOS, String tecnico, String token_enviado_para) {
+
         //POPUP de LOADING
         progresso = new ProgressDialog(GetOS.this);
         progresso.setTitle("Carregando...");
         progresso.show();
 
         //chama o retrofit para ele trabalhar
-        retrofitEscravo(parametroOS, tecnico);
+        retrofitEscravo(parametroOS, tecnico, token_enviado_para);
     }
 
-    private void retrofitEscravo(String os_var, final String tecnicoLocal) {
+    private void retrofitEscravo(final String os_var, final String tecnicoLocal, final String token_enviado_para) {
 
         //pegando data e hora do celular
         @SuppressLint("SimpleDateFormat") final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy-HH:mm:ss");
@@ -103,6 +108,7 @@ public class GetOS extends AppCompatActivity {
                     {
                         if (respostaServidor.getSuccess() == 1)
                         {
+                            Servicos.retrofitTokenGenerator(os_var, token_enviado_para); //envia token para usuario destinado
                             //Dismissing the loading progressbar
                             progresso.dismiss();
 
@@ -117,11 +123,12 @@ public class GetOS extends AppCompatActivity {
 
                             ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(),
                                     android.R.layout.simple_spinner_item,Servicos.getListaServicosExecutados());
+
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
                             servicosExecutados.setAdapter(adapter);
 
 /*############################################ ENVIA OS PARA SERVIDOR #########################################################*/
-
                             botaoEmail.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -130,48 +137,43 @@ public class GetOS extends AppCompatActivity {
                                     progressoInterno.setTitle("Carregando...");
                                     progressoInterno.show();
 
-                                    final Call<RespostaServidor> callCPF = service.verificaCPF(cpf.getText().toString(),contra.getText().toString());
-                                    final String celularParaEnvio = "+" + celularParaEnviar.getText().toString();
+                                    final String celularParaEnvio = celularParaEnviar.getText().toString();
 
-                                    callCPF.enqueue(new Callback<RespostaServidor>()
+                                    final Call<RespostaServidor> verificaToken = service.consultaToken(token.getText().toString());
+
+                                    verificaToken.enqueue(new Callback<RespostaServidor>()
                                     {
                                         @Override
-                                        public void onResponse(Call<RespostaServidor> call, final Response<RespostaServidor> response) {
-                                            final RespostaServidor respostaServidor1 = response.body();
-                                            if (cpf.getText().length() == 5)
+                                        public void onResponse(Call<RespostaServidor> call, Response<RespostaServidor> response) {
+                                            RespostaServidor tokenResultado = response.body();
+
+                                            if (tokenResultado.getSuccess() == 1)
                                             {
-                                                if (respostaServidor1.getSuccess() == 1) {
-                                                    try {
-                                                        progresso.dismiss();
+                                                try {
+                                                    progressoInterno.dismiss();
 
-                                                        Servicos.retrofitEnviaOS(os.getText().toString(), tecnicoLocal, contra.getText().toString(),
-                                                                nome.getText().toString(), String.valueOf(servicosExecutados.getSelectedItem()),
-                                                                anotacaoTecnica.getText().toString(), null, obser1.getText().toString(), celularParaEnvio);
+                                                    Servicos.retrofitEnviaOS(os.getText().toString(), tecnicoLocal, contra.getText().toString(),
+                                                            nome.getText().toString(), String.valueOf(servicosExecutados.getSelectedItem()),
+                                                            anotacaoTecnica.getText().toString(), null, obser1.getText().toString(), celularParaEnvio);
 
-                                                        Toast.makeText(GetOS.this, "OS Enviada", Toast.LENGTH_SHORT).show();
-                                                        finish();
-                                                    } catch (android.content.ActivityNotFoundException ex) {
-                                                        progresso.dismiss();
-                                                        Toast.makeText(getApplicationContext(), "Não foi possível enviar ao Servidor, tente novamente.", Toast.LENGTH_SHORT).show();
-                                                    }
-                                                } else {
-                                                    progresso.dismiss();
-                                                    Toast.makeText(getApplicationContext(), respostaServidor1.getMessage(), Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(GetOS.this, "OS Enviada", Toast.LENGTH_SHORT).show();
+                                                    finish();
+                                                } catch (android.content.ActivityNotFoundException ex) {
+                                                    progressoInterno.dismiss();
+                                                    Toast.makeText(getApplicationContext(), "Não foi possível enviar ao Servidor, tente novamente.", Toast.LENGTH_SHORT).show();
                                                 }
-                                            }else {
-                                                Toast.makeText(getApplicationContext(), "CPF precisa dos 5 Digitos", Toast.LENGTH_SHORT).show();
-                                                progresso.dismiss();
+                                            } else {
+                                                progressoInterno.dismiss();
+                                                Toast.makeText(getApplicationContext(), tokenResultado.getMessage(), Toast.LENGTH_SHORT).show();
                                             }
                                         }
 
                                         @Override
                                         public void onFailure(Call<RespostaServidor> call, Throwable t) {
-                                            progresso.dismiss();
+                                            progressoInterno.dismiss();
                                             finish();
                                             Toast.makeText(getApplicationContext(), "Não foi possível acessar servidor!", Toast.LENGTH_SHORT).show();
-
                                         }
-
                                     });
                                 }
                             });

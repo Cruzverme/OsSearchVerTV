@@ -12,11 +12,11 @@
     <string name="sem_telefone_residencial">Sem Telefone Residencial</string>
     <string name="sem_telefone_celular">Sem Telefone Celular</string>
     <string name="anota_es_t_cnicas">Anotações Técnicas</string>
-    <string name="cpf_de_confirma_o">CPF de Confirmação</string>
+    <string name="token_de_confirma_o">Token de Confirmação</string>
     <string name="hint_confirme_os_5_primeiros_digitos">Confirme os 5 primeiros digitos</string>
     <string name="enviar_os">Enviar OS</string>
     <string name="nome">Nome:</string>
-    <string name="celular_para_envio_de_comprovante">Celular para Envio de Comprovante</string>
+    <string name="confirma_token">Digite o Token de Confirmação</string>
     <string name="exemploCelular">Ex.: 2299992121</string>
     <string name="textoSenha">Senha</string>
     <string name="hint_digite_sua_senha">Digite sua Senha</string>
@@ -24,4 +24,11 @@
     <string name="label_usuario">Usuario</string>
     <string name="hint_digite_seu_usuario">Digite Seu Usuario</string>
     <string name="os">OS:</string>
+    <string name="token_envio">Celular para envio de Token</string>
+    <string name="solicita_token">Solicitar</string>
+    <string name="msg_token_confirmacao">Informe as informações abaixo para consegue o token de confirmação</string>
+    <string name="celular_token">Numero Celular</string>
+    <string name="logovertv">logoVerTV</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="celular_para_envio_de_comprovante">Celular Para Envio de Comprovante</string>
 </resources>

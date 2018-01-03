@@ -1,5 +1,7 @@
 package com.example.shield.ossearchvertv.Retrofit;
 
+import android.widget.EditText;
+
 import com.example.shield.ossearchvertv.OrdemServico;
 
 import java.util.List;
@@ -51,11 +53,21 @@ public interface RetrofitService {
                                    @Query("imagem") String imagem,
                                    @Query("celularComprovante") String celularParaEnvio);
 //@Query("equipe") String equipe, estava no envia
+
+
+    @GET("token/consultaToken.php")
+    Call<RespostaServidor> consultaToken(@Query("token") String token);
+
+    @GET("token/salvaToken.php")
+    Call<RespostaServidor> salvaToken(@Query("os") String os,
+                                      @Query("enviado_para") String telefone);
+
     @GET("verifica_cpf.php")
     Call<RespostaServidor> verificaCPF(@Query("cpf") String cpf,
                                        @Query("contrato") String contrato);
 
     @GET("lista_servico_executado.php")
     Call<RespostaServidor> listaServicosExecutados();
+
 
 }

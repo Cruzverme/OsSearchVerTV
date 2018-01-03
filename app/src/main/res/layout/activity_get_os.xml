@@ -225,13 +225,13 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:layout_height="wrap_content"
         android:textColor="@color/colorVertvLetters"
         android:paddingTop="8dp"
-        android:text="@string/cpf_de_confirma_o"
+        android:text="@string/token_de_confirma_o"
         android:textSize="24sp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/cpfID"
+        android:id="@+id/tokenID"
         android:hint="@string/hint_confirme_os_5_primeiros_digitos"
         android:textSize="24sp"
         android:inputType="number"

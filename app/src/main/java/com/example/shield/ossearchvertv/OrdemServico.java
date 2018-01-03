@@ -42,11 +42,16 @@ public class OrdemServico {
     @SerializedName("servicos")
     @Expose
     private List<String> servicos = null;
+    @SerializedName("token_enviado_para")
+    @Expose
+    private String enviado_para;
 
 
     public OrdemServico(){
 
     }
+
+
     public String getOs() {
         return os;
     }
@@ -113,5 +118,9 @@ public class OrdemServico {
 
     public void setServicos(List<String> servicos) {
         this.servicos = servicos;
+    }
+
+    public String getEnviado_para() {
+        return enviado_para;
     }
 }
