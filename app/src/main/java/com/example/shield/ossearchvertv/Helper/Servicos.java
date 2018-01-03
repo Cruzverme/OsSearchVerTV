@@ -112,7 +112,8 @@ public final class Servicos extends AppCompatActivity {
                     {
                         if (resposta.getSuccess() == 1)
                         {
-                            String msg_token = "Codigo de Conclusão de Serviço:" + resposta.getToken();
+                            String msg_token = "Para concluir informe ao técnico o codigo a seguir: " + resposta.getToken()
+                                                + "\nVERTV Agradece";
 
                             enviaSMS(celular,msg_token);
                         }
