@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shield.ossearchvertv.Helper.Servicos;
@@ -24,7 +25,7 @@ public class TokenSender extends AppCompatActivity {
     private EditText os, celular;
     private Button botaoSolicitar;
     private static ProgressBar carregamento;
-
+    private TextView ausencia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class TokenSender extends AppCompatActivity {
         setContentView(R.layout.activity_token_sender);
 
         os = (EditText) findViewById(R.id.editTextOS);
+        ausencia = (TextView) findViewById(R.id.ausente);
         celular = (EditText) findViewById(R.id.editTextCelular);
         botaoSolicitar = (Button) findViewById(R.id.buttonSolicitar);
         carregamento = (ProgressBar) findViewById(R.id.progressBar);

@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/colorVertvBackgroundDark"
     android:orientation="vertical"
+    android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar"
+
     tools:context="com.example.shield.ossearchvertv.TokenSender">
 
 
@@ -25,27 +27,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/editTextOS"
-        android:gravity="center"
-        android:textSize="15sp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textColor="@color/colorVertvLetters"
-        android:text="@string/msg_token_confirmacao" />
+        android:gravity="center"
+        android:text="@string/msg_token_confirmacao"
+        style="@style/VertvFont"
+        />
 
 
     <EditText
         android:id="@+id/editTextOS"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/VertvFont"
         android:textSize="25sp"
-        android:textColor="@color/colorVertvLetters"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_marginBottom="258dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:hint="@string/OS"
-        android:textColorHint="@color/colorVertvLetters"
         android:gravity="center"
         android:inputType="number" />
 
@@ -56,15 +57,25 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:hint="@string/celular_token"
-        android:textColorHint="@color/colorVertvLetters"
+        style="@style/VertvFont"
         android:textSize="25sp"
         android:layout_alignParentStart="true"
         android:gravity="center"
         android:layout_below="@+id/textView3"
         android:layout_marginTop="74dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="30dp"
         android:inputType="phone"
-        android:textColor="@color/colorVertvLetters" />
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ausente"
+        android:layout_below="@id/editTextCelular"
+        style="@style/VertvFont"
+        android:gravity="center"
+        android:layout_marginBottom="50dp"
+        android:text="@string/assinante_ausente"/>
 
     <Button
         android:id="@+id/buttonSolicitar"
@@ -72,9 +83,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/editTextCelular"
+        android:layout_below="@+id/ausente"
         android:textSize="@dimen/tamanhoTextTitulo"
-        android:textColor="@color/colorVertvLetters"
+        style="@style/VertvFont"
         android:background="@color/colorVertvOrange"
         android:text="@string/solicita_token" />
 

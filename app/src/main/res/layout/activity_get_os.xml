@@ -20,7 +20,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_width="wrap_content"
-        android:textColor="@color/colorVertvLetters"
+        style="@style/VertvFont"
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
         android:paddingBottom="8dp"
@@ -32,7 +32,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:layout_height="wrap_content"
         android:layout_below="@id/titOS"
         android:background="@color/colorVertvDetailBlack"
-        android:textColor="@color/colorVertvLetters"
+        style="@style/VertvFont"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:paddingBottom="8dp"
         android:textSize="24sp" />
@@ -45,7 +45,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:textSize="24sp"
         android:paddingTop="16dp"
         android:paddingBottom="8dp"
-        android:textColor="@color/colorVertvLetters"
+        style="@style/VertvFont"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -55,7 +55,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:textSize="24sp"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:background="@color/colorVertvDetailBlack"
-        android:textColor="@color/colorVertvLetters"
+        style="@style/VertvFont"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -67,7 +67,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:textSize="24sp"
         android:paddingTop="16dp"
         android:paddingBottom="8dp"
-        android:textColor="@color/colorVertvLetters"
+        style="@style/VertvFont"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -78,7 +78,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:textSize="24sp"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:background="@color/colorVertvDetailBlack"
-        android:textColor="@color/colorVertvLetters"
+        style="@style/VertvFont"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -90,7 +90,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:textSize="24sp"
         android:paddingTop="16dp"
         android:paddingBottom="8dp"
-        android:textColor="@color/colorVertvLetters"
+        style="@style/VertvFont"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -100,7 +100,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorVertvDetailBlack"
-        android:textColor="@color/colorVertvLetters"
+        style="@style/VertvFont"
         android:layout_below="@id/titEndereco"
         android:layout_marginBottom="@dimen/activity_vertical_margin" />
 
@@ -108,7 +108,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:id="@+id/titObser"
         android:text="@string/obs"
         android:layout_below="@id/textViewEndereco"
-        android:textColor="@color/colorVertvLetters"
+        style="@style/VertvFont"
         android:paddingTop="16dp"
         android:paddingBottom="8dp"
         android:layout_marginTop="20dp"
@@ -123,7 +123,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:layout_height="wrap_content"
         android:text="@string/sem_observa_o"
         android:background="@color/colorVertvDetailBlack"
-        android:textColor="@color/colorVertvLetters"
+        style="@style/VertvFont"
         android:layout_below="@id/titObser"
         android:layout_marginBottom="@dimen/activity_vertical_margin" />
 
@@ -135,7 +135,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:layout_marginTop="20dp"
         android:paddingTop="16dp"
         android:text="@string/servi_o_executado"
-        android:textColor="@color/colorVertvLetters"
+        style="@style/VertvFont"
         android:textSize="24sp" />
 
     <Spinner
@@ -145,7 +145,6 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         style="?android:spinnerDropDownItemStyle"
         android:background="@color/colorVertvDetailBlack"
-        android:textColor="@color/colorVertvLetters"
         android:textSize="24sp" />
 
 
@@ -162,7 +161,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
             android:text="@string/contato"
             android:paddingBottom="8dp"
             android:id="@+id/contatoID"
-            android:textColor="@color/colorVertvLetters"
+            style="@style/VertvFont"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
             android:layout_below="@id/textViewObser"/>
 
@@ -174,7 +173,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
             android:text="@string/sem_telefone_comercial"
             android:layout_below="@id/contatoID"
             android:background="@color/colorVertvDetailBlack"
-            android:textColor="@color/colorVertvLetters"
+            style="@style/VertvFont"
             android:layout_marginBottom="@dimen/activity_vertical_margin"  />
 
         <TextView
@@ -185,7 +184,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
             android:text="@string/sem_telefone_residencial"
             android:layout_below="@id/textViewTelComercial"
             android:background="@color/colorVertvDetailBlack"
-            android:textColor="@color/colorVertvLetters"
+            style="@style/VertvFont"
             android:layout_marginBottom="@dimen/activity_vertical_margin"  />
 
         <TextView
@@ -196,7 +195,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
             android:text="@string/sem_telefone_celular"
             android:background="@color/colorVertvDetailBlack"
             android:layout_below="@id/textViewTelResidencial"
-            android:textColor="@color/colorVertvLetters"
+            style="@style/VertvFont"
             android:layout_marginBottom="@dimen/activity_vertical_margin"  />
 
     </LinearLayout>
@@ -206,7 +205,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:layout_height="wrap_content"
         android:text="@string/anota_es_t_cnicas"
         android:textSize="24sp"
-        android:textColor="@color/colorVertvLetters"
+        style="@style/VertvFont"
         android:paddingTop="16dp"
         android:paddingBottom="8dp"/>
 
@@ -216,14 +215,14 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
         android:background="@color/colorVertvDetailBlack"
-        android:textColor="@color/colorVertvLetters"
+        style="@style/VertvFont"
         android:paddingBottom="8dp"
         android:id="@+id/textoAnotacoesID"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorVertvLetters"
+        style="@style/VertvFont"
         android:paddingTop="8dp"
         android:text="@string/token_de_confirma_o"
         android:textSize="24sp" />
@@ -236,14 +235,13 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:textSize="24sp"
         android:inputType="number"
         android:maxLength="5"
-        android:textColor="@color/colorVertvLetters"
-        android:textColorHint="@color/colorVertvLetters"
+        style="@style/VertvFont"
         android:background="@color/colorVertvDetailBlack"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorVertvLetters"
+        style="@style/VertvFont"
         android:paddingTop="8dp"
         android:text="@string/celular_para_envio_de_comprovante"
         android:textSize="24sp" />
@@ -256,8 +254,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:inputType="phone"
         android:layout_marginBottom="8dp"
         android:hint="@string/exemploCelular"
-        android:textColor="@color/colorVertvLetters"
-        android:textColorHint="@color/colorVertvLetters"
+        style="@style/VertvFont"
         android:background="@color/colorVertvDetailBlack"
         />
 
@@ -267,6 +264,7 @@ tools:context="com.example.shield.ossearchvertv.GetOS">
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_horizontal_margin"
         android:id="@+id/botaoEmailID"
+        style="@style/VertvFont"
         android:background="@color/colorVertvOrange"
         android:text="@string/enviar_os"/>
 

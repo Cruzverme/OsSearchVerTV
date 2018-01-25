@@ -13,7 +13,7 @@
         android:layout_below="@+id/textViewOS"
         android:layout_marginTop="70dp"
         android:textSize="@dimen/tamanhoTextTitulo"
-        android:textColor="@color/colorVertvLetters"
+        style="@style/VertvFont"
         android:background="@color/colorVertvOrange"
         android:text="@string/solicita_token" />
 
