@@ -35,4 +35,5 @@
     <string name="formulario_de_aus_ncia">Formulario de Ausência</string>
     <string name="observacao">Observação</string>
     <string name="botaoEnviaAusente">Enviar</string>
+    <string name="insira_a_ordem_de_servico">Insira a Ordem de Serviço</string>
 </resources>

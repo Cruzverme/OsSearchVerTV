@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/colorVertvBackgroundDark"
     android:orientation="vertical"
-    android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar"
-
     tools:context="com.example.shield.ossearchvertv.TokenSender">
 
 
@@ -42,6 +40,7 @@
         style="@style/VertvFont"
         android:textSize="25sp"
         android:layout_alignParentBottom="true"
+
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_marginBottom="258dp"
         android:layout_alignParentEnd="true"

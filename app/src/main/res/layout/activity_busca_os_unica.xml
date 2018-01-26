@@ -16,7 +16,8 @@ tools:context="com.example.shield.ossearchvertv.BuscaOsUnica">
         android:layout_above="@+id/OsID"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:src="@mipmap/logo_nova_vertv" />
+        android:src="@mipmap/logo_nova_vertv"
+        android:contentDescription="@string/logovertv" />
 
 <EditText
     android:layout_width="match_parent"
@@ -24,7 +25,7 @@ tools:context="com.example.shield.ossearchvertv.BuscaOsUnica">
     android:id="@+id/OsID"
     android:layout_marginTop="@dimen/tamanhoTextTitulo"
     android:textAlignment="center"
-    android:hint="Insira a Ordem de Serviço"
+    android:hint="@string/insira_a_ordem_de_servico"
     android:textColor="@color/colorVertvLetters"
     android:paddingTop="@dimen/activity_horizontal_margin"
     android:layout_centerInParent="true"

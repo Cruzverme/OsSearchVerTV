@@ -13,6 +13,7 @@
         <item name="android:textColor">@color/colorVertvLetters</item>
         <item name="android:textSize">24sp</item>
         <item name="android:textColorHint">@color/colorVertvLetters</item>
+        <item name="colorAccent">@color/colorVertvOrange</item>
     </style>
 
 </resources>
