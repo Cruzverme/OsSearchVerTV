@@ -1,8 +1,11 @@
 package com.example.shield.ossearchvertv.Helper;
 
+import android.app.Activity;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.shield.ossearchvertv.Retrofit.RespostaServidor;
@@ -145,4 +148,28 @@ public final class Servicos extends AppCompatActivity {
 
     }
 
+
+    public static void retrofitClienteAusente(final Context activity, final String os, final String usuario, final String anotacao_ausente) {
+        //Minha URLBASE
+        final RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
+        Call<RespostaServidor> call = service.enviaAusente(os,usuario,anotacao_ausente);
+
+        call.enqueue(new Callback<RespostaServidor>() {
+            @Override
+            public void onResponse(Call<RespostaServidor> call, Response<RespostaServidor> response) {
+                final RespostaServidor respostaServidor = response.body(); //pega o json
+
+                if (response.isSuccessful()) {
+                    if (respostaServidor != null) //se o body nao está vazio
+                        Toast.makeText(activity, "OKOK", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RespostaServidor> call, Throwable t) {
+
+            }
+        });
+
+    }
 }

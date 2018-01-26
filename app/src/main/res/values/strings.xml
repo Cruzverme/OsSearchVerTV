@@ -32,4 +32,7 @@
     <string name="confirmar">Confirmar</string>
     <string name="celular_para_envio_de_comprovante">Celular Para Envio de Comprovante</string>
     <string name="assinante_ausente">Assinante Ausente</string>
+    <string name="formulario_de_aus_ncia">Formulario de Ausência</string>
+    <string name="observacao">Observação</string>
+    <string name="botaoEnviaAusente">Enviar</string>
 </resources>

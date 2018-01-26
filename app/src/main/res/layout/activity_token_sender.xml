@@ -74,8 +74,10 @@
         android:layout_below="@id/editTextCelular"
         style="@style/VertvFont"
         android:gravity="center"
+        android:clickable="true"
         android:layout_marginBottom="50dp"
-        android:text="@string/assinante_ausente"/>
+        android:text="@string/assinante_ausente"
+        android:focusable="true" />
 
     <Button
         android:id="@+id/buttonSolicitar"

@@ -54,6 +54,10 @@ public interface RetrofitService {
                                    @Query("celularComprovante") String celularParaEnvio);
 //@Query("equipe") String equipe, estava no envia
 
+    @GET("envia_cliente_ausente.php")
+    Call<RespostaServidor> enviaAusente(@Query("os") String os,
+                                        @Query("tecnico") String tecnico,
+                                        @Query("anotacaoTecnico") String anotacao);
 
     @GET("token/consultaToken.php")
     Call<RespostaServidor> consultaToken(@Query("token") String token);

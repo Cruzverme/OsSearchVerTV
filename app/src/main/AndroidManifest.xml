@@ -27,7 +27,8 @@
         <activity android:name=".BuscaOsUnica" />
         <activity android:name=".GetOS" />
         <activity android:name=".TokenSender" />
-        <activity android:name=".TokenVerify"></activity>
+        <activity android:name=".TokenVerify" />
+        <activity android:name=".ausencia_form"></activity>
     </application>
 
 </manifest>

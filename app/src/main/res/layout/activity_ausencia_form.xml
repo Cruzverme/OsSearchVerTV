@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorVertvBackgroundDark"
+    tools:context="com.example.shield.ossearchvertv.ausencia_form">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimensao_horizontal_logoVERTV"
+        android:src="@mipmap/logo_nova_vertv"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/formulario_de_aus_ncia"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:gravity="center"
+        style="@style/VertvFont"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/OS"
+        style="@style/VertvFont" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/VertvFont"
+        android:inputType="number"
+        android:id="@+id/os_ausenteEdit"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/VertvFont"
+        android:text="@string/observacao"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:maxLines="5"
+        android:id="@+id/obs_ausenteEdit"
+        style="@style/VertvFont"/>
+    
+    <Button
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorVertvOrange"
+        android:text="@string/botaoEnviaAusente"
+        style="@style/VertvFont"
+        android:onClick="clienteAusenteEnviar"
+        android:id="@+id/botaoAusente"/>
+
+
+</LinearLayout>

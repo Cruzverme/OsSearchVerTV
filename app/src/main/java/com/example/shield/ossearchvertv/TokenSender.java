@@ -1,5 +1,6 @@
 package com.example.shield.ossearchvertv;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,6 +45,25 @@ public class TokenSender extends AppCompatActivity {
 
         assert bundle != null;
         final String usuarioLocal = bundle.getString("user");
+
+
+        ausencia.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onClick(View view) {
+                carregamento.setVisibility(ProgressBar.VISIBLE);
+                Intent intentAusente = new Intent(getApplicationContext(),ausencia_form.class);
+
+                Bundle bundleAusente = new Bundle();
+                bundleAusente.putString("user", usuarioLocal);
+                intentAusente.putExtras(bundleAusente);
+
+                startActivity(intentAusente);
+                carregamento.setVisibility(ProgressBar.INVISIBLE);
+            }
+        });
+
+
 
 
         botaoSolicitar.setOnClickListener(new View.OnClickListener() {
