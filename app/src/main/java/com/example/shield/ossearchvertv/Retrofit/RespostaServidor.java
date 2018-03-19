@@ -33,7 +33,6 @@ public class RespostaServidor {
     @Expose
     private String token;
 
-
     public Integer getSuccess() {
         return success;
     }

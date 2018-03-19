@@ -1,61 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorVertvBackgroundDark"
     tools:context="com.example.shield.ossearchvertv.ausencia_form">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimensao_horizontal_logoVERTV"
-        android:src="@mipmap/logo_nova_vertv"/>
+        android:src="@mipmap/logo_nova_vertv"
+        android:layout_above="@id/textViewLabel"
+        android:contentDescription="@string/logovertv" />
+
     <TextView
+        android:id="@+id/textViewLabel"
+        style="@style/VertvFont"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/formulario_de_aus_ncia"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_above="@+id/os_ausenteEdit"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="49dp"
         android:gravity="center"
-        style="@style/VertvFont"/>
+        android:text="@string/formulario_de_aus_ncia" />
 
     <TextView
+        android:id="@+id/textViewLabelOS"
+        style="@style/VertvFont"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/OS"
-        style="@style/VertvFont" />
+        android:layout_alignBaseline="@+id/os_ausenteEdit"
+        android:layout_alignBottom="@+id/os_ausenteEdit"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="@string/OS" />
 
     <EditText
+        android:id="@+id/os_ausenteEdit"
+        style="@style/VertvFont"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/VertvFont"
-        android:inputType="number"
-        android:id="@+id/os_ausenteEdit"/>
+        android:layout_above="@+id/textView"
+        android:layout_toEndOf="@+id/textView"
+        android:layout_toRightOf="@+id/textView"
+        android:inputType="number" />
 
     <TextView
+        android:id="@+id/textView"
+        style="@style/VertvFont"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/VertvFont"
-        android:text="@string/observacao"/>
+        android:layout_above="@+id/obs_ausenteEdit"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="@string/observacao" />
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:maxLines="5"
         android:id="@+id/obs_ausenteEdit"
-        style="@style/VertvFont"/>
-    
-    <Button
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+        style="@style/VertvFont"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorVertvOrange"
-        android:text="@string/botaoEnviaAusente"
+        android:layout_above="@+id/botaoAusente"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="39dp"
+        android:inputType="text"
+        android:maxLines="5" />
+
+    <Button
+        android:id="@+id/botaoAusente"
         style="@style/VertvFont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="44dp"
+        android:background="@color/colorVertvOrange"
         android:onClick="clienteAusenteEnviar"
-        android:id="@+id/botaoAusente"/>
+        android:text="@string/botaoEnviaAusente" />
 
 
-</LinearLayout>
+</RelativeLayout>

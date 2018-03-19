@@ -28,7 +28,8 @@
         <activity android:name=".GetOS" />
         <activity android:name=".TokenSender" />
         <activity android:name=".TokenVerify" />
-        <activity android:name=".ausencia_form"></activity>
+        <activity android:name=".ausencia_form" />
+        <activity android:name=".AssinaturaDigital"></activity>
     </application>
 
 </manifest>

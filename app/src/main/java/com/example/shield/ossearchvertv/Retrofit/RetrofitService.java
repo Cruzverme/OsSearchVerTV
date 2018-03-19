@@ -6,12 +6,16 @@ import com.example.shield.ossearchvertv.OrdemServico;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 /**
@@ -65,6 +69,10 @@ public interface RetrofitService {
     @GET("token/salvaToken.php")
     Call<RespostaServidor> salvaToken(@Query("os") String os,
                                       @Query("enviado_para") String telefone);
+    @Multipart
+    @POST("envia_assinatura_digital.php")
+    Call<RespostaServidor> enviaAssinatura(@Part ("os") RequestBody os,
+                                           @Part MultipartBody.Part assinatura);
 
     @GET("verifica_cpf.php")
     Call<RespostaServidor> verificaCPF(@Query("cpf") String cpf,

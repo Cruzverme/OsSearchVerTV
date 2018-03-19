@@ -16,6 +16,8 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -171,5 +173,28 @@ public final class Servicos extends AppCompatActivity {
             }
         });
 
+    }
+
+    public static void enviaAssinaturaRetrofit(RequestBody os, MultipartBody.Part assinatura)
+    {
+        final RetrofitService retrofitService = ServiceGenerator.createService(RetrofitService.class);
+        Call<RespostaServidor> call = retrofitService.enviaAssinatura(os,assinatura);
+
+        call.enqueue(new Callback<RespostaServidor>() {
+            @Override
+            public void onResponse(Call<RespostaServidor> call, Response<RespostaServidor> response) {
+
+                RespostaServidor resposta = response.body();
+                if (response.isSuccessful())
+                {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RespostaServidor> call, Throwable t) {
+                Log.d("BUG", String.valueOf(t));
+            }
+        });
     }
 }

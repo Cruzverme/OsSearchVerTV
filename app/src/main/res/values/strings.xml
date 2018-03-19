@@ -36,4 +36,8 @@
     <string name="observacao">Observação</string>
     <string name="botaoEnviaAusente">Enviar</string>
     <string name="insira_a_ordem_de_servico">Insira a Ordem de Serviço</string>
+    <string name="title_activity_assinatura_digital">AssinaturaDigital</string>
+    <string name="concluir">concluir</string>
+    <string name="limpar">LIMPAR</string>
+    <string name="favor_rubrique_abaixo">Favor Rubrique Abaixo</string>
 </resources>

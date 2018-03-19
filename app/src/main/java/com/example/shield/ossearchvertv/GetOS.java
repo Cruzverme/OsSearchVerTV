@@ -156,7 +156,13 @@ public class GetOS extends AppCompatActivity {
                                                             nome.getText().toString(), String.valueOf(servicosExecutados.getSelectedItem()),
                                                             anotacaoTecnica.getText().toString(), null, obser1.getText().toString(), celularParaEnvio);
 
-                                                    Toast.makeText(GetOS.this, "OS Enviada", Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(getApplicationContext(), AssinaturaDigital.class);
+
+                                                    Bundle bundle = new Bundle();
+                                                    bundle.putString("os", os.getText().toString());
+                                                    intent.putExtras(bundle);
+                                                    startActivity(intent);
+
                                                     finish();
                                                 } catch (android.content.ActivityNotFoundException ex) {
                                                     progressoInterno.dismiss();
