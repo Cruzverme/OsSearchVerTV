@@ -10,6 +10,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -41,10 +42,10 @@ public interface RetrofitService {
                                         @Query("password") String password,
                                         @Query("nome") String nome,
                                         @Query("equipe") String equipe);*/
-
-    @GET("confirma_login.php")
-    Call<RespostaServidor> logarUsuario(@Query("usuario") String usuario,
-                                        @Query("password") String password);
+    @FormUrlEncoded
+    @POST("confirma_login.php")
+    Call<RespostaServidor> logarUsuario(@Field("usuario") String usuario,
+                                        @Field("password") String password);
     //@FormUrlEncoded
     @GET("envia_os.php")
     Call<RespostaServidor> enviaOS(@Query("os") String os,
