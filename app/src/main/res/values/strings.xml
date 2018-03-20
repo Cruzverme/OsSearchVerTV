@@ -13,7 +13,7 @@
     <string name="sem_telefone_celular">Sem Telefone Celular</string>
     <string name="anota_es_t_cnicas">Anotações Técnicas</string>
     <string name="token_de_confirma_o">Token de Confirmação</string>
-    <string name="hint_confirme_os_5_primeiros_digitos">Confirme os 5 primeiros digitos</string>
+    <string name="hint_confirme_os_5_primeiros_digitos">Digite o token</string>
     <string name="enviar_os">Enviar OS</string>
     <string name="nome">Nome:</string>
     <string name="confirma_token">Digite o Token de Confirmação</string>
