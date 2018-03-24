@@ -2,6 +2,7 @@ package com.example.shield.ossearchvertv.Helper;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.util.Log;
@@ -14,6 +15,7 @@ import com.example.shield.ossearchvertv.Retrofit.ServiceGenerator;
 
 import org.w3c.dom.Text;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import okhttp3.MultipartBody;
@@ -197,4 +199,15 @@ public final class Servicos extends AppCompatActivity {
             }
         });
     }
+
+    public byte[] converterBitmapParaArray(Bitmap bitmap)
+    {
+        //Bitmap bmp = BitmapFactory.decodeResource(getResources(), bitmap);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        return byteArray;
+    }
+
+
 }

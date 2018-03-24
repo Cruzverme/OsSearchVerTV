@@ -1,6 +1,7 @@
 package com.example.shield.ossearchvertv;
 
 import android.annotation.SuppressLint;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -34,7 +35,7 @@ public class GetOS extends AppCompatActivity {
     EditText anotacaoTecnica, celularParaEnviar;
     Spinner servicosExecutados;
     ProgressDialog progresso, progressoInterno;
-    Button botaoEmail;
+    Button botaoOS, botaoFoto;
     //String equipe = "TI";
 
     @SuppressLint("WrongViewCast")
@@ -48,10 +49,11 @@ public class GetOS extends AppCompatActivity {
         nome = (TextView) findViewById(R.id.textViewNome);
         endereco = (TextView) findViewById(R.id.textViewEndereco);
         obser1 = (TextView) findViewById(R.id.textViewObser);
+        botaoFoto = (Button) findViewById(R.id.btnFoto);
         telComercial = (TextView) findViewById(R.id.textViewTelComercial);
         telResidencial = (TextView) findViewById(R.id.textViewTelResidencial);
         telCelular = (TextView) findViewById(R.id.textViewTelCelular);
-        botaoEmail = (Button) findViewById(R.id.botaoEmailID);
+        botaoOS = (Button) findViewById(R.id.botaoEnviaOS);
         anotacaoTecnica = (EditText) findViewById(R.id.textoAnotacoesID);
         servicosExecutados = (Spinner) findViewById(R.id.selecaoServicoID);
         token = (EditText) findViewById(R.id.tokenID);
@@ -129,7 +131,7 @@ public class GetOS extends AppCompatActivity {
                             servicosExecutados.setAdapter(adapter);
 
 /*############################################ ENVIA OS PARA SERVIDOR #########################################################*/
-                            botaoEmail.setOnClickListener(new View.OnClickListener() {
+                            botaoOS.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
 
@@ -203,6 +205,11 @@ public class GetOS extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void tirarFoto(View view) {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent,0);
     }
 
 

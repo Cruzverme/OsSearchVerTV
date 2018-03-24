@@ -29,8 +29,7 @@
         android:layout_alignParentStart="true"
         android:gravity="center"
         android:text="@string/msg_token_confirmacao"
-        style="@style/VertvFont"
-        />
+        style="@style/VertvFont" />
 
 
     <EditText
@@ -81,15 +80,15 @@
 
     <Button
         android:id="@+id/buttonSolicitar"
+        style="@style/VertvFont"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/ausente"
-        android:textSize="@dimen/tamanhoTextTitulo"
-        style="@style/VertvFont"
         android:background="@color/colorVertvOrange"
-        android:text="@string/solicita_token" />
+        android:text="@string/solicita_token"
+        android:textSize="@dimen/tamanhoTextTitulo" />
 
 
     <ProgressBar

@@ -45,7 +45,8 @@ public class Login extends AppCompatActivity {
     //array de permissoes do APP, apenas para android 23>
     private String[] permissoesNecessarias = new String[]{
             Manifest.permission.INTERNET,
-            Manifest.permission.SEND_SMS
+            Manifest.permission.SEND_SMS,
+            Manifest.permission.CAMERA
     };
 
     @Override
@@ -182,5 +183,4 @@ public class Login extends AppCompatActivity {
         dialog.show();
 
     }
-
 }
