@@ -50,20 +50,20 @@ public class GetOS extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_os);
 
-        os = (TextView) findViewById(R.id.textViewOS);
-        contra = (TextView) findViewById(R.id.textViewContra);
-        nome = (TextView) findViewById(R.id.textViewNome);
-        endereco = (TextView) findViewById(R.id.textViewEndereco);
-        obser1 = (TextView) findViewById(R.id.textViewObser);
-        botaoFoto = (Button) findViewById(R.id.btnFoto);
-        telComercial = (TextView) findViewById(R.id.textViewTelComercial);
-        telResidencial = (TextView) findViewById(R.id.textViewTelResidencial);
-        telCelular = (TextView) findViewById(R.id.textViewTelCelular);
-        botaoOS = (Button) findViewById(R.id.botaoEnviaOS);
-        anotacaoTecnica = (EditText) findViewById(R.id.textoAnotacoesID);
-        servicosExecutados = (Spinner) findViewById(R.id.selecaoServicoID);
+        os = findViewById(R.id.textViewOS);
+        contra = findViewById(R.id.textViewContra);
+        nome = findViewById(R.id.textViewNome);
+        endereco = findViewById(R.id.textViewEndereco);
+        obser1 = findViewById(R.id.textViewObser);
+        botaoFoto = findViewById(R.id.btnFoto);
+        telComercial = findViewById(R.id.textViewTelComercial);
+        telResidencial = findViewById(R.id.textViewTelResidencial);
+        telCelular = findViewById(R.id.textViewTelCelular);
+        botaoOS = findViewById(R.id.botaoEnviaOS);
+        anotacaoTecnica = findViewById(R.id.textoAnotacoesID);
+        servicosExecutados = findViewById(R.id.selecaoServicoID);
         token = (EditText) findViewById(R.id.tokenID);
-        celularParaEnviar = (EditText) findViewById(R.id.textoCelular);
+        celularParaEnviar = findViewById(R.id.textoCelular);
 
         //pegando valor da activity anterior
         Intent intent = getIntent();
@@ -103,6 +103,7 @@ public class GetOS extends AppCompatActivity {
                 { String os = parametroOS;
 
                     Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+
                     //Bitmap reduzido = BITMAP_RESIZER(bitmap,300,300);
                     byte [] imagem = Servicos.converterBitmapParaArray(bitmap);
 
@@ -121,10 +122,10 @@ public class GetOS extends AppCompatActivity {
                 }else if( resultCode == RESULT_CANCELED)
                 {
                     Toast.makeText(getBaseContext(), "A captura foi cancelada",
-                            Toast.LENGTH_SHORT);
+                            Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getBaseContext(), "A câmera foi fechada",
-                            Toast.LENGTH_SHORT);
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -134,11 +135,11 @@ public class GetOS extends AppCompatActivity {
     private void retrofitEscravo(final String os_var, final String tecnicoLocal, final String token_enviado_para) {
 
         //pegando data e hora do celular
-        @SuppressLint("SimpleDateFormat") final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy-HH:mm:ss");
+        //@SuppressLint("SimpleDateFormat") final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy-HH:mm:ss");
         Date data = new Date();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(data);
-        final Date dataAtual = calendar.getTime();
+        //final Date dataAtual = calendar.getTime();
 
 
         //Minha URLBASE
