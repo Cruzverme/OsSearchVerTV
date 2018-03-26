@@ -64,12 +64,12 @@ public final class Servicos extends AppCompatActivity {
     }
 
     public static void retrofitEnviaOS(final String os, final String tecnico, final String contrato, final String nomeAssinante, final String servicoExecutado,
-                                       final String anotacaoTecnica, final String imagem, final String observacao, final String celularParaEnvio) {
+                                       final String anotacaoTecnica, final String observacao, final String celularParaEnvio) {
 
         final RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
 
         Call<RespostaServidor> caller = service.enviaOS(os, tecnico, contrato, nomeAssinante,
-                servicoExecutado, anotacaoTecnica, observacao, imagem, celularParaEnvio);
+                servicoExecutado, anotacaoTecnica, observacao, celularParaEnvio);
         caller.enqueue(new Callback<RespostaServidor>() {
             @Override
             public void onResponse(Call<RespostaServidor> call, Response<RespostaServidor> response) {
@@ -177,10 +177,10 @@ public final class Servicos extends AppCompatActivity {
 
     }
 
-    public static void enviaAssinaturaRetrofit(RequestBody os, MultipartBody.Part assinatura)
+    public static void enviaAssinaturaRetrofit(RequestBody os, MultipartBody.Part assinatura, MultipartBody.Part problema)
     {
         final RetrofitService retrofitService = ServiceGenerator.createService(RetrofitService.class);
-        Call<RespostaServidor> call = retrofitService.enviaAssinatura(os,assinatura);
+        Call<RespostaServidor> call = retrofitService.enviaAssinatura(os,assinatura, problema);
 
         call.enqueue(new Callback<RespostaServidor>() {
             @Override
@@ -200,7 +200,7 @@ public final class Servicos extends AppCompatActivity {
         });
     }
 
-    public byte[] converterBitmapParaArray(Bitmap bitmap)
+    public static byte[] converterBitmapParaArray(Bitmap bitmap)
     {
         //Bitmap bmp = BitmapFactory.decodeResource(getResources(), bitmap);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();

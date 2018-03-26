@@ -55,7 +55,6 @@ public interface RetrofitService {
                                    @Query("servicoExecutado") String servico,
                                    @Query("anotacaoTecnico") String anotacao,
                                    @Query("observacao") String observacao,
-                                   @Query("imagem") String imagem,
                                    @Query("celularComprovante") String celularParaEnvio);
 //@Query("equipe") String equipe, estava no envia
 
@@ -72,8 +71,9 @@ public interface RetrofitService {
                                       @Query("enviado_para") String telefone);
     @Multipart
     @POST("envia_assinatura_digital.php")
-    Call<RespostaServidor> enviaAssinatura(@Part ("os") RequestBody os,
-                                           @Part MultipartBody.Part assinatura);
+    Call<RespostaServidor> enviaAssinatura(@Part("os") RequestBody os,
+                                           @Part MultipartBody.Part assinatura,
+                                           @Part MultipartBody.Part problema);
 
     @GET("verifica_cpf.php")
     Call<RespostaServidor> verificaCPF(@Query("cpf") String cpf,

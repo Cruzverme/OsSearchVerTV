@@ -1,6 +1,7 @@
 package com.example.shield.ossearchvertv;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,6 +26,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,10 +37,12 @@ public class GetOS extends AppCompatActivity {
 
     private TextView os, endereco, contra, nome, telComercial, telResidencial, telCelular, obser1, token;
     EditText anotacaoTecnica, celularParaEnviar;
+    String parametroOS;
     Spinner servicosExecutados;
     ProgressDialog progresso, progressoInterno;
     Button botaoOS, botaoFoto;
-    //String equipe = "TI";
+    RequestBody ordem, tipoDeDadoDaAssinatura;
+    MultipartBody.Part corpoProblema;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -63,16 +69,16 @@ public class GetOS extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         assert bundle != null;
-        String parametroOS = bundle.getString("os");
+        parametroOS = bundle.getString("os");
         String usuario = bundle.getString("user");
 
         final String token_enviado_para = bundle.getString("celular");
 
         Servicos.retrofitServicosExecutados();
 
-
         listenerButton(parametroOS, usuario,token_enviado_para);
     }
+
 
     private void listenerButton(String parametroOS, String tecnico, String token_enviado_para) {
 
@@ -84,6 +90,46 @@ public class GetOS extends AppCompatActivity {
         //chama o retrofit para ele trabalhar
         retrofitEscravo(parametroOS, tecnico, token_enviado_para);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 0 )
+        {
+            if (resultCode == RESULT_OK)
+            {
+                if (data != null)
+                { String os = parametroOS;
+
+                    Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                    //Bitmap reduzido = BITMAP_RESIZER(bitmap,300,300);
+                    byte [] imagem = Servicos.converterBitmapParaArray(bitmap);
+
+                    ordem =
+                            RequestBody.create(
+                                    okhttp3.MultipartBody.FORM, os); //os
+
+                    tipoDeDadoDaAssinatura = RequestBody.create(MediaType.parse(
+                            "multipart/form-data"),imagem);
+
+                    corpoProblema = MultipartBody.Part.createFormData("problema",
+                            "desenhoNome",tipoDeDadoDaAssinatura);
+
+                    //Servicos.enviaAssinaturaRetrofit(ordem, null,corpoProblema);
+
+                }else if( resultCode == RESULT_CANCELED)
+                {
+                    Toast.makeText(getBaseContext(), "A captura foi cancelada",
+                            Toast.LENGTH_SHORT);
+                } else {
+                    Toast.makeText(getBaseContext(), "A câmera foi fechada",
+                            Toast.LENGTH_SHORT);
+                }
+            }
+        }
+    }
+
 
     private void retrofitEscravo(final String os_var, final String tecnicoLocal, final String token_enviado_para) {
 
@@ -156,7 +202,9 @@ public class GetOS extends AppCompatActivity {
 
                                                     Servicos.retrofitEnviaOS(os.getText().toString(), tecnicoLocal, contra.getText().toString(),
                                                             nome.getText().toString(), String.valueOf(servicosExecutados.getSelectedItem()),
-                                                            anotacaoTecnica.getText().toString(), null, obser1.getText().toString(), celularParaEnvio);
+                                                            anotacaoTecnica.getText().toString(), obser1.getText().toString(), celularParaEnvio);
+
+                                                    Servicos.enviaAssinaturaRetrofit(ordem, null,corpoProblema);
 
                                                     Intent intent = new Intent(getApplicationContext(), AssinaturaDigital.class);
 
@@ -211,6 +259,8 @@ public class GetOS extends AppCompatActivity {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent,0);
     }
+
+
 
 
     //AKI ESTAVA O SELECIONAR OPS

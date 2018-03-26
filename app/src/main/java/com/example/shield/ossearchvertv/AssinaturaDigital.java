@@ -67,7 +67,7 @@ public class AssinaturaDigital extends AppCompatActivity {
                         okhttp3.MultipartBody.FORM, parametroOS); //os
 
         converteByteArrayToImageView(desenhoDaAssinatura);
-        Servicos.enviaAssinaturaRetrofit(ordem,corpoDaAssinatura);
+        Servicos.enviaAssinaturaRetrofit(ordem,corpoDaAssinatura,null);
         Toast.makeText(getApplicationContext(), "OS Enviada", Toast.LENGTH_SHORT).show();
         finish();
     }
