@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorVertvBackgroundDark"
+    android:layout_height="match_parent"
+    tools:context=".ListaOS">
+
+    <TextView
+        style="@style/VertvFont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/os_diaria"
+        android:textAlignment="center" />
+
+    <ProgressBar
+        android:id="@+id/progressBarListaOS"
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:visibility="gone"/>
+
+    <ListView
+
+        android:id="@+id/osAreaID"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="40dp"
+        android:background="@color/colorVertvDetailBlack" />
+
+
+
+</LinearLayout>

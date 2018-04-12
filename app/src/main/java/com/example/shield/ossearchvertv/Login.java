@@ -13,6 +13,7 @@ import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -60,8 +61,27 @@ public class Login extends AppCompatActivity {
         usuario = (EditText) findViewById(R.id.usuarioID);
         senha = (EditText) findViewById(R.id.senhaID);
 
+        senha.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+                // If the event is a key-down event on the "enter" button
+                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    // Perform action on key press
+                    progresso = new ProgressDialog(Login.this);
+                    progresso.setTitle("aguarde...");
+                    progresso.show();
+                    testarOnline();
+                    return true;
+                }
+                return false;
+            }
+        });
+
         listener();
     }
+
+
 
     private void listener() {
 
@@ -72,22 +92,27 @@ public class Login extends AppCompatActivity {
                 progresso.setTitle("aguarde...");
                 progresso.show();
 
-                if(isOnline())//checa se o celular esta com rede
-                {
-                    if (usuario.getText().length() == 0 || senha.getText().length() == 0) {
-                        progresso.dismiss();
-                        Toast.makeText(getApplicationContext(), "Informação Incompleta", Toast.LENGTH_LONG).show();
-                        senha.setText("");
-                    } else {
-                        retrofitEscravo(usuario.getText().toString(), senha.getText().toString());
-                    }
-                }else{
-                    progresso.dismiss();
-                    Toast.makeText(getApplicationContext(), "Não estava online logar!", Toast.LENGTH_SHORT).show();
-                    System.exit(0);
-                }
+                testarOnline();
             }
         });
+    }
+
+    private void testarOnline()
+    {
+        if(isOnline())//checa se o celular esta com rede
+        {
+            if (usuario.getText().length() == 0 || senha.getText().length() == 0) {
+                progresso.dismiss();
+                Toast.makeText(getApplicationContext(), "Informação Incompleta", Toast.LENGTH_LONG).show();
+                senha.setText("");
+            } else {
+                retrofitEscravo(usuario.getText().toString(), senha.getText().toString());
+            }
+        }else{
+            progresso.dismiss();
+            Toast.makeText(getApplicationContext(), "Não estava online logar!", Toast.LENGTH_SHORT).show();
+            System.exit(0);
+        }
     }
 
     private void retrofitEscravo(final String usuarioLocal, String password)
@@ -111,14 +136,16 @@ public class Login extends AppCompatActivity {
                             usuario.setText("");
 
                             //joga pra proxima activity
-                            Intent bemVindo = new Intent(getApplicationContext(), TokenSender.class);
+                            Intent bemVindo = new Intent(getApplicationContext(), ListaOS.class);//TokenSender.class
 
                             Bundle bundle = new Bundle();
                             bundle.putString("user",usuarioLocal);
                             bemVindo.putExtras(bundle);
                             startActivity(bemVindo);
 
+
                             progresso.dismiss();
+                            finish();
                         } else {
                             progresso.dismiss();
                             Toast.makeText(Login.this, respostaServidor.getMessage() , Toast.LENGTH_SHORT).show();

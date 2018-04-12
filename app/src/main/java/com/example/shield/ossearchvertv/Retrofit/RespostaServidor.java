@@ -8,7 +8,6 @@ import com.example.shield.ossearchvertv.OrdemServico;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,6 +19,9 @@ public class RespostaServidor {
     @SerializedName("os")
     @Expose
     private List<OrdemServico> os = null;
+    @SerializedName("listaOS")
+    @Expose
+    private List<String> ordemLista = null;
     @SerializedName("message")
     @Expose
     private String message;
@@ -72,4 +74,6 @@ public class RespostaServidor {
     public String getToken() {
         return token;
     }
+
+    public List<String> getOrdemServicoLista(){ return ordemLista;}
 }

@@ -1,19 +1,18 @@
 package com.example.shield.ossearchvertv.Helper;
 
-import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.util.Log;
-import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.shield.ossearchvertv.ListaOS;
+import com.example.shield.ossearchvertv.OrdemServico;
 import com.example.shield.ossearchvertv.Retrofit.RespostaServidor;
 import com.example.shield.ossearchvertv.Retrofit.RetrofitService;
 import com.example.shield.ossearchvertv.Retrofit.ServiceGenerator;
-
-import org.w3c.dom.Text;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -208,6 +207,7 @@ public final class Servicos extends AppCompatActivity {
         byte[] byteArray = stream.toByteArray();
         return byteArray;
     }
+
 
 
 }

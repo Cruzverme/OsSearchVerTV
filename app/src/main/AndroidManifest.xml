@@ -30,7 +30,8 @@
         <activity android:name=".TokenSender" />
         <activity android:name=".TokenVerify" />
         <activity android:name=".ausencia_form" />
-        <activity android:name=".AssinaturaDigital"/>
+        <activity android:name=".AssinaturaDigital" />
+        <activity android:name=".ListaOS"></activity>
     </application>
 
 </manifest>

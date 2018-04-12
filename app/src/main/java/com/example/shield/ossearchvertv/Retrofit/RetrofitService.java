@@ -33,6 +33,9 @@ public interface RetrofitService {
     @GET("get_all_products.php")
     public void mostraTudo(Callback<List<OrdemServico>> response);
 
+    @GET("get_os_list.php")
+    Call<RespostaServidor> listarOS(@Query("tecnico") String tecnico);
+
     //@FormUrlEncoded FUNCIONAL
     @GET("get_os_spec.php")
     Call<RespostaServidor> mostrarOS(@Query("os") String os);
