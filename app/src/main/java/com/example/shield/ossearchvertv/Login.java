@@ -162,7 +162,7 @@ public class Login extends AppCompatActivity {
             public void onFailure(Call<RespostaServidor> call, Throwable t)
             {
                 progresso.dismiss();
-                Toast.makeText(Login.this, "Falha ao Logar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, "Sem Comunicação Com Servidor", Toast.LENGTH_SHORT).show();
                 senha.setText("");
             }
         });

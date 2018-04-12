@@ -37,7 +37,6 @@ public class ListaOS extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_os);
 
-
         listaOS = (ListView) findViewById(R.id.osAreaID);
 
         //pegando valor da activity anterior MainActivity
@@ -47,25 +46,17 @@ public class ListaOS extends AppCompatActivity {
         assert bundle != null;
         final String usuarioLocal = bundle.getString("user");
 
+        retrofitOrdemServicoLista(usuarioLocal);
+    }
+
+    public void retrofitOrdemServicoLista(String tecnico) {
+        final RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
+
         //POPUP de LOADING
-        progresso = new ProgressDialog(getApplicationContext());
+        progresso = new ProgressDialog(ListaOS.this);
         progresso.setTitle("Carregando...");
         progresso.show();
 
-
-        retrofitOrdemServicoLista(usuarioLocal);
-
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(),
-                R.layout.lista_os_layout, getListaOrdemServico());
-        Log.d("TAGA", String.valueOf(getListaOrdemServico()));
-
-        listaOS.setAdapter(adapter);
-
-    }
-
-    public static void retrofitOrdemServicoLista(String tecnico) {
-        final RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
 
         Call<RespostaServidor> callList = service.listarOS(tecnico);
 
@@ -83,6 +74,13 @@ public class ListaOS extends AppCompatActivity {
                         Log.d("TAG", String.valueOf(listaDeOrdemServico));
                         progresso.dismiss();
                     }
+
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(),
+                            R.layout.lista_os_layout, getListaOrdemServico());
+                    Log.d("TAGA", String.valueOf(getListaOrdemServico()));
+
+                    listaOS.setAdapter(adapter);
+
                 }
             }
 
