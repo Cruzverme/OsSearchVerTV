@@ -1,4 +1,4 @@
-package com.example.shield.ossearchvertv;
+package com.example.shield.ossearchvertv.ClassesMortas;
 
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.shield.ossearchvertv.GetOS;
+import com.example.shield.ossearchvertv.R;
 import com.example.shield.ossearchvertv.Retrofit.RespostaServidor;
 import com.example.shield.ossearchvertv.Retrofit.RetrofitService;
 import com.example.shield.ossearchvertv.Retrofit.ServiceGenerator;

@@ -46,7 +46,6 @@ public class TokenSender extends AppCompatActivity {
         assert bundle != null;
         final String usuarioLocal = bundle.getString("user");
 
-
         ausencia.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
@@ -62,8 +61,6 @@ public class TokenSender extends AppCompatActivity {
                 carregamento.setVisibility(ProgressBar.INVISIBLE);
             }
         });
-
-
 
 
         botaoSolicitar.setOnClickListener(new View.OnClickListener() {

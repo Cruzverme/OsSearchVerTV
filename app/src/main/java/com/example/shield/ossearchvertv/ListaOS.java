@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,11 +27,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ListaOS extends AppCompatActivity {
+public class ListaOS extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     private ListView listaOS;
     private static ArrayList<String> listaDeOrdemServico = new ArrayList<String>();
-    static ProgressDialog progresso;
+    private static ProgressBar carregamento;
+    private SwipeRefreshLayout swipeRefreshLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,15 @@ public class ListaOS extends AppCompatActivity {
         setContentView(R.layout.activity_lista_os);
 
         listaOS = (ListView) findViewById(R.id.osAreaID);
+        carregamento = (ProgressBar) findViewById(R.id.progressBar);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refreshLayoutID);
+
+        // Seta o Listener para atualizar o conteudo quando o gesto for feito
+        swipeRefreshLayout.setOnRefreshListener(this);
+
+        swipeRefreshLayout.setColorSchemeResources(
+                R.color.colorVertvOrange
+        );
 
         //pegando valor da activity anterior MainActivity
         Intent intent = getIntent();
@@ -47,16 +59,35 @@ public class ListaOS extends AppCompatActivity {
         final String usuarioLocal = bundle.getString("user");
 
         retrofitOrdemServicoLista(usuarioLocal);
+
+        listaOS.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @SuppressLint("ResourceType")
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Object valorDoItemClicado = listaOS.getItemAtPosition(i);
+
+                //envia as infos para a proxima activity
+                Intent intent = new Intent(getApplicationContext(), GetOS.class);
+
+                Bundle bundle = new Bundle();
+
+                bundle.putString("os", String.valueOf(valorDoItemClicado));
+                bundle.putString("user", usuarioLocal);
+                intent.putExtras(bundle);
+                startActivity(intent);
+
+                ///// fim envia prox activity \\\\\
+
+                carregamento.setVisibility(ProgressBar.INVISIBLE);
+            }
+        });
     }
 
     public void retrofitOrdemServicoLista(String tecnico) {
         final RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
 
         //POPUP de LOADING
-        progresso = new ProgressDialog(ListaOS.this);
-        progresso.setTitle("Carregando...");
-        progresso.show();
-
+        carregamento.setVisibility(View.VISIBLE);
 
         Call<RespostaServidor> callList = service.listarOS(tecnico);
 
@@ -71,13 +102,13 @@ public class ListaOS extends AppCompatActivity {
                     {
                         listaDeOrdemServico.clear();
                         listaDeOrdemServico.addAll(respostaServidor.getOrdemServicoLista());
-                        Log.d("TAG", String.valueOf(listaDeOrdemServico));
-                        progresso.dismiss();
+
+                        carregamento.setVisibility(View.INVISIBLE);
                     }
 
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(),
                             R.layout.lista_os_layout, getListaOrdemServico());
-                    Log.d("TAGA", String.valueOf(getListaOrdemServico()));
+
 
                     listaOS.setAdapter(adapter);
 
@@ -86,7 +117,7 @@ public class ListaOS extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<RespostaServidor> call, Throwable t) {
-
+                carregamento.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -94,5 +125,20 @@ public class ListaOS extends AppCompatActivity {
     public static ArrayList<String> getListaOrdemServico()
     {
         return listaDeOrdemServico;
+    }
+
+    @Override
+    public void onRefresh()
+    {
+        //pegando valor da activity anterior MainActivity
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+
+        assert bundle != null;
+        final String usuarioLocal = bundle.getString("user");
+
+        retrofitOrdemServicoLista(usuarioLocal);
+
+        swipeRefreshLayout.setRefreshing(false);
     }
 }

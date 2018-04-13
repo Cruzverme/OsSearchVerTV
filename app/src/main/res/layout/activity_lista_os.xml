@@ -1,37 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.v4.widget.SwipeRefreshLayout
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:background="@color/colorVertvBackgroundDark"
     android:layout_height="match_parent"
-    tools:context=".ListaOS">
+    android:id="@+id/refreshLayoutID"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        style="@style/VertvFont"
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/os_diaria"
-        android:textAlignment="center" />
-
-    <ProgressBar
-        android:id="@+id/progressBarListaOS"
-        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max="100"
-        android:visibility="gone"/>
-
-    <ListView
-
-        android:id="@+id/osAreaID"
-        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorVertvBackgroundDark"
         android:layout_height="match_parent"
-        android:layout_marginBottom="40dp"
-        android:background="@color/colorVertvDetailBlack" />
+        tools:context=".ListaOS">
 
+        <TextView
+            style="@style/VertvFont"
+            android:id="@+id/textViewOS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:text="@string/os_diaria"
+            android:textAlignment="center" />
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_centerInParent="true"/>
 
-</LinearLayout>
+        <ListView
+            android:layout_below="@id/textViewOS"
+            android:id="@+id/osAreaID"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="40dp"
+            android:background="@color/colorVertvDetailBlack" />
+
+    </RelativeLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

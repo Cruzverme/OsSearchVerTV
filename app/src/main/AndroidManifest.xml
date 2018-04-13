@@ -25,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BuscaOsUnica" />
+        <activity android:name=".ClassesMortas.BuscaOsUnica" />
         <activity android:name=".GetOS" />
         <activity android:name=".TokenSender" />
         <activity android:name=".TokenVerify" />

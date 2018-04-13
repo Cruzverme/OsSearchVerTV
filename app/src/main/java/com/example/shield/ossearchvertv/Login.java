@@ -17,6 +17,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,8 +35,7 @@ public class Login extends AppCompatActivity {
     private Button logar;
     private TextView botao_cadastrar;
     private EditText usuario, senha;
-    private ProgressDialog progresso;
-    private RespostaServidor resposta = new RespostaServidor();
+    private static ProgressBar carregamento;
 
     public static final String PREFERENCIAS = "preferencia";
 
@@ -60,6 +60,7 @@ public class Login extends AppCompatActivity {
         logar = (Button) findViewById(R.id.logarID);
         usuario = (EditText) findViewById(R.id.usuarioID);
         senha = (EditText) findViewById(R.id.senhaID);
+        carregamento = (ProgressBar) findViewById(R.id.progressBar);
 
         senha.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -68,9 +69,10 @@ public class Login extends AppCompatActivity {
                 if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     // Perform action on key press
-                    progresso = new ProgressDialog(Login.this);
-                    progresso.setTitle("aguarde...");
-                    progresso.show();
+//                    progresso = new ProgressDialog(Login.this);
+//                    progresso.setTitle("aguarde...");
+//                    progresso.show();
+                    carregamento.setVisibility(ProgressBar.VISIBLE);
                     testarOnline();
                     return true;
                 }
@@ -88,10 +90,10 @@ public class Login extends AppCompatActivity {
         logar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progresso = new ProgressDialog(Login.this);
-                progresso.setTitle("aguarde...");
-                progresso.show();
-
+//                progresso = new ProgressDialog(Login.this);
+//                progresso.setTitle("aguarde...");
+//                progresso.show();
+                carregamento.setVisibility(ProgressBar.VISIBLE);
                 testarOnline();
             }
         });
@@ -102,14 +104,16 @@ public class Login extends AppCompatActivity {
         if(isOnline())//checa se o celular esta com rede
         {
             if (usuario.getText().length() == 0 || senha.getText().length() == 0) {
-                progresso.dismiss();
+                //progresso.dismiss();
+                carregamento.setVisibility(ProgressBar.INVISIBLE);
                 Toast.makeText(getApplicationContext(), "Informação Incompleta", Toast.LENGTH_LONG).show();
                 senha.setText("");
             } else {
                 retrofitEscravo(usuario.getText().toString(), senha.getText().toString());
             }
         }else{
-            progresso.dismiss();
+            //progresso.dismiss();
+            carregamento.setVisibility(ProgressBar.INVISIBLE);
             Toast.makeText(getApplicationContext(), "Não estava online logar!", Toast.LENGTH_SHORT).show();
             System.exit(0);
         }
@@ -144,16 +148,18 @@ public class Login extends AppCompatActivity {
                             startActivity(bemVindo);
 
 
-                            progresso.dismiss();
+                            //progresso.dismiss();
+                            carregamento.setVisibility(ProgressBar.INVISIBLE);
                             finish();
                         } else {
-                            progresso.dismiss();
+                            carregamento.setVisibility(View.INVISIBLE);
                             Toast.makeText(Login.this, respostaServidor.getMessage() , Toast.LENGTH_SHORT).show();
                             senha.setText("");
                         }
                     }
                 } else {
-                    progresso.dismiss();
+                    //progresso.dismiss();
+                    carregamento.setVisibility(ProgressBar.INVISIBLE);
                     Toast.makeText(getApplicationContext(), "Resposta nula do servidor", Toast.LENGTH_LONG).show();
                     senha.setText("");
                 }
@@ -161,7 +167,8 @@ public class Login extends AppCompatActivity {
             @Override
             public void onFailure(Call<RespostaServidor> call, Throwable t)
             {
-                progresso.dismiss();
+                //progresso.dismiss();
+                carregamento.setVisibility(ProgressBar.INVISIBLE);
                 Toast.makeText(Login.this, "Sem Comunicação Com Servidor", Toast.LENGTH_SHORT).show();
                 senha.setText("");
             }

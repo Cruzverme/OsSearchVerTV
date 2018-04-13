@@ -48,7 +48,16 @@ tools:context="com.example.shield.ossearchvertv.Login">
     android:layout_alignLeft="@+id/userLabelID"
     android:layout_alignStart="@+id/userLabelID" />
 
-<EditText
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
+
+
+    <EditText
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/senhaID"

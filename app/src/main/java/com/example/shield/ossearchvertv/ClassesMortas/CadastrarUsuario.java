@@ -1,4 +1,4 @@
-package com.example.shield.ossearchvertv;
+package com.example.shield.ossearchvertv.ClassesMortas;
 
 /**
  * Created by Shield on 06/10/2017.
@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.shield.ossearchvertv.R;
 import com.example.shield.ossearchvertv.Retrofit.RespostaServidor;
 import com.example.shield.ossearchvertv.Retrofit.RetrofitService;
 import com.example.shield.ossearchvertv.Retrofit.ServiceGenerator;
