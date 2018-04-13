@@ -4,11 +4,13 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -81,6 +83,32 @@ public class ListaOS extends AppCompatActivity implements SwipeRefreshLayout.OnR
                 carregamento.setVisibility(ProgressBar.INVISIBLE);
             }
         });
+
+        listaOS.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView absListView, int firstVisibleItem,
+                                 int visibleItemCount, int totalItemCount)
+            {
+                boolean enable = false;
+
+                if(listaOS != null && listaOS.getChildCount() > 0)
+                {
+                    // check if the first item of the list is visible
+                    boolean firstItemVisible = listaOS.getFirstVisiblePosition() == 0;
+                    // check if the top of the first item is visible
+                    boolean topOfFirstItemVisible = listaOS.getChildAt(0).getTop() == 0;
+                    // enabling or disabling the refresh layout
+                    enable = firstItemVisible && topOfFirstItemVisible;
+                }
+
+                swipeRefreshLayout.setEnabled(enable);
+            }
+        });
     }
 
     public void retrofitOrdemServicoLista(String tecnico) {
@@ -104,6 +132,7 @@ public class ListaOS extends AppCompatActivity implements SwipeRefreshLayout.OnR
                         listaDeOrdemServico.addAll(respostaServidor.getOrdemServicoLista());
 
                         carregamento.setVisibility(View.INVISIBLE);
+                        swipeRefreshLayout.setRefreshing(false);
                     }
 
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(),
@@ -138,7 +167,6 @@ public class ListaOS extends AppCompatActivity implements SwipeRefreshLayout.OnR
         final String usuarioLocal = bundle.getString("user");
 
         retrofitOrdemServicoLista(usuarioLocal);
-
-        swipeRefreshLayout.setRefreshing(false);
     }
+
 }
