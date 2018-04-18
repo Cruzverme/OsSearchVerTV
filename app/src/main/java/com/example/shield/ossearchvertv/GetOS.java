@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,14 +36,11 @@ import retrofit2.Response;
 
 public class GetOS extends AppCompatActivity {
 
-    private TextView os, endereco, contra, nome, telComercial, telResidencial, telCelular, obser1, token;
-    EditText anotacaoTecnica, celularParaEnviar;
+    private TextView os, endereco, contra, nome, telComercial, telResidencial, telCelular, obser1;
+    EditText celularParaEnviar;
     String parametroOS;
-    Spinner servicosExecutados;
-    ProgressDialog progresso, progressoInterno;
-    Button botaoOS, botaoFoto;
-    RequestBody ordem, tipoDeDadoDaAssinatura;
-    MultipartBody.Part corpoProblema;
+    ProgressBar carregamento;
+    Button botaoOS;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -55,15 +53,11 @@ public class GetOS extends AppCompatActivity {
         nome = findViewById(R.id.textViewNome);
         endereco = findViewById(R.id.textViewEndereco);
         obser1 = findViewById(R.id.textViewObser);
-        botaoFoto = findViewById(R.id.btnFoto);
         telComercial = findViewById(R.id.textViewTelComercial);
         telResidencial = findViewById(R.id.textViewTelResidencial);
         telCelular = findViewById(R.id.textViewTelCelular);
-        botaoOS = findViewById(R.id.botaoEnviaOS);
-        anotacaoTecnica = findViewById(R.id.textoAnotacoesID);
-        servicosExecutados = findViewById(R.id.selecaoServicoID);
-        token = (EditText) findViewById(R.id.tokenID);
-        celularParaEnviar = findViewById(R.id.textoCelular);
+        botaoOS = findViewById(R.id.botaoAvancar);
+        carregamento = findViewById(R.id.progressBar);
 
         //pegando valor da activity anterior
         Intent intent = getIntent();
@@ -72,67 +66,20 @@ public class GetOS extends AppCompatActivity {
         parametroOS = bundle.getString("os");
         String usuario = bundle.getString("user");
 
-        final String token_enviado_para = bundle.getString("celular");
-
-        Servicos.retrofitServicosExecutados();
-
-        listenerButton(parametroOS, usuario,token_enviado_para);
+        listenerButton(parametroOS, usuario);
     }
 
 
-    private void listenerButton(String parametroOS, String tecnico, String token_enviado_para) {
+    private void listenerButton(String parametroOS, String tecnico) {
 
         //POPUP de LOADING
-        progresso = new ProgressDialog(GetOS.this);
-        progresso.setTitle("Carregando...");
-        progresso.show();
+        carregamento.setVisibility(View.VISIBLE);
 
-        //chama o retrofit para ele trabalhar
-        retrofitEscravo(parametroOS, tecnico, token_enviado_para);
+        retrofitEscravo(parametroOS,tecnico);
+
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == 0 )
-        {
-            if (resultCode == RESULT_OK)
-            {
-                if (data != null)
-                { String os = parametroOS;
-
-                    Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-
-                    //Bitmap reduzido = BITMAP_RESIZER(bitmap,300,300);
-                    byte [] imagem = Servicos.converterBitmapParaArray(bitmap);
-
-                    ordem =
-                            RequestBody.create(
-                                    okhttp3.MultipartBody.FORM, os); //os
-
-                    tipoDeDadoDaAssinatura = RequestBody.create(MediaType.parse(
-                            "multipart/form-data"),imagem);
-
-                    corpoProblema = MultipartBody.Part.createFormData("problema",
-                            "desenhoNome",tipoDeDadoDaAssinatura);
-
-                    //Servicos.enviaAssinaturaRetrofit(ordem, null,corpoProblema);
-
-                }else if( resultCode == RESULT_CANCELED)
-                {
-                    Toast.makeText(getBaseContext(), "A captura foi cancelada",
-                            Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getBaseContext(), "A câmera foi fechada",
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
-    }
-
-
-    private void retrofitEscravo(final String os_var, final String tecnicoLocal, final String token_enviado_para) {
+    private void retrofitEscravo(final String os_var, final String tecnicoLocal) {
 
         //pegando data e hora do celular
         //@SuppressLint("SimpleDateFormat") final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy-HH:mm:ss");
@@ -157,9 +104,8 @@ public class GetOS extends AppCompatActivity {
                     {
                         if (respostaServidor.getSuccess() == 1)
                         {
-                            Servicos.retrofitTokenGenerator(os_var, token_enviado_para); //envia token para usuario destinado
                             //Dismissing the loading progressbar
-                            progresso.dismiss();
+                            carregamento.setVisibility(View.INVISIBLE);
 
                             os.setText(respostaServidor.getOs().get(0).getOs());
                             contra.setText(respostaServidor.getOs().get(0).getContra());
@@ -170,75 +116,34 @@ public class GetOS extends AppCompatActivity {
                             telResidencial.setText(respostaServidor.getOs().get(0).getResidencial());
                             telCelular.setText(respostaServidor.getOs().get(0).getCelular());
 
-                            ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(),
-                                    android.R.layout.simple_spinner_item,Servicos.getListaServicosExecutados());
 
-                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-                            servicosExecutados.setAdapter(adapter);
-
-/*############################################ ENVIA OS PARA SERVIDOR #########################################################*/
+                            /*############################################ ENVIA OS PARA SERVIDOR #########################################################*/
                             botaoOS.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
 
-                                    progressoInterno = new ProgressDialog(GetOS.this);
-                                    progressoInterno.setTitle("Carregando...");
-                                    progressoInterno.show();
+                                    carregamento.setVisibility(View.VISIBLE);
+//                                    final String celularParaEnvio = celularParaEnviar.getText().toString();
 
-                                    final String celularParaEnvio = celularParaEnviar.getText().toString();
-
-                                    final Call<RespostaServidor> verificaToken = service.consultaToken(token.getText().toString());
-
-                                    verificaToken.enqueue(new Callback<RespostaServidor>()
-                                    {
-                                        @Override
-                                        public void onResponse(Call<RespostaServidor> call, Response<RespostaServidor> response) {
-                                            RespostaServidor tokenResultado = response.body();
-
-                                            if (tokenResultado.getSuccess() == 1)
-                                            {
-                                                try {
-                                                    progressoInterno.dismiss();
-
-                                                    Servicos.retrofitEnviaOS(os.getText().toString(), tecnicoLocal, contra.getText().toString(),
-                                                            nome.getText().toString(), String.valueOf(servicosExecutados.getSelectedItem()),
-                                                            anotacaoTecnica.getText().toString(), obser1.getText().toString(), celularParaEnvio);
-
-                                                    Servicos.enviaAssinaturaRetrofit(ordem, null,corpoProblema);
-
-                                                    Intent intent = new Intent(getApplicationContext(), AssinaturaDigital.class);
-
-                                                    Bundle bundle = new Bundle();
-                                                    bundle.putString("os", os.getText().toString());
-                                                    intent.putExtras(bundle);
-                                                    startActivity(intent);
-
-                                                    finish();
-                                                } catch (android.content.ActivityNotFoundException ex) {
-                                                    progressoInterno.dismiss();
-                                                    Toast.makeText(getApplicationContext(), "Não foi possível enviar ao Servidor, tente novamente.", Toast.LENGTH_SHORT).show();
-                                                }
-                                            } else {
-                                                progressoInterno.dismiss();
-                                                Toast.makeText(getApplicationContext(), tokenResultado.getMessage(), Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onFailure(Call<RespostaServidor> call, Throwable t) {
-                                            progressoInterno.dismiss();
-                                            finish();
-                                            Toast.makeText(getApplicationContext(), "Não foi possível acessar servidor!", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
+                                    //Intent intent = new Intent(getApplicationContext(), AssinaturaDigital.class);
+                                    Intent intent = new Intent(getApplicationContext(), AtendimentoOS.class);
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("os", os.getText().toString());
+                                    bundle.putString("contra",contra.getText().toString());
+                                    bundle.putString("nome",nome.getText().toString());
+                                    bundle.putString("obser",obser1.getText().toString());
+                                    bundle.putString("celular",telCelular.getText().toString());
+                                    bundle.putString("user", tecnicoLocal);
+                                    intent.putExtras(bundle);
+                                    startActivity(intent);
                                 }
                             });
 
-     /*###############################################FIM ENVIA EMAIL ########################################################*/
+                            /*###############################################FIM ENVIA EMAIL ########################################################*/
                         } else {
                             //Dismissing the loading progressbar
-                            progresso.dismiss();
+                            //progresso.dismiss();
+                            carregamento.setVisibility(View.INVISIBLE);
 
                             finish();
                             Toast.makeText(GetOS.this, respostaServidor.getMessage(), Toast.LENGTH_SHORT).show();
@@ -249,16 +154,12 @@ public class GetOS extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<RespostaServidor> call, Throwable t) {
-                progresso.dismiss();
+                //progresso.dismiss();
+                carregamento.setVisibility(View.INVISIBLE);
                 Toast.makeText(getApplicationContext(), "Erro na chamada ao servidor" + t, Toast.LENGTH_LONG).show();
 
             }
         });
-    }
-
-    public void tirarFoto(View view) {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent,0);
     }
 
 

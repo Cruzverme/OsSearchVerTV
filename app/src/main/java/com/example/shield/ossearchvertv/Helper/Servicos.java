@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.util.Log;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.shield.ossearchvertv.ListaOS;
@@ -29,46 +30,18 @@ import retrofit2.Response;
 
 public final class Servicos extends AppCompatActivity {
 
-    private static ArrayList<String> listaServicosExecutados = new ArrayList<String>();
     private static String mensagem;
 
-    public static void retrofitServicosExecutados() {
-        final RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
 
-        Call<RespostaServidor> callList = service.listaServicosExecutados();
-
-        callList.enqueue(new Callback<RespostaServidor>() {
-            @Override
-            public void onResponse(Call<RespostaServidor> call, Response<RespostaServidor> response) {
-                final RespostaServidor respostaServidorServicos = response.body();
-
-                if (response.isSuccessful()) {
-                    if (respostaServidorServicos.getSuccess() == 1) {
-                        listaServicosExecutados.clear();
-                        listaServicosExecutados.add("SELECIONE O SERVIÇO EXECUTADO");
-                        listaServicosExecutados.addAll(respostaServidorServicos.getServicos());
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<RespostaServidor> call, Throwable t) {
-
-            }
-        });
-    }
-
-    public static ArrayList<String> getListaServicosExecutados() {
-        return listaServicosExecutados;
-    }
-
-    public static void retrofitEnviaOS(final String os, final String tecnico, final String contrato, final String nomeAssinante, final String servicoExecutado,
-                                       final String anotacaoTecnica, final String observacao, final String celularParaEnvio) {
+    public static void retrofitEnviaOS(final String os, final String tecnico, final String contrato, final String nomeAssinante,
+                                       final String servicoExecutado, final String anotacaoTecnica,
+                                       final String observacao, final String celularParaEnvio) {
 
         final RetrofitService service = ServiceGenerator.createService(RetrofitService.class);
 
         Call<RespostaServidor> caller = service.enviaOS(os, tecnico, contrato, nomeAssinante,
                 servicoExecutado, anotacaoTecnica, observacao, celularParaEnvio);
+
         caller.enqueue(new Callback<RespostaServidor>() {
             @Override
             public void onResponse(Call<RespostaServidor> call, Response<RespostaServidor> response) {
@@ -176,7 +149,7 @@ public final class Servicos extends AppCompatActivity {
 
     }
 
-    public static void enviaAssinaturaRetrofit(RequestBody os, MultipartBody.Part assinatura, MultipartBody.Part problema)
+    public static void enviaImagemRetrofit(RequestBody os, MultipartBody.Part assinatura, MultipartBody.Part problema)
     {
         final RetrofitService retrofitService = ServiceGenerator.createService(RetrofitService.class);
         Call<RespostaServidor> call = retrofitService.enviaAssinatura(os,assinatura, problema);

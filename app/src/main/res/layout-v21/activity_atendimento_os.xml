@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AtendimentoOS"
+    android:background="@color/colorVertvBackgroundDark">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:id="@+id/labelServicosExec"
+        android:text="@string/servi_o_executado"
+        style="@style/VertvFont"
+        android:textSize="24sp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center" />
+
+    <Spinner
+        android:id="@+id/selecaoServicoID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dialog"
+        android:backgroundTint="@color/colorVertvOrange"
+        android:layout_below="@id/labelServicosExec"
+        android:layout_marginBottom="@dimen/activity_vertical_margin" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/anota_es_t_cnicas"
+        android:layout_below="@id/selecaoServicoID"
+        style="@style/VertvFont"
+        android:id="@+id/labelAnotacaoTec" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="6"
+        style="@style/VertvFont"
+        android:background="@color/colorVertvDetailBlack"
+        android:id="@+id/editAnotacao"
+        android:layout_below="@id/labelAnotacaoTec"
+        android:inputType="textMultiLine"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/VertvFont"
+        android:paddingTop="8dp"
+        android:layout_marginTop="@dimen/resolucao_25"
+        android:layout_below="@id/editAnotacao"
+        android:id="@+id/labelComprovante"
+        android:text="@string/celular_para_envio_de_comprovante"
+        android:textSize="24sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/labelComprovante"
+        android:background="@color/colorVertvDetailBlack"
+        android:id="@+id/textoCelular"
+        android:inputType="phone"
+        android:layout_marginBottom="10dp"
+        android:hint="@string/exemploCelular"
+        style="@style/VertvFont" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnFoto"
+        android:text="@string/tirar_foto"
+        android:layout_gravity="center"
+        android:layout_below="@id/textoCelular"
+        android:onClick="tirarFoto"
+        android:paddingLeft="@dimen/resolucao_25"
+        android:paddingRight="@dimen/resolucao_25"
+        style="@style/VertvFont"
+        android:background="@color/colorVertvOrange" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/botaoEnviaOS"
+        android:gravity="center"
+        android:layout_below="@id/btnFoto"
+        android:id="@+id/fotoTiradaTexto"
+        android:visibility="invisible"
+        style="@style/VertvFont" />
+
+    <Button
+        android:id="@+id/botaoEnviaOS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:onClick="enviaOS"
+        android:background="@color/colorVertvOrange"
+        android:text="@string/botaoEnviar"
+        android:layout_alignParentLeft="true" />
+
+
+</RelativeLayout>

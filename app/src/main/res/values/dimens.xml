@@ -5,5 +5,6 @@
     <dimen name="activity_vertical_margin">10dp</dimen>
     <dimen name="tamanhoTextTitulo">24sp</dimen>
     <dimen name="resolucao_25">25dp</dimen>
+    <dimen name="resolucao_15">15dp</dimen>
     <dimen name="dimensao_horizontal_logoVERTV">408dp</dimen>
 </resources>

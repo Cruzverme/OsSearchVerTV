@@ -31,7 +31,8 @@
         <activity android:name=".TokenVerify" />
         <activity android:name=".ausencia_form" />
         <activity android:name=".AssinaturaDigital" />
-        <activity android:name=".ListaOS"></activity>
+        <activity android:name=".ListaOS" />
+        <activity android:name=".AtendimentoOS"></activity>
     </application>
 
 </manifest>

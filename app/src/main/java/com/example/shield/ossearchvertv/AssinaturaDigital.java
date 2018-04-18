@@ -27,6 +27,8 @@ public class AssinaturaDigital extends AppCompatActivity {
     CaptureSignatureView mSig;
     LinearLayout mContent;
     ImageView img;
+    private MultipartBody.Part corpoProblema;
+    private RequestBody tipoDeDadoDaFoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,15 @@ public class AssinaturaDigital extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         assert bundle != null;
         String parametroOS = bundle.getString("os");
+        String servicosExecutado = bundle.getString("servico");
+        String usuario = bundle.getString("user");
+        String nome = bundle.getString("nome");
+        String anotacao = bundle.getString("anotacao");
+        String contra = bundle.getString("contra");
+        String obser = bundle.getString("obser");
+        String celular = bundle.getString("celular");
+        byte[] imagem = bundle.getByteArray("fotoProblema");
+
 
         RequestBody tipoDeDadoDaAssinatura = RequestBody.create(MediaType.parse(
                 "multipart/form-data"),desenhoDaAssinatura);
@@ -66,8 +77,23 @@ public class AssinaturaDigital extends AppCompatActivity {
                 RequestBody.create(
                         okhttp3.MultipartBody.FORM, parametroOS); //os
 
+//DADOS DA FOTO TIRADA NA ACTIVITT ANTERIOR
+        assert imagem != null;
+        tipoDeDadoDaFoto = RequestBody.create(MediaType.parse(
+                "multipart/form-data"),imagem);
+
+        corpoProblema = MultipartBody.Part.createFormData("problema",
+                "desenhoNome",tipoDeDadoDaFoto);
+//FIM DADOS DA FOTO TIRADA NA ACTIVITT ANTERIOR
+
+        //converte a assinatura para ImageView, devido ela ser um bitmap
         converteByteArrayToImageView(desenhoDaAssinatura);
-        Servicos.enviaAssinaturaRetrofit(ordem,corpoDaAssinatura,null);
+
+        //Envia as requisições para o servidor
+        Servicos.retrofitEnviaOS(parametroOS,usuario,contra,nome,servicosExecutado,anotacao,obser,celular);
+        Servicos.enviaImagemRetrofit(ordem,corpoDaAssinatura,null);//envia a assinatura
+        Servicos.enviaImagemRetrofit(ordem,null,corpoProblema);//envia a foto
+
         Toast.makeText(getApplicationContext(), "OS Enviada", Toast.LENGTH_SHORT).show();
         finish();
     }
