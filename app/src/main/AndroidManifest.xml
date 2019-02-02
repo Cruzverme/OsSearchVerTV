@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.shield.ossearchvertv">
 
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -12,16 +14,17 @@
     <application
         android:allowBackup="true"
         android:debuggable="false"
+        android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="HardcodedDebugMode">
+
         <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -32,7 +35,11 @@
         <activity android:name=".ausencia_form" />
         <activity android:name=".AssinaturaDigital" />
         <activity android:name=".ListaOS" />
-        <activity android:name=".AtendimentoOS"></activity>
-    </application>
+        <activity android:name=".AtendimentoOS" />
+        <activity android:name=".DeviceListBluetooth"
+            android:theme="@android:style/Theme.DeviceDefault.Dialog"></activity>
+        <activity android:name=".BluetoothPrinterConnection"/>
+
+</application>
 
 </manifest>

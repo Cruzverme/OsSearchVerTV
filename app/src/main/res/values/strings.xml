@@ -31,7 +31,7 @@
     <string name="celular_token">Numero Celular</string>
     <string name="logovertv">logoVerTV</string>
     <string name="confirmar">Confirmar</string>
-    <string name="celular_para_envio_de_comprovante">Celular Para Envio de Comprovante</string>
+    <string name="email_para_envio_de_comprovante">Email Para Envio de Comprovante</string>
     <string name="assinante_ausente">Assinante Ausente</string>
     <string name="formulario_de_aus_ncia">Formulario de Ausência</string>
     <string name="observacao">Observação</string>
@@ -43,4 +43,15 @@
     <string name="favor_rubrique_abaixo">Favor Rubrique Abaixo</string>
     <string name="tirar_foto">Foto do Problema</string>
     <string name="os_diaria">OS Diaria</string>
+    <string name="tel_comercial">Comercial</string>
+    <string name="tel_residencial">Residencial</string>
+    <string name="tel_celular">Celular</string>
+    <string name="title_activity_blutuf">blutuf</string>
+    <string name="conectar_impressora">Conectar Impressora</string>
+    <string name="desativar_impressora">Desativar Impressora</string>
+    <string name="emitir_comprovante">Emitir Comprovante</string>
+    <string name="impressoras_bluetooth">Impressoras Bluetooth</string>
+    <string name="status_bluetooth">Status Bluetooth</string>
+    <string name="dispositivo_indisponivel">Dispositivo Indisponível</string>
+    <string name="continuar">continuar</string>
 </resources>

@@ -136,13 +136,14 @@ public class GetOS extends AppCompatActivity {
                                     bundle.putString("user", tecnicoLocal);
                                     intent.putExtras(bundle);
                                     startActivity(intent);
+                                    carregamento.setVisibility(View.GONE);
+                                    finish();
                                 }
                             });
 
                             /*###############################################FIM ENVIA EMAIL ########################################################*/
                         } else {
                             //Dismissing the loading progressbar
-                            //progresso.dismiss();
                             carregamento.setVisibility(View.INVISIBLE);
 
                             finish();
@@ -155,15 +156,12 @@ public class GetOS extends AppCompatActivity {
             @Override
             public void onFailure(Call<RespostaServidor> call, Throwable t) {
                 //progresso.dismiss();
-                carregamento.setVisibility(View.INVISIBLE);
+                carregamento.setVisibility(View.GONE);
                 Toast.makeText(getApplicationContext(), "Erro na chamada ao servidor" + t, Toast.LENGTH_LONG).show();
 
             }
         });
     }
-
-
-
 
     //AKI ESTAVA O SELECIONAR OPS
 

@@ -61,7 +61,7 @@ public final class Servicos extends AppCompatActivity {
                                     "\nSERVICO: " + servicoExecutado +
                                     "\n\n VerTV Agradece";
 
-                            enviaSMS(celularParaEnvio,body);
+                            //enviaSMS(celularParaEnvio,body);
                         }
                     }
                 }
@@ -161,7 +161,7 @@ public final class Servicos extends AppCompatActivity {
                 RespostaServidor resposta = response.body();
                 if (response.isSuccessful())
                 {
-
+                    Log.i("img","enviada");
                 }
             }
 

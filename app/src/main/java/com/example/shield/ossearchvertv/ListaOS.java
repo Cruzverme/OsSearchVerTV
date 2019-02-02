@@ -33,9 +33,8 @@ public class ListaOS extends AppCompatActivity implements SwipeRefreshLayout.OnR
 
     private ListView listaOS;
     private static ArrayList<String> listaDeOrdemServico = new ArrayList<String>();
-    private static ProgressBar carregamento;
+    private  ProgressBar carregamento;
     private SwipeRefreshLayout swipeRefreshLayout;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,6 +130,11 @@ public class ListaOS extends AppCompatActivity implements SwipeRefreshLayout.OnR
                         listaDeOrdemServico.clear();
                         listaDeOrdemServico.addAll(respostaServidor.getOrdemServicoLista());
 
+                        carregamento.setVisibility(View.INVISIBLE);
+                        swipeRefreshLayout.setRefreshing(false);
+                    }else{
+                        listaDeOrdemServico.clear();
+                        listaDeOrdemServico.add("NAO EXISTE OS DESIGNADA!");
                         carregamento.setVisibility(View.INVISIBLE);
                         swipeRefreshLayout.setRefreshing(false);
                     }

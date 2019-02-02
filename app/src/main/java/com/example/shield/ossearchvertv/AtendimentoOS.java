@@ -38,7 +38,7 @@ public class AtendimentoOS extends AppCompatActivity {
 
     static Spinner servicosExecutados;
     String parametroOS,usuario,contra,obser,nome,celular;
-    EditText celularParaEnviar, anotacaoTecnica;
+    EditText anotacaoTecnica,emailParaEnvio;
     TextView confirmacaoFoto;
     static ProgressBar carregamento;
     RequestBody ordem, tipoDeDadoDaAssinatura;
@@ -54,7 +54,7 @@ public class AtendimentoOS extends AppCompatActivity {
         setContentView(R.layout.activity_atendimento_os);
 
         carregamento = findViewById(R.id.progressBar);
-        celularParaEnviar = findViewById(R.id.textoCelular);
+        emailParaEnvio = findViewById(R.id.textoMail);
         anotacaoTecnica = findViewById(R.id.editAnotacao);
         botaoFoto = findViewById(R.id.btnFoto);
         botaoAvancar = findViewById(R.id.botaoAvancar);
@@ -125,11 +125,6 @@ public class AtendimentoOS extends AppCompatActivity {
 
 
     public void enviaOS(View view) {
-//        Servicos.retrofitEnviaOS(parametroOS,usuario,contra,nome,
-//                String.valueOf(servicosExecutados.getSelectedItem()),
-//                anotacaoTecnica.getText().toString(),obser,"1212121");
-
-//        Servicos.enviaImagemRetrofit(ordem, null,corpoProblema);
 
         Intent intent = new Intent(getApplicationContext(), AssinaturaDigital.class);
         Bundle bundle = new Bundle();
@@ -137,16 +132,15 @@ public class AtendimentoOS extends AppCompatActivity {
         bundle.putString("contra",contra);
         bundle.putString("nome",nome);
         bundle.putString("obser",obser);
-        bundle.putString("celular",celular);
+        bundle.putString("email", String.valueOf(emailParaEnvio.getText()));
         bundle.putString("anotacao", String.valueOf(anotacaoTecnica.getText()));
         bundle.putString("user", usuario);
         bundle.putString("servico", String.valueOf(servicosExecutados.getSelectedItem()));
         bundle.putByteArray("fotoProblema",imagem);
         intent.putExtras(bundle);
-
-        Log.d("TAGA",String.valueOf(servicosExecutados.getSelectedItem()));
-        intent.putExtras(bundle);
         startActivity(intent);
+
+        finish();
     }
 
     //Area da FOTO
@@ -173,7 +167,6 @@ public class AtendimentoOS extends AppCompatActivity {
                     corpoProblema = MultipartBody.Part.createFormData("problema",
                             "desenhoNome",tipoDeDadoDaAssinatura);
 
-
                     ordem =
                             RequestBody.create(
                                     okhttp3.MultipartBody.FORM, os); //os
@@ -186,7 +179,6 @@ public class AtendimentoOS extends AppCompatActivity {
 
                     confirmacaoFoto.setText("FOTO CAPTURADA");
                     confirmacaoFoto.setVisibility(View.VISIBLE);
-                    //Servicos.enviaAssinaturaRetrofit(ordem, null,corpoProblema);
 
                 }else if( resultCode == RESULT_CANCELED)
                 {

@@ -63,28 +63,27 @@
         android:layout_below="@id/editAnotacao"
         android:layout_marginTop="@dimen/resolucao_15"
         android:paddingTop="8dp"
-        android:text="@string/celular_para_envio_de_comprovante"
+        android:text="@string/email_para_envio_de_comprovante"
         android:textSize="24sp" />
 
     <EditText
-        android:id="@+id/textoCelular"
+        android:id="@+id/textoMail"
         style="@style/VertvFont"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/labelComprovante"
         android:layout_marginBottom="10dp"
         android:background="@color/colorVertvDetailBlack"
-        android:hint="@string/exemploCelular"
-        android:inputType="phone"
-        android:maxLength="10"
+        android:inputType="textEmailAddress"
         android:singleLine="true" />
 
     <Button
         android:id="@+id/btnFoto"
         style="@style/VertvFont"
+        android:layout_marginTop="@dimen/resolucao_15"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textoCelular"
+        android:layout_below="@id/textoMail"
         android:layout_gravity="center"
         android:background="@color/colorVertvOrange"
         android:onClick="tirarFoto"

@@ -8,196 +8,221 @@ android:layout_height="match_parent"
 android:background="@color/colorVertvBackgroundDark"
 tools:context="com.example.shield.ossearchvertv.GetOS">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:weightSum="1">
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="@style/Widget.AppCompat.ProgressBar"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_gravity="center" />
+        android:weightSum="1">
 
-    <TextView
-        android:text="@string/os"
-        android:textSize="24sp"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_width="wrap_content"
-        style="@style/VertvFont"
-        android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:paddingBottom="8dp"
-        android:id="@+id/titOS"/>
+        <TextView
+            android:id="@+id/titOS"
+            style="@style/VertvFont"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:paddingBottom="8dp"
+            android:text="@string/os"
+            android:textSize="24sp" />
 
-    <TextView
-        android:id="@+id/textViewOS"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/titOS"
-        android:background="@color/colorVertvDetailBlack"
-        style="@style/VertvFont"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:paddingBottom="8dp"
-        android:textSize="24sp" />
+        <TextView
+            android:id="@+id/textViewOS"
+            style="@style/VertvFont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@id/titOS"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:background="@color/colorVertvDetailBlack"
+            android:textSize="24sp" />
 
-    <TextView
-        android:id="@+id/titContra"
-        android:text="@string/contrato"
-        android:layout_below="@id/textViewOS"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:textSize="24sp"
-        android:paddingTop="16dp"
-        android:paddingBottom="8dp"
-        style="@style/VertvFont"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/titContra"
+            style="@style/VertvFont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@id/textViewOS"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:paddingBottom="8dp"
+            android:text="@string/contrato"
+            android:textSize="24sp" />
 
-    <TextView
-        android:id="@+id/textViewContra"
-        android:layout_below="@id/titContra"
-        android:textSize="24sp"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:background="@color/colorVertvDetailBlack"
-        style="@style/VertvFont"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/textViewContra"
+            style="@style/VertvFont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@id/titContra"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:background="@color/colorVertvDetailBlack"
+            android:textSize="24sp" />
 
-    <TextView
-        android:id="@+id/titNome"
-        android:text="@string/nome"
-        android:layout_below="@id/textViewContra"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:textSize="24sp"
-        android:paddingTop="16dp"
-        android:paddingBottom="8dp"
-        style="@style/VertvFont"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/titNome"
+            style="@style/VertvFont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@id/textViewContra"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:text="@string/nome"
+            android:textSize="24sp" />
 
 
-    <TextView
-        android:id="@+id/textViewNome"
-        android:layout_below="@id/titNome"
-        android:textSize="24sp"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:background="@color/colorVertvDetailBlack"
-        style="@style/VertvFont"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/textViewNome"
+            style="@style/VertvFont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@id/titNome"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:background="@color/colorVertvDetailBlack"
+            android:textSize="24sp" />
 
-    <TextView
-        android:id="@+id/titEndereco"
-        android:text="@string/endere_o"
-        android:layout_below="@id/textViewNome"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:textSize="24sp"
-        android:paddingTop="16dp"
-        android:paddingBottom="8dp"
-        style="@style/VertvFont"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/titEndereco"
+            style="@style/VertvFont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@id/textViewNome"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:paddingBottom="8dp"
+            android:text="@string/endere_o"
+            android:textSize="24sp" />
 
-    <TextView
-        android:id="@+id/textViewEndereco"
-        android:textSize="24sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorVertvDetailBlack"
-        style="@style/VertvFont"
-        android:layout_below="@id/titEndereco"
-        android:layout_marginBottom="@dimen/activity_vertical_margin" />
+        <TextView
+            android:id="@+id/textViewEndereco"
+            style="@style/VertvFont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titEndereco"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:background="@color/colorVertvDetailBlack"
+            android:textSize="24sp" />
 
-    <TextView
-        android:id="@+id/titObser"
-        android:text="@string/obs"
-        android:layout_below="@id/textViewEndereco"
-        style="@style/VertvFont"
-        android:paddingTop="16dp"
-        android:paddingBottom="8dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:textSize="24sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/textViewObser"
-        android:textSize="24sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/sem_observa_o"
-        android:background="@color/colorVertvDetailBlack"
-        style="@style/VertvFont"
-        android:layout_below="@id/titObser"
-        android:layout_marginBottom="@dimen/activity_vertical_margin" />
+        <TextView
+            android:id="@+id/titObser"
+            style="@style/VertvFont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_below="@id/textViewEndereco"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:paddingBottom="8dp"
+            android:text="@string/obs"
+            android:textSize="24sp" />
 
+        <TextView
+            android:id="@+id/textViewObser"
+            style="@style/VertvFont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titObser"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:background="@color/colorVertvDetailBlack"
+            android:text="@string/sem_observa_o"
+            android:textSize="24sp" />
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/colorVertvDetailBlack"
-        android:layout_marginTop="@dimen/activity_horizontal_margin">
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/contato"
             android:paddingBottom="8dp"
             android:id="@+id/contatoID"
+            android:layout_below="@id/textViewObser"
             style="@style/VertvFont"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:layout_below="@id/textViewObser"/>
+            android:layout_marginBottom="@dimen/activity_horizontal_margin" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tel_comercial"
+            android:layout_alignBaseline="@id/textViewTelComercial"
+            android:layout_below="@id/contatoID"
+            style="@style/VertvFont"
+            android:id="@+id/telComercial"/>
         <TextView
             android:id="@+id/textViewTelComercial"
             android:textSize="24sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sem_telefone_comercial"
+            android:gravity="center"
+            android:layout_toEndOf="@id/telComercial"
             android:layout_below="@id/contatoID"
+            android:text="@string/sem_telefone_comercial"
             android:background="@color/colorVertvDetailBlack"
             style="@style/VertvFont"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"  />
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_toRightOf="@id/telComercial" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tel_residencial"
+            android:layout_alignBaseline="@id/textViewTelResidencial"
+            android:layout_below="@id/telComercial"
+            style="@style/VertvFont"
+            android:id="@+id/telResidencial"/>
         <TextView
             android:id="@+id/textViewTelResidencial"
             android:textSize="24sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_toEndOf="@id/telResidencial"
             android:text="@string/sem_telefone_residencial"
             android:layout_below="@id/textViewTelComercial"
             android:background="@color/colorVertvDetailBlack"
             style="@style/VertvFont"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"  />
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_toRightOf="@id/telResidencial" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tel_celular"
+            android:layout_below="@id/telResidencial"
+            style="@style/VertvFont"
+            android:layout_alignBaseline="@id/textViewTelCelular"
+            android:id="@+id/telCelular"/>
 
         <TextView
             android:id="@+id/textViewTelCelular"
             android:textSize="24sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_toEndOf="@id/telCelular"
+            android:layout_below="@id/textViewTelResidencial"
             android:text="@string/sem_telefone_celular"
             android:background="@color/colorVertvDetailBlack"
-            android:layout_below="@id/textViewTelResidencial"
             style="@style/VertvFont"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"  />
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_toRightOf="@id/telCelular" />
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/botaoAvancar"
+            style="@style/VertvFont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorVertvOrange"
+            android:layout_below="@id/textViewTelCelular"
+            android:text="@string/comecar_atendimento"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin"
-        android:id="@+id/botaoAvancar"
-        style="@style/VertvFont"
-        android:background="@color/colorVertvOrange"
-        android:text="@string/comecar_atendimento"/>
-
-</LinearLayout>
+    </RelativeLayout>
 
 </ScrollView>

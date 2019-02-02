@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_gravity="center"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorVertvBackgroundDark">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        style="@style/VertvFont"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/status_bluetooth"
+        android:text="@string/status_bluetooth" />
+
+    <TextView
+        android:id="@+id/status_impressora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        style="@style/VertvFont"
+        android:gravity="center"
+        android:layout_below="@id/status_bluetooth"
+        android:layout_marginTop="30dp"
+        android:text="@string/dispositivo_indisponivel"/>
+
+    <Button
+        android:id="@+id/Scan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        style="@style/VertvFont"
+        android:background="@color/colorVertvOrange"
+        android:layout_marginTop="10dp"
+        android:text="@string/conectar_impressora"/>
+
+    <Button
+        android:id="@+id/mPrint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        style="@style/VertvFont"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@color/colorVertvOrange"
+        android:text="@string/emitir_comprovante" />
+
+    <Button
+        android:id="@+id/encerrarOS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        style="@style/VertvFont"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorVertvOrange"
+        android:text="@string/enviar_os"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toEndOf="@id/mPrint"
+        android:layout_toRightOf="@id/mPrint"
+        android:onClick="enviaOSEmail"/>
+
+    <Button
+        android:id="@+id/dis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/Scan"
+        style="@style/VertvFont"
+        android:background="@color/colorVertvOrange"
+        android:text="@string/desativar_impressora"/>
+</RelativeLayout>

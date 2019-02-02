@@ -7,6 +7,8 @@ package com.example.shield.ossearchvertv.EmailServicos;
 import android.util.Log;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -19,77 +21,68 @@ import javax.mail.internet.MimeMessage;
 
 public class GMail {
 
-    final String emailPort = "587";// gmail's smtp port
-    final String smtpAuth = "true";
-    final String starttls = "true";
-    final String emailHost = "smtp.gmail.com";
-    final String fromUser = "emailExemplo@gmail.com";
-    final String fromUserEmailPassword = "123456";
-    final String TO_EMAIL = "enviaos@emailsmtp.com.br";
+        final String emailPort = "587";// gmail's smtp port
+        final String smtpAuth = "true";
+        final String starttls = "true";
+        final String emailHost = "smtp.gmail.com";
 
-    String fromTecnico;
-    String fromPassword;
-    String emailSubject = "Resumo da OS Digital";
-    String emailBody;
+        private String fromEmail;
+        private String fromPassword;
+        private List toEmailList;
+        private String emailSubject;
+        private String emailBody;
 
-//    String contra;
-//    String nome;
-//    String endereco;
-//    String telCelular;
-//    String telResidencial;
-//    String telComercial;
+        private Properties emailProperties;
+        private Session mailSession;
+        private MimeMessage emailMessage;
 
-    Properties emailProperties;
-    Session mailSession;
-    MimeMessage emailMessage;
+        public GMail() {
 
-    public GMail() {
+        }
 
-    }
+        public GMail(String fromEmail, String fromPassword,
+                     List toEmailList, String emailSubject, String emailBody) {
+            this.fromEmail = fromEmail;
+            this.fromPassword = fromPassword;
+            this.toEmailList = toEmailList;
+            this.emailSubject = emailSubject;
+            this.emailBody = emailBody;
 
+            emailProperties = System.getProperties();
+            emailProperties.put("mail.smtp.port", emailPort);
+            emailProperties.put("mail.smtp.auth", smtpAuth);
+            emailProperties.put("mail.smtp.starttls.enable", starttls);
+            Log.i("GMail", "Mail server properties set.");
+        }
 
-    //public GMail(String fromTecnico, String fromPassword,
-    //             List<String> toEmailList, String emailSubject, String emailBody) {
-    public GMail(String fromTecnico, String emailBody) {
-        this.fromTecnico = fromTecnico;
-        this.emailBody = emailBody;
+        public MimeMessage createEmailMessage() throws AddressException,
+                MessagingException, UnsupportedEncodingException {
 
-        emailProperties = System.getProperties();
-        emailProperties.put("mail.smtp.port", emailPort);
-        emailProperties.put("mail.smtp.auth", smtpAuth);
-        emailProperties.put("mail.smtp.starttls.enable", starttls);
-       // Log.i("GMail", "Mail server properties set.");
-    }
+            mailSession = Session.getDefaultInstance(emailProperties, null);
+            emailMessage = new MimeMessage(mailSession);
 
-    public MimeMessage createEmailMessage() throws AddressException,
-            MessagingException, UnsupportedEncodingException {
+            emailMessage.setFrom(new InternetAddress(fromEmail, fromEmail));
+            for (Object toEmail : toEmailList) {
+                Log.i("GMail","toEmail: "+toEmail);
+                emailMessage.addRecipient(Message.RecipientType.TO,
+                        new InternetAddress((String) toEmail));
+            }
 
-        mailSession = Session.getDefaultInstance(emailProperties, null);
-        emailMessage = new MimeMessage(mailSession);
+            emailMessage.setSubject(emailSubject);
+            emailMessage.setContent(emailBody, "text/html");// for a html email
+            // emailMessage.setText(emailBody);// for a text email
+            Log.i("GMail", "Email Message created.");
+            return emailMessage;
+        }
 
-        emailMessage.setFrom(new InternetAddress(TO_EMAIL, "OS de " + fromTecnico));
-        //for (String toEmail : toEmailList) {
-        //Log.i("GMail", "toEmail: " + TO_EMAIL);
-        emailMessage.addRecipient(Message.RecipientType.TO,
-                new InternetAddress(TO_EMAIL));
-        //}
+        public void sendEmail() throws AddressException, MessagingException {
 
-        emailMessage.setSubject(emailSubject);
-        //emailMessage.setContent(emailBody,"text/html");// for a html email
-        emailMessage.setText(emailBody, "utf-8", "html");// for a text email
-        //Log.i("GMail", "Email Message created.");
-        return emailMessage;
-    }
-
-    public void sendEmail() throws AddressException, MessagingException {
-
-        Transport transport = mailSession.getTransport("smtp");
-        //Log.i("INFO", emailHost);
-        transport.connect(emailHost, fromUser, fromUserEmailPassword);
-       // Log.i("GMail", "allrecipients: " + emailMessage.getAllRecipients());
-        transport.sendMessage(emailMessage, emailMessage.getAllRecipients());
-        transport.close();
-       // Log.i("GMail", "Email sent successfully.");
-    }
+            Transport transport = mailSession.getTransport("smtp");
+            transport.connect(emailHost, fromEmail, fromPassword);
+            Log.i("GMail","allrecipients: "+ Arrays.toString(emailMessage.getAllRecipients()));
+            transport.sendMessage(emailMessage, emailMessage.getAllRecipients());
+            transport.close();
+            Log.i("GMail", "Email sent successfully.");
+        }
 
 }

@@ -45,7 +45,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLines="6"
+        android:maxLines="5"
         style="@style/VertvFont"
         android:background="@color/colorVertvDetailBlack"
         android:id="@+id/editAnotacao"
@@ -61,7 +61,7 @@
         android:layout_marginTop="@dimen/resolucao_25"
         android:layout_below="@id/editAnotacao"
         android:id="@+id/labelComprovante"
-        android:text="@string/celular_para_envio_de_comprovante"
+        android:text="@string/email_para_envio_de_comprovante"
         android:textSize="24sp" />
 
     <EditText
@@ -69,10 +69,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/labelComprovante"
         android:background="@color/colorVertvDetailBlack"
-        android:id="@+id/textoCelular"
-        android:inputType="phone"
+        android:id="@+id/textoMail"
+        android:inputType="textEmailAddress"
         android:layout_marginBottom="10dp"
-        android:hint="@string/exemploCelular"
         style="@style/VertvFont" />
 
     <Button
@@ -80,8 +79,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnFoto"
         android:text="@string/tirar_foto"
+        android:layout_marginTop="@dimen/resolucao_15"
         android:layout_gravity="center"
-        android:layout_below="@id/textoCelular"
+        android:layout_below="@id/textoMail"
         android:onClick="tirarFoto"
         android:paddingLeft="@dimen/resolucao_25"
         android:paddingRight="@dimen/resolucao_25"
